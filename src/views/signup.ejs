@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #212121;
+        }
+
+        #conteiner-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 100px 100px 80px rgba(0, 0, 0, 0.03)
+        }
+
+        .title {
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .sub {
+            text-align: center;
+            color: black;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .sub.mb {
+            margin-bottom: 1px;
+        }
+
+        .sub a {
+            color: rgb(23, 111, 211);
+        }
+
+        .avatar {
+            height: 50px;
+            width: 50px;
+            background-color: rgb(23, 111, 211);
+            border-radius: 50%;
+            align-self: center;
+            padding: 6px;
+            cursor: pointer;
+            box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015), 100px 100px 80px rgba(0, 0, 0, 0.03);
+        }
+
+        .form button {
+            align-self: flex-end;
+        }
+
+        .inputs,
+        button {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 16px 10px;
+            background-color: rgb(247, 243, 243);
+            border-radius: 10px;
+            box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015), 100px 100px 80px rgba(0, 0, 0, 0.03);
+        }
+
+        button {
+            margin-top: 12px;
+            background-color: rgb(23, 111, 211);
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+
+        }
+
+
+        .inputs:focus {
+            border: 1px solid rgb(23, 111, 211);
+        }
+
+        #file {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="conteiner-login">
+        <form class="form" id="form" action="/auth/signup" method="post">
+            <span class="title">Obrigado por apoiar o projeto</span>
+            <span class="sub mb">Bem vindo(a) ao New Tab Tool!</span>
+            <input id="file" type="text" hidden>
+            <label class="avatar" for="file"><span> <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                        <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill="#ffffff"
+                                d="M17.1813 16.3254L15.3771 14.5213C16.5036 13.5082 17.379 12.9869 18.2001 12.8846C19.0101 12.7837 19.8249 13.0848 20.8482 13.8687C20.8935 13.9034 20.947 13.9202 21 13.9202V15.024C21 19.9452 19.9452 21 15.024 21H8.976C4.05476 21 3 19.9452 3 15.024V13.7522C3.06398 13.7522 3.12796 13.7278 3.17678 13.679L4.45336 12.4024C5.31928 11.5365 6.04969 10.8993 6.71002 10.4791C7.3679 10.0605 7.94297 9.86572 8.50225 9.86572C9.06154 9.86572 9.6366 10.0605 10.2945 10.4791C10.9548 10.8993 11.6852 11.5365 12.5511 12.4024L16.8277 16.679C16.9254 16.7766 17.0836 16.7766 17.1813 16.679C17.2789 16.5813 17.2789 16.423 17.1813 16.3254Z"
+                                opacity="0.1"></path>
+                            <path stroke-width="2" stroke="#ffffff"
+                                d="M3 8.976C3 4.05476 4.05476 3 8.976 3H15.024C19.9452 3 21 4.05476 21 8.976V15.024C21 19.9452 19.9452 21 15.024 21H8.976C4.05476 21 3 19.9452 3 15.024V8.976Z">
+                            </path>
+                            <path stroke-linecap="round" stroke-width="2" stroke="#ffffff"
+                                d="M17.0045 16.5022L12.7279 12.2256C9.24808 8.74578 7.75642 8.74578 4.27658 12.2256L3 13.5022">
+                            </path>
+                            <path stroke-linecap="round" stroke-width="2" stroke="#ffffff"
+                                d="M21.0002 13.6702C18.907 12.0667 17.478 12.2919 15.1982 14.3459"></path>
+                            <path stroke-width="2" stroke="#ffffff"
+                                d="M17 8C17 8.55228 16.5523 9 16 9C15.4477 9 15 8.55228 15 8C15 7.44772 15.4477 7 16 7C16.5523 7 17 7.44772 17 8Z">
+                            </path>
+                        </g>
+                    </svg></span></label>
+
+            <input type="email" class="inputs" id="email" name="email" placeholder="email">
+            <input type="password" class="inputs" id="password" name="password" placeholder="senha">
+            <input type="password" class="inputs" id="password_confirm" name="password_confirm" placeholder="confirmação de senha">
+            <span class="sub">Ja tem uma conta? <a href="/auth/login">login</a></span>
+            <button type="submit" id="action">cadastrar</button>
+        </form>
+    </div>
+    <script>
+        const action = document.querySelector('#action')
+        const formElement = document.querySelector('#form')
+        const passwordElement = document.querySelector('#password')
+        const passwordConfirmElement = document.querySelector('#password_confirm')
+        const emailElement = document.querySelector('#email')
+        let validPass
+        let validEmail
+        let validPassConf
+
+        async function validateEmail(email, emailElement) {
+            // expressão regular para validar email
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let isValid = await regex.test(email);
+
+            if (!isValid) {
+                emailElement.style.borderColor = '#f00';
+                emailElement.style.borderStyle = 'solid';
+                emailElement.style.borderWidth = '1px';
+                validEmail = false;
+            } else {
+                emailElement.style.borderColor = 'none';
+                emailElement.style.borderStyle = 'none';
+                emailElement.style.borderWidth = '0';
+                validEmail = true
+            }
+        }
+
+        async function validatePassword(password, passwordElement) {
+            // expressão regular para validar senha
+            const regex = /^(?=.*\d).{8,}$/
+            let isValid = await regex.test(password);
+
+            if (!isValid) {
+
+                passwordElement.style.borderColor = '#f00';
+                passwordElement.style.borderStyle = 'solid';
+                passwordElement.style.borderWidth = '1px';
+                validPass = false;
+
+            } else {
+                passwordElement.style.borderColor = 'none';
+                passwordElement.style.borderStyle = 'none';
+                passwordElement.style.borderWidth = '0';
+                validPass = true;
+            }
+        }
+
+        function validatePasswordConfirmation(password, passwordConfirm, passwordConfirmElement) {
+           
+            if (password !== passwordConfirm) {
+                passwordConfirmElement.style.borderColor = '#f00';
+                passwordConfirmElement.style.borderStyle = 'solid';
+                passwordConfirmElement.style.borderWidth = '1px';
+                validPassConf = false;
+
+            } else {
+                passwordConfirmElement.style.borderColor = 'none';
+                passwordConfirmElement.style.borderStyle = 'none';
+                passwordConfirmElement.style.borderWidth = '0';
+                validPassConf = true;
+
+            }
+        }
+
+        if(validPass && validPassConf && validEmail){
+            action.removeAttribute('disabled')
+            action.style.backgroundColor = '#f00';
+            action.style.borderStyle ='solid';
+            action.style.borderWidth = '1px';
+            
+        }
+        passwordElement.addEventListener('input', () => { validatePassword(passwordElement.value, passwordElement) })
+        emailElement.addEventListener('input', () => { validateEmail(emailElement.value, emailElement) });
+        emailElement.addEventListener('change', () => { validateEmail(emailElement.value, emailElement) });
+        passwordConfirmElement.addEventListener('input', () => { validatePasswordConfirmation(passwordElement.value, passwordConfirmElement.value, passwordConfirmElement, validPassConf)})
+        formElement.addEventListener('submit', function (e) {
+            e.preventDefault()
+            let password = passwordElement.value
+            let passwordConfirm = passwordConfirmElement.value
+            let email = emailElement.value
+
+
+        })
+
+        formElement.addEventListener("submit", function (e) {
+            e.preventDefault()
+            console.log( validEmail, validPass, validPass)
+            console.log('clicado')
+            if(validPass && validPassConf && validEmail){
+                formElement.submit();
+            }
+        })
+    </script>
+</body>
+
+</html>

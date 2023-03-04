@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolher Trilha</title>
+    <link rel="stylesheet" href="/css/formCreateTrail.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/cardsTrail.css">
+    <link rel="stylesheet" href="/css/loader.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section_form container hidden" id="form-create">
+        <form id="consultation-form" class="feed-form" method="post" action="/trails/create">
+            <input required placeholder="Nome da trilha" name="name" id="name" type="text">
+            <input required placeholder="Descrição curta" name="description" type="text">
+            <select id="visibilidade" name="type" required>
+                <option value="public">Público</option>
+                <option value="pritave" selected>Privado</option>
+            </select>
+            <button class="button_submit">Criar</button>
+        </form>
+    </section>
+
+
+    <div class="conteiner_load" id="load">
+        <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+        </div>
+    </div>
+
+
+
+    <div class="container hidden" id="new">
+        <div class="card">
+            <div class="header">
+                <div class="img-box">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path fill="rgba(66,193,110,1)"
+                            d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
+                        </path>
+                    </svg>
+                </div>
+                <h1 class="title">Novo</h1>
+            </div>
+
+            <div class="content">
+                <p>
+                    Adicionar nova trilha de estudos...
+                </p>
+
+                <a class="btn-link" id="btn-create">Adicionar</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        const load = document.getElementById('load')
+        const nameInput = document.getElementById('name')
+        const btnNew = document.getElementById('new')
+        const btnCreate = document.getElementById('btn-create')
+        const formCreate = document.getElementById('form-create')
+
+
+        fetch('/trails').then(response => response.json).then(data => {
+            load.remove()
+            btnNew.classList.remove('hidden')
+        })
+
+        btnCreate.addEventListener('click', () => {
+            btnNew.remove()
+            formCreate.classList.remove("hidden");
+        })
+        formCreate.addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const name = nameInput.value
+            const verifyName = await fetch('/trails/testname', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name })
+            }).then( response => {
+                if(response.valid === true){
+
+                }else{
+                    nameInput.style.borderColor = 'red'
+                    nameInput.style.borderWidth = '1px'
+                    nameInput.style.borderStyle = 'solid'
+                    alert('Este nome ja está em uso')
+                    nameInput.addEventListener('input', () => {
+                        nameInput.style.borderColor = 'none'
+                        nameInput.style.borderWidth = '0'
+                        nameInput.style.borderStyle = 'none'
+                    })
+                }
+            })
+        })
+
+
+
+
+
+    </script>
+</body>
+
+</html>
