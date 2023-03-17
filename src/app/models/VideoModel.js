@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const VideoSchema = mongoose.model("video", {
     userId: { type: String, required: true },
+    trailId: { type: String, required: true },
     url: { type: String, required: true },
     title: { type: String, required: true },
     thumbnail: { type: String, required: true },

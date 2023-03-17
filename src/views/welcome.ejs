@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Boas vindas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        html, body{
+            height: 100%;
+            width: 100%;
+        }
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .conteiner{
+            height: 100%;
+            background: linear-gradient(45deg , #001, #000);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+        }
+        .conteiner h1{
+            font-size: 110px;
+            font-weight: bold;
+            color: #22f;
+        }
+        .conteiner h3{
+            font-size: 30px;
+            font-weight: 200;
+            color: #fff;
+        }
+        .conteiner a{
+            border:none;
+            padding: 15px 35px;
+            color:#eef;
+            background-color: #22f;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .conteiner p{
+            width: 40%;
+            max-width: 450px;
+            color: #fff;
+            font-weight: 100;
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        .conteiner span{
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+        .conteiner span svg{
+            color: #fff;
+            font-size: 30px;
+            width: 30px;
+            height: 30px;
+        }
+        .conteiner span button{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .conteiner i{
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            padding: 10px;
+            text-align: right;
+        }
+        .conteiner i a{
+            background-color: transparent;
+            color:#fff;
+
+        }
+    </style>
+
+</head>
+<body onload="changeUp()">
+    <div class="conteiner">
+        <i><a href="/news">v 1.0.0 - Ver novidades</a> </i>
+        <h1 class="title">youtee.tech</h1>
+        <span>
+            <button onclick="changeDown()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+                <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+              </svg></button>
+            <h3 id="change-text"></h3> 
+            <button onclick="changeUp()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+                <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+              </svg></button>
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-three-dots" viewBox="0 0 16 16">
+            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+          </svg>
+        <p>Crie trilhas de estudo personalizadas e compartilhe com a comunidade ou mantenha-as privadas. Adicione links de vídeos do YouTube, notas, anotações, leia a transcrição, tire print e estude de maneira gera</p>
+        <a href="/auth/signup">Começar agora</a>
+    </div>
+    <script src="/js/welcome/welcome.js"></script>
+</body>
+</html>

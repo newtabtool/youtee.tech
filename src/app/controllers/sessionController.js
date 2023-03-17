@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 async function SessionsController(req, res, next){
     const token = req.cookies.jwt_token
-    console.log(token)
+    //console.log(token)
     if(!token) return res.status(200).redirect('/auth/signup')
 
     try{

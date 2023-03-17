@@ -31,7 +31,7 @@ class userController {
         function salvarTokenNoCookie(res, token) {
           // Define o cookie com o token JWT e configura seu tempo de expiração (em segundos)
           const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
-          res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: true });
+          res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
         }
 
 

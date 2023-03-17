@@ -14,10 +14,37 @@
         .hidden {
             display: none;
         }
+
+        header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background-color: #226;
+        }
+
+        header button {
+            padding: 25px 45px;
+            background-color: #226;
+            color: #fff;
+            border: none;
+        }
+
+        header button:hover {
+            background-color: #224;
+        }
+        .active{
+            background-color: #224;
+        }
     </style>
 </head>
 
-<body>
+<body onload="loadPrivatesTrails()">
+    <header>
+        <button onclick="loadPrivatesTrails()" id="private" class="active">Pessoal</button>
+        <button onclick="loadPublicTrails()" id="comunity">Comunidade</button>
+    </header>
     <section class="section_form container hidden" id="form-create">
         <form id="consultation-form" class="feed-form" method="post" action="/trails/create">
             <input required placeholder="Nome da trilha" name="name" id="name" type="text">
@@ -31,6 +58,7 @@
     </section>
 
 
+
     <div class="conteiner_load" id="load">
         <div class="three-body">
             <div class="three-body__dot"></div>
@@ -41,8 +69,8 @@
 
 
 
-    <div class="container hidden" id="new">
-        <div class="card">
+    <div class="container row-wrap hidden" id="new">
+        <div class="card-new" id="card-new">
             <div class="header">
                 <div class="img-box">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -71,48 +99,168 @@
 
 
 
+
     <script>
         const load = document.getElementById('load')
         const nameInput = document.getElementById('name')
         const btnNew = document.getElementById('new')
         const btnCreate = document.getElementById('btn-create')
         const formCreate = document.getElementById('form-create')
+        const test = document.getElementById('test')
+        const conteiner = document.getElementById('new')
+        const form = document.getElementById('consultation-form')
+
+        function loadPrivatesTrails(event) {
+            fetch('/trails')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                let cards = document.querySelectorAll('.card')
+                    cards.forEach(card => {
+                        card.remove()
+                    })
+                    document.getElementById('comunity').classList.remove('active')
+                    
+                    document.getElementById('private').classList.add('active')
+                    const trails = data.trails;
+                    // Use os dados das trilhas aqui
+                    console.log(trails)
+                    load.remove()
+                    btnNew.classList.remove('hidden')
+                    document.getElementById('card-new').classList.remove('hidden')
+                    trails.forEach(trail => {
+                        console.log(trail.name)
+
+                        const newTrailDiv = document.createElement('div');
+                        newTrailDiv.innerHTML = `
+          <div class="card">
+            <div class="header">
+              <div class="img-box">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path fill="rgba(66,193,110,1)" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
+                  </path>
+                </svg>
+              </div>
+              <h1 class="title">${trail.name}</h1>
+            </div>
+
+            <div class="content">
+              <p>
+                ${trail.description}
+              </p>
+
+              <a class="btn-link" href="/trail/${trail._id}">Acessar</a>
+            </div>
+          </div>
+        
+      `;
+
+                        // Anexe o elemento criado ao elemento pai
+                        conteiner.appendChild(newTrailDiv);
+
+                    });
+                })
+        }
 
 
-        fetch('/trails').then(response => response.json).then(data => {
-            load.remove()
-            btnNew.classList.remove('hidden')
-        })
+
+        function loadPublicTrails() {
+
+            fetch('/comunidade/trails')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+
+                    let cards = document.querySelectorAll('.card')
+                    cards.forEach(card => {
+                        card.remove()
+                    })
+                    
+                    document.getElementById('comunity').classList.add('active')
+                    document.getElementById('card-new').classList.add('hidden')
+                    document.getElementById('private').classList.remove('active')
+                    const trails = data.trails;
+                    // Use os dados das trilhas aqui
+                    console.log(trails)
+                    load.remove()
+                    btnNew.classList.remove('hidden')
+
+                    trails.forEach(trail => {
+                        console.log(trail.name)
+
+                        const newTrailDiv = document.createElement('div');
+                        newTrailDiv.innerHTML = `
+          <div class="card">
+            <div class="header">
+              <div class="img-box">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path fill="rgba(66,193,110,1)" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
+                  </path>
+                </svg>
+              </div>
+              <h1 class="title">${trail.name}</h1>
+            </div>
+
+            <div class="content">
+              <p>
+                ${trail.description}
+              </p>
+
+              <a class="btn-link" href="/trail/${trail._id}">Acessar</a>
+            </div>
+          </div>
+        
+      `;
+
+                        // Anexe o elemento criado ao elemento pai
+                        conteiner.appendChild(newTrailDiv);
+
+
+
+
+                    });
+                })
+
+        }
+
+
 
         btnCreate.addEventListener('click', () => {
             btnNew.remove()
             formCreate.classList.remove("hidden");
         })
         formCreate.addEventListener('submit', async (e) => {
-            e.preventDefault()
-            const name = nameInput.value
-            const verifyName = await fetch('/trails/testname', {
+            e.preventDefault();
+            const name = nameInput.value;
+            const response = await fetch('/trails/testname', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ name })
-            }).then( response => {
-                if(response.valid === true){
-
-                }else{
-                    nameInput.style.borderColor = 'red'
-                    nameInput.style.borderWidth = '1px'
-                    nameInput.style.borderStyle = 'solid'
-                    alert('Este nome ja está em uso')
-                    nameInput.addEventListener('input', () => {
-                        nameInput.style.borderColor = 'none'
-                        nameInput.style.borderWidth = '0'
-                        nameInput.style.borderStyle = 'none'
-                    })
-                }
-            })
-        })
+            });
+            const data = await response.json();
+            console.log(data);
+            if (data.valid === true) {
+                // Name is valid
+                form.submit();
+            } else {
+                // Name is not valid
+                nameInput.style.borderColor = 'red';
+                nameInput.style.borderWidth = '1px';
+                nameInput.style.borderStyle = 'solid';
+                alert('Este nome já está em uso');
+                nameInput.addEventListener('input', () => {
+                    nameInput.style.borderColor = 'none';
+                    nameInput.style.borderWidth = '0';
+                    nameInput.style.borderStyle = 'none';
+                });
+            }
+        });
 
 
 

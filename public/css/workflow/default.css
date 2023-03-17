@@ -1,0 +1,30 @@
+html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+            
+        }
+
+        body {
+            background: linear-gradient(to top right, #222 0%, #000 100%);
+            display: grid;
+            grid-template-columns: minmax(260px, 15%) 30px minmax(350px, 30%) minmax(270px, auto);
+            grid-template-rows: 100%;
+            gap:10px;
+            
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
+            grid-gap: 10px;
+        }

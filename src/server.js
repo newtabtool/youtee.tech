@@ -1,7 +1,8 @@
-import server from './app.js'
+import { serverHttp } from "./http.js";
+import './websocket.js'
 
-const port = process.env.PORT || 3001
 
-const s = server.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+serverHttp.listen(3000, ()=>{
+  console.log("Servidor rodando na porta 3000")
+  
 })

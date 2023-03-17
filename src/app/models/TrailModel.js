@@ -6,7 +6,6 @@ const TrailModel = mongoose.model('trail', {
     name: { type: String, required: true },
     description: { type: String, required: true },
     likes: { type: Number, required: false },
-    videos: { type: Object, required: false},
     tags: { type: Object, required: false}
     
 })
