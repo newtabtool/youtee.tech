@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Boas vindas</title>
+    <link rel="shortcut icon" href="/assets/faviconpng.png">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
     <style>
         html, body{
@@ -67,15 +68,28 @@
             border: none;
             cursor: pointer;
         }
-        .conteiner i{
+        .conteiner div{
             width: 100%;
             position: absolute;
             top: 0px;
             left: 0px;
             padding: 10px;
             text-align: right;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
         }
-        .conteiner i a{
+        .conteiner span.logo{
+            width: 20%;
+            color: #22f;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        span.logo img{
+            max-width: 10%;
+        }
+        .conteiner div a{
             background-color: transparent;
             color:#fff;
 
@@ -85,7 +99,9 @@
 </head>
 <body onload="changeUp()">
     <div class="conteiner">
-        <i><a href="/news">v 1.0.0 - Ver novidades</a> </i>
+        <div>
+        <span class="logo"><img src="/assets/faviconpng.png" alt="youtee.tech">youtee.tech</span>
+            <a href="/news">v 1.0.0 - Ver novidades</a> </div>
         <h1 class="title">youtee.tech</h1>
         <span>
             <button onclick="changeDown()">
