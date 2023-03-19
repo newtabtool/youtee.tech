@@ -35,16 +35,16 @@ class userController {
         }
 
 
-        console.log('login')
+        //console.log('login')
         const email = req.body.email
         const password = req.body.password
-        console.log(email, password)
+        //console.log(email, password)
         const loging = checkLogin(email, password)
         if (loging) {
             try {
                 const user = await User.findOne({ email: email })
                 const token_secret = process.env.JWT_SECRET;
-                console.log(user)
+               // console.log(user)
                 const token = jwt.sign({ id: user._id, email: email, premium: user.premium }, token_secret, { expiresIn: "7d" })
                  await salvarTokenNoCookie(res, token)
                 res.redirect('/')

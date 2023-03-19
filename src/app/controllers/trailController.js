@@ -8,7 +8,7 @@ import VideoModel from '../models/VideoModel.js'
 
 
 function con(msg){
-    console.log(msg);
+    //console.log(msg);
 }
 class trailController{
 
