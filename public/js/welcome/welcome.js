@@ -30,3 +30,8 @@ function changeDown(){
 }
 
 setInterval(changeUp, 2500)
+setInterval(()=>{
+    let width = window.innerWidth;
+    console.log(width)
+}
+    ,1000)

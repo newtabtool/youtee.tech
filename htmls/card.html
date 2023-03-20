@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolher trilha</title>
+    <style>
+        body{
+            background-color: #111;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .card{
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            background: linear-gradient( rgb(0, 49, 82), #003);
+            padding: 10px;
+            margin:10px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 15px;
+
+        }
+        .card-hero{
+            width: 100%;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .card-hero h1{
+            font-size: 20px;
+        }
+        .card-hero svg{
+            height: 60%;
+            max-height: 100px;
+        }
+        .card p{
+            width: 100%;
+            padding: 10px;
+            color:#fff;
+            font-size: 15px;
+            text-align: left;
+            scroll-behavior: smooth;
+            overflow: scroll;
+            text-overflow: ellipsis;
+            height: auto;
+            
+        }
+        .card p::-webkit-scrollbar{
+            width: 0;
+        }
+        .card button{
+            border: none;
+            color:#fff;
+            background-color: #02f;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <a href="/trail/${trail._id}" id="btn-new" title="${trail.description}" >
+            
+        <div class="card" id="card-new">
+            <div class="card-hero">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path fill="rgba(66,193,110,1)"
+                        d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
+                    </path>
+                </svg>
+                <h1 class="title">${trail.name}</h1>
+            </div>
+        </div></a>
+    </div>
+</body>
+</html>

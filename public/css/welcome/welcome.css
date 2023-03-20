@@ -1,0 +1,134 @@
+
+.conteiner{
+    height: 100%;
+    background: linear-gradient(45deg , #001, #000);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+.conteiner h1{
+    font-size: 110px;
+    font-weight: bold;
+    color: #22f;
+}
+.conteiner h3{
+    font-size: 30px;
+    font-weight: 200;
+    color: #fff;
+}
+.conteiner a{
+    border:none;
+    padding: 15px 35px;
+    color:#eef;
+    background-color: #22f;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.conteiner p{
+    width: 40%;
+    max-width: 450px;
+    color: #fff;
+    font-weight: 100;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.conteiner span{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.conteiner span svg{
+    color: #fff;
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+}
+.conteiner span button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.conteiner div{
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.conteiner span.logo{
+
+    width: 20%;
+    min-width: 250px;
+    color: #22f;
+    font-size: 25px;
+    font-weight: bold;
+}
+span.logo img{
+    max-width: 10%;
+}
+.conteiner div a{
+    background-color: transparent;
+    color:#fff;
+
+}
+
+@media screen and (max-width: 785px) {
+    .conteiner h1{
+        font-size: 13vw;
+    }
+    .conteiner h3{
+        font-size: 3vw;
+        text-align: center;
+    }
+    .conteiner p{
+        width: 80%;
+        color: #fff;
+        font-weight: 100;
+        text-align: center;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .conteiner span{
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+    .conteiner span svg{
+        color: #fff;
+        font-size: 30px;
+        width: 3vw;
+        height: 3vw;
+    }
+    .conteiner span.logo{
+        width: 20%;
+        min-width: 0;
+        color: #22f;
+        font-size: 0;
+        font-weight: bold;
+    }
+    span.logo img{
+        max-width: 10%;
+        min-width: 40px;
+    }
+    .conteiner div a{
+        font-size: 15px;
+    
+    }
+    
+}
+
+@media screen and (max-width: 385px) {
+    .conteiner h3{
+        font-size: 4.8vw;
+    }
+    .conteiner div a{
+        font-size: 5vw;
+    
+    }
+}
