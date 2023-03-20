@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pomodoro</title>
+    <style>
+        .conteiner-clock{
+            padding: 15px;
+            font-size: 20px;
+            text-align: center;
+            color:#fff;
+            max-width: 200px;
+        }
+        .work{
+            background-color: #09f;
+        }
+        .pause{
+            background-color: #0f9;
+
+        }
+        .break{
+            background-color: #f09;
+        }
+    </style>
+</head>
+
+<body onload="pomodoro()">
+    <div class="conteiner-clock work" id="cont-clock">
+        <b id="clock"></b>
+    </div>
+    <script>
+        const clock = document.getElementById('clock');
+        const contClock = document.getElementById('cont-clock');
+
+        let currentTimeSeconds = 0;
+        let currentTimeMinutes = 00;
+        let breaks = 0;
+        let isBigBreak = false;
+        let isBreak = false;
+
+        function pomodoro() {
+    setInterval(() => {
+        if (!isBreak && !isBigBreak) {
+            
+
+
+            currentTimeSeconds++;
+            if (currentTimeSeconds < 10) {
+                clock.textContent = currentTimeMinutes + ':0' + currentTimeSeconds;
+            } else {
+                clock.textContent = currentTimeMinutes + ':' + currentTimeSeconds;
+            }
+            if (currentTimeSeconds === 60) {
+                currentTimeMinutes++;
+                currentTimeSeconds = 0;
+            }
+            if (currentTimeMinutes === 25) {
+                isBreak = true;
+                console.log("pausar trabalho")
+                currentTimeMinutes = 0;
+                currentTimeSeconds = 0;
+                breaks++;
+                console.log("Big Break:"+isBigBreak)
+            }
+        }
+        if (isBreak) {
+            contClock.classList.remove('work')
+            contClock.classList.add('pause')
+            currentTimeSeconds++;
+            if (currentTimeSeconds < 10) {
+                clock.textContent = currentTimeMinutes + ':0' + currentTimeSeconds;
+            } else {
+                clock.textContent = currentTimeMinutes + ':' + currentTimeSeconds;
+            }
+            if (currentTimeSeconds === 60) {
+                currentTimeMinutes++;
+                currentTimeSeconds = 0;
+            }
+            if (currentTimeMinutes === 5) {
+                isBreak = false;
+                console.log("voltar ao trabalho");
+                currentTimeMinutes = 0;
+                currentTimeSeconds = 0;
+                breaks++;
+                console.log("Big Break:"+isBigBreak)
+            }
+            if (breaks === 3) {
+                isBigBreak = true;
+                isBreak = false;
+                currentTimeMinutes = 0;
+                currentTimeSeconds = 0;
+
+            }
+        }
+
+        if (isBigBreak) {
+            console.log("pausa longa");
+            currentTimeSeconds++;
+            if (currentTimeSeconds < 10) {
+                clock.textContent = currentTimeMinutes + ':0' + currentTimeSeconds;
+            } else {
+                clock.textContent = currentTimeMinutes + ':' + currentTimeSeconds;
+            }
+            if (currentTimeSeconds === 60) {
+                currentTimeMinutes++;
+                currentTimeSeconds = 0;
+            }
+            if (currentTimeMinutes === 30) {
+                isBreak = false;
+                isBigBreak = false;
+                currentTimeMinutes = 0;
+                currentTimeSeconds = 0;
+                breaks = 0;
+                console.log("Big Break:"+isBigBreak)
+            }
+        }
+    }, 10)
+}
+
+    </script>
+</body>
+
+</html>

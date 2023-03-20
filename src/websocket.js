@@ -15,6 +15,7 @@ io.on("connection", socket => {
         const userId = userLoged.id;
         const url = data.url;
         const trailId = data.trailId
+        console.log(url+'\n'+ trailId+'\n'+  userId)
         const newVideo = await videoController.create(url, trailId, userId)
         const title = newVideo.title;
         const id = newVideo._id;
