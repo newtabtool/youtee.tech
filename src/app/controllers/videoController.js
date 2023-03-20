@@ -136,7 +136,9 @@ class videoController {
 
             })
             //console.log(relateds)
-
+            if(text === undefined){
+                text = "erro ao baixar transcrição"
+            }
             newVideo = await VideoModel.create({
                 userId: userId,
                 trailId: trailId,
@@ -184,13 +186,13 @@ class videoController {
 
         try {
             const video = await VideoModel.findOne({ _id: req.params.id })
-            console.log("video " + video)
+            //console.log("video " + video)
             if (video){
                 const userIdDb = video.userId
-                console.log("User id deb: -------------------------------------" + userIdDb)
+                //console.log("User id deb: -------------------------------------" + userIdDb)
                 if (userIdDb === req.id) {
                     let deleteVideoDb = await VideoModel.findByIdAndDelete({ _id: req.params.id })
-                    console.log(deleteVideoDb)
+                    //console.log(deleteVideoDb)
                     res.status(200).send({ stats: "ok" })
                     return
                 }
