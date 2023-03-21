@@ -3,8 +3,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color:#fff;;
 }
-
+a, button{
+    cursor: pointer;
+}
 
 .sidebar {
     
@@ -134,3 +137,6 @@
     transition: 0.3s linear;
 }
     
+#videos-list button, #videos-list .line{
+    color:#fff;
+}

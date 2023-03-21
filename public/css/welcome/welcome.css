@@ -1,7 +1,12 @@
 
+body{
+    background: linear-gradient(45deg , #001, #000);
+    background-size: 100%;
+    background-attachment: fixed;
+
+}
 .conteiner{
     height: 100%;
-    background: linear-gradient(45deg , #001, #000);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -77,6 +82,40 @@ span.logo img{
     background-color: transparent;
     color:#fff;
 
+}
+#explain-cards{
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    transform: translateY(-50px);
+    gap: 30px;
+}
+#explain-cards .card{
+    background: rgba(255,255,255,0.05) ;
+    width: 30%;
+    height: 70%;
+    min-width: 350px;
+    height: 400px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: none;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    color:#fff;
+    padding: 10px 35px;
+}
+#explain-cards .card svg{
+    color:#09f;
+    width: 70px;
+    height: 70px;
 }
 
 @media screen and (max-width: 785px) {

@@ -22,13 +22,13 @@ async function loadWorkflow(event) {
     }
     let id = await Number(event.currentTarget.id);
     globalVideoId = idUnit;
-    console.log(id)
+    //console.log(id)
     try {
         //console.log(globalVideoId)
         const videosData = await fetch(`/video/${idUnit}`).then((res) => {
             return res.json();
         })
-        console.log(videosData.videoData[0])
+        //console.log(videosData.videoData[0])
         globalVideoData = videosData.videoData[0]
         let relatedVideos = videosData.videoData[0].related
         let note = videosData.videoData[0].notes
