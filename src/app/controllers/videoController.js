@@ -45,8 +45,9 @@ class videoController {
     async getVideoDataUnit(req, res) {
         console.log("get video data")
         try {
-            let videoId = req.params.videoId
-            const videoData = await VideoModel.find({ videoId: videoId })
+            let videoId = req.params.id
+            console.log(videoId)
+            const videoData = await VideoModel.find({ _id: videoId })
             res.status(200).json({ videoData })
         } catch (err) {
             console.log(err)
