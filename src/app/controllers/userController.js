@@ -58,14 +58,15 @@ class UserController {
       const signup = await User.create({ email, password: password_hash, premium: false });
       if (signup) {
         const token = jwt.sign({ id: signup._id, email: email, premium: signup.premium }, token_secret, { expiresIn: 30 });
-        res.header('authorization-token', token).json({ msg: 'logado' });
-        await salvarTokenNoCookie(res, token);
+        //res.header('authorization-token', token).json({ msg: 'logado' });
+        const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
+        res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
         res.redirect('/');
       } else {
         res.status(501).send('Erro ao realizar cadastro');
       }
     } else {
-      res.status(501).send('Erro ao realizar signup');
+      res.status(501).send('Erro ao realizar cadastro');
     }
   }
 

@@ -42,8 +42,11 @@ form.addEventListener('submit', (e) => {
 socket.on('new-video-added', (data) => {
     console.log(data.title, data.id, data.url )
     const list = document.querySelector('ul#videos-list');
+    let arrayVideos = document.querySelectorAll(".link");
+    let videosQuant = arrayVideos.length;
+    let thisId = videosQuant + 1;
     list.insertAdjacentHTML('beforeend', `
-    <button onclick="loadWorkflow(event)" " class="link" data-id="${data._id}" >
+    <button onclick="loadWorkflow(event)" " id=${thisId} class="link" data-id="${data._id}" >
     <li class="line">${data.title}</li>
   </button>
     `);
