@@ -46,7 +46,7 @@ class videoController {
         console.log("get video data")
         try {
             let videoId = req.params.id
-            console.log(videoId)
+            //console.log(videoId)
             const videoData = await VideoModel.find({ _id: videoId })
             res.status(200).json({ videoData })
         } catch (err) {
@@ -91,7 +91,8 @@ class videoController {
         try {
             let videoId = getId(url)
             title = await youtube.metadata(url).then(function (json) {
-                //console.log(json);
+                //console.log("json com erro")
+                //console.log(json)
                 return json.title;
             }, function (err) {
                 console.log(err);

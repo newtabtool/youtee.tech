@@ -17,7 +17,7 @@ const toolBarNoteFunctions = {
             success.innerText = 'Salvo com sucesso'
             success.classList.add('success')
             document.body.appendChild(success)
-            console.log(success)
+            //console.log(success)
 
             setTimeout(()=>{
                 success.remove()
@@ -28,7 +28,7 @@ const toolBarNoteFunctions = {
             errorMsg.innerText = 'Erro ao salvar, tente novamente'
             errorMsg.classList.add('error')
             document.body.appendChild(errorMsg)
-            console.log(errorMsg)
+            //console.log(errorMsg)
 
             setTimeout(()=>{
                 error.remove()
@@ -45,7 +45,7 @@ const toolBarNoteFunctions = {
         if(size < 80){
         textArea.style.fontSize = size + 2 + 'px';
         size = size + 2;
-        console.log(size)
+        //console.log(size)
         return size
         }
     },

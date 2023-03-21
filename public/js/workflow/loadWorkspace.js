@@ -11,7 +11,7 @@ function getYouTubeVideoId(url) {
 
 async function loadWorkflow(event) {
     const idUnit = event.currentTarget.dataset.id;
-    console.log(idUnit)
+    //console.log(idUnit)
     const actives = document.querySelectorAll('.active')
     if(actives.length > 0) {
     actives.forEach((element) => {
@@ -22,15 +22,17 @@ async function loadWorkflow(event) {
     }
     let id = await Number(event.currentTarget.id);
     globalVideoId = idUnit;
+    console.log(id)
     try {
-        console.log(globalVideoId)
+        //console.log(globalVideoId)
         const videosData = await fetch(`/video/${idUnit}`).then((res) => {
             return res.json();
         })
-        globalVideoData = videosData.videoData[id]
-        let relatedVideos = videosData.videoData[id].related
-        let note = videosData.videoData[id].notes
-        let url = videosData.videoData[id].url
+        console.log(videosData.videoData[0])
+        globalVideoData = videosData.videoData[0]
+        let relatedVideos = videosData.videoData[0].related
+        let note = videosData.videoData[0].notes
+        let url = videosData.videoData[0].url
         let href = getYouTubeVideoId(url)
         //NoteAppend(note)
         getRelatedVideos(relatedVideos)

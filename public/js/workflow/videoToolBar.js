@@ -16,12 +16,10 @@ async function getFrame() {
         await document.body.appendChild(canvas)
     });
     
-        console.log(globalVideoData.url)
     
 }
 
 async function loadTranscription() {
-    console.log(globalVideoData)
     try {
         let col3 = document.getElementById('col3')
 
@@ -46,7 +44,6 @@ async function loadTranscription() {
 
 
 async function loadNote() {
-   // console.log(globalVideoData)
     try {
         let col3 = document.getElementById('col3')
 
@@ -98,7 +95,6 @@ async function loadNote() {
 
         }
     } catch (err) {
-        console.log(err)
     }
 }
 

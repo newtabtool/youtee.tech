@@ -77,6 +77,6 @@ function toggleVisibility() {
     }
     document.getElementById('bar').replaceChild(buttonVisibility, document.getElementById('visibility') )
     //document.getElementById('visibility').remove()
-    console.log(data)
+    //console.log(data)
   })
   }
