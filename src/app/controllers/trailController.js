@@ -23,7 +23,7 @@ class trailController{
         }else{
             publik = false
         }
-        console.log(name, description, type, userId, likes, tags)
+        //console.log(name, description, type, userId, likes, tags)
         const verifyName = await TrailModel.find({name: name, creator: userId})
         if(verifyName.length > 0){
             return res.status(400).redirect('/trail')
@@ -67,9 +67,9 @@ class trailController{
     async testTrailName(req,res){
         const { name }  = req.body;
         const trail = await TrailModel.find({name: name, creator: req.id})
-        console.log(name)
-        console.log(trail)
-        console.log(trail.length)
+        //console.log(name)
+        //console.log(trail)
+        //console.log(trail.length)
 
         if (trail.length > 0 ){
             return res.status(200).json({valid: false})
@@ -82,7 +82,7 @@ class trailController{
     async saveNote(req,res){
         const videoId = req.body.id
         const note = req.body.note;
-        console.log(note, videoId)
+        //console.log(note, videoId)
 
         const save = await VideoModel.findByIdAndUpdate({_id: videoId}, { notes: note})
         .then(res.status(200).send({msg: "success"}))
@@ -112,7 +112,7 @@ class trailController{
             visibility = !visibility;
             con("Mudado:  " + visibility)
             let change = await TrailModel.findOneAndUpdate({_id: trailId}, { publik: visibility}).then((ok)=>{
-                console.log(ok)
+                //console.log(ok)
                 return res.status(200).json({ visibility: visibility})
             }).catch((err) => {
                 console.log(err)
