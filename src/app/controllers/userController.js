@@ -55,6 +55,7 @@ class UserController {
     if (signuping != false) {
       let salt = bcrypt.genSaltSync(14);
       let password_hash = bcrypt.hashSync(password, salt);
+      try{
       const signup = await User.create({ email, password: password_hash, premium: false });
       if (signup) {
         const token = jwt.sign({ id: signup._id, email: email, premium: signup.premium }, token_secret, { expiresIn: 30 });
@@ -62,11 +63,12 @@ class UserController {
         const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
         res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
         res.redirect('/');
-      } else {
-        res.status(501).send('Erro ao realizar cadastro');
-      }
-    } else {
+      } 
+    }catch(err){
       res.status(501).send('Erro ao realizar cadastro');
+    }
+    } else {
+      res.status(501).send('Erro ao realizar cadastro, verifique os dados. Se voce ja se cadastrou anteriormente tente fazer login');
     }
   }
 

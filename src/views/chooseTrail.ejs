@@ -50,6 +50,7 @@
         <button onclick="loadPrivatesTrails()" id="private" class="active">Pessoal</button>
         <button id="comunity">Comunidade</button>
     </header>
+
     <section class="section_form container hidden" id="form-create">
         <form id="consultation-form" class="feed-form" method="post" action="/trails/create">
             <input required placeholder="Nome da trilha" name="name" id="name" type="text">
@@ -235,7 +236,7 @@
                 body: JSON.stringify({ name })
             });
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             if (data.valid === true) {
                 // Name is valid
                 form.submit();
