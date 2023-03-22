@@ -23,10 +23,10 @@ class trailController{
         }else{
             publik = false
         }
-        //console.log(name, description, type, userId, likes, tags)
+        console.log(name)
         const verifyName = await TrailModel.find({name: name, creator: userId})
         if(verifyName.length > 0){
-            return res.status(400).redirect('/trail')
+            return res.status(400).send("Você ja cadstrou uma trilha com este nome ")
         }
 
      let create = await TrailModel.create({ 
