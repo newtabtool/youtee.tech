@@ -58,7 +58,7 @@ class UserController {
       try{
       const signup = await User.create({ email, password: password_hash, premium: false });
       if (signup) {
-        const token = jwt.sign({ id: signup._id, email: email, premium: signup.premium }, token_secret, { expiresIn: 30 });
+        const token = jwt.sign({ id: signup._id, email: email, premium: signup.premium }, token_secret, { expiresIn: '30d' });
         //res.header('authorization-token', token).json({ msg: 'logado' });
         const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
         res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });

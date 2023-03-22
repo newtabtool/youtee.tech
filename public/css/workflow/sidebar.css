@@ -140,3 +140,28 @@ a, button{
 #videos-list button, #videos-list .line{
     color:#fff;
 }
+#notify{
+    position: relative;
+}
+#notify span{
+    display: none;
+    transition: 0.5s linear;
+    position: absolute;
+    width: 250px;
+    height: 270px;
+    background-color: #fff;
+    left: 10px;
+    bottom: 45px;
+}
+#notify:hover span{
+    display: block;
+    padding: 0;
+}
+#notifications a{
+    color:#000;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    text-align: left;
+}
