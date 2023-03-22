@@ -165,3 +165,24 @@ a, button{
     padding: 10px;
     text-align: left;
 }
+#bell-not{
+    animation: change-color 4s linear infinite;
+  }
+  /* Define a animação */
+@keyframes change-color {
+    0% {
+      fill: white; /* começa com branco */
+    }
+    33% {
+      fill: blue; /* muda pra azul */
+    }
+    66% {
+      fill: deeppink; /* muda pra deeppink */
+    }
+    100% {
+      fill: white; /* volta pra branco */
+    }
+  }
+  
+  
+  
