@@ -26,6 +26,7 @@
     "mongoose": "^6.9.3",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.1",
+    "tesseract.js": "^4.0.2",
     "youtube-captions-scraper": "^2.0.0",
     "youtube-frames": "^1.0.3",
     "youtube-metadata-from-url": "^1.0.3"

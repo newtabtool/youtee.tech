@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #paste-area {
+            background-color: #033;
+        }
+
+        #paste-area img {
+            width: 100%;
+            height: 100%;
+        }
+        #paste-area p{
+            padding: 20px;
+        }
+        #paste-area img:not(#pasted-image) {
+  display: none;
+}
+#col3{
+    display: grid;
+    width: 30vw;
+    height: 100vh;
+    grid-template-columns: 100%;
+    grid-template-rows:  30% auto 60%;
+}
+#text-ocr-display{
+    background-color: rgba(255,0,255,0.2);
+    color:rgba(255,255,255,0.6);
+    
+    
+}
+.center-text{
+ color: rgba(255,255,255,0.6);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ font-size: 22px;
+ font-weight: bold;
+}
+#col3 button{
+    padding: 15px;
+    background: rgba(0,0,0,0.3);
+}
+    </style>
+</head>
+
+<body>
+    <div id="col3">
+    
+
+        <div id="paste-area" contenteditable="true" class="center-text" onclick="cl()">
+           <p id="info-ocr"> Coloque o vídeo em fullscreen, pressione a tecla PrtScr, depois clique aqui e pressione CRTL + V
+            </p>
+            <img id="pasted-image" style="display:none;" />
+        </div>
+    
+    <button onclick="ocrImage()">Analizar e extrair texto</button>
+    <div id="text-ocr-display" class="center-text">
+        O texto extraido aparecerá aqui
+    </div>
+    </div>
+    <script src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+    <script>
+
+        const area = document.getElementById('paste-area')
+        area.addEventListener('paste', (e) => {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+        if (item.type.indexOf('image') !== -1) {
+            const blob = item.getAsFile();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById('pasted-image');
+                img.src = event.target.result;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(blob)
+        }
+    }
+})
+
+    function cl(){
+        if(document.getElementById('info-ocr')){
+        document.getElementById('info-ocr').remove()
+        }
+    }
+        function ocrImage() {
+    const img = document.getElementById('pasted-image');
+    Tesseract.recognize(img, 'por', {
+         logger: m => {
+            if(m.status === 'recognizing text'){
+                console.log(m.progress)
+            }
+         } 
+
+        }).then(({ data: { text } }) => {
+        console.log(text);
+    });
+}
+        
+    </script>
+</body>
+
+</html>

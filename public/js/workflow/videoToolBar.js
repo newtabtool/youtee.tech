@@ -43,6 +43,79 @@ async function loadTranscription() {
 }
 
 
+
+async function loadOCR(){
+    try {
+        let col3 = document.getElementById('col3')
+
+        if (col3 && globalVideoData) {
+            col3.remove();
+        }
+
+        col3 = document.createElement('div')
+        col3.id = 'col3'
+        col3.classList.add('ocr')
+        col3.innerHTML = `<div id="paste-area" contenteditable="true" class="center-text" onclick="cl()">
+        <p id="info-ocr"> Coloque o vídeo em fullscreen, pressione a tecla PrtScr, depois clique aqui e pressione CRTL + V
+         </p>
+         <img id="pasted-image" style="display:none;" />
+     </div>`
+        document.body.appendChild(col3)
+
+
+
+
+    } catch (err) {
+
+    }
+
+    const area = document.getElementById('paste-area')
+        area.addEventListener('paste', (e) => {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+        if (item.type.indexOf('image') !== -1) {
+            const blob = item.getAsFile();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById('pasted-image');
+                img.src = event.target.result;
+                img.style.display = 'block';
+            }
+            reader.readAsDataURL(blob)
+        }
+    }
+
+    document.getElementById('col3').innerHTML += `<button onclick="ocrImage()">Analizar e extrair texto</button>
+    <div id="text-ocr-display" class="center-text">
+        O texto extraido aparecerá aqui
+    </div>`
+
+})
+
+}
+function cl(){
+    if(document.getElementById('info-ocr')){
+    document.getElementById('info-ocr').remove()
+    }
+}
+    function ocrImage() {
+        document.getElementById('text-ocr-display').textContent = "0%"
+const img = document.getElementById('pasted-image');
+Tesseract.recognize(img, 'por', {
+     logger: m => {
+        if(m.status === 'recognizing text'){
+            console.log(m.progress)
+            document.getElementById('text-ocr-display').textContent =  Math.round(100*m.progress) + "%  aguarde"
+        }
+     } 
+
+    }).then(({ data: { text } }) => {
+        document.getElementById('text-ocr-display').textContent = text;
+        document.getElementById('text-ocr-display').style.fontSize = '12px'
+});
+}
+
+
 async function loadNote() {
     try {
         let col3 = document.getElementById('col3')
