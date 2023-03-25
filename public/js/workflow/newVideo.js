@@ -16,6 +16,7 @@ const meuCookie = document.cookie.split(';').find(cookie => cookie.trim().starts
 socket.on('connect', function getNewNotifications(){
     socket.emit('get-notifications', { token: meuCookie })
 })
+
 function validateYouTubeUrl(url) {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
@@ -25,10 +26,6 @@ function validateYouTubeUrl(url) {
         return false;
     }
 }
-
-
-
-
 
 
 form.addEventListener('submit', (e) => {
@@ -42,8 +39,6 @@ form.addEventListener('submit', (e) => {
     // Obtem o último elemento do array, que deve ser o ID
     let id = partes_url[partes_url.length - 1];
 
-    // Exibe o ID no console
-    //console.log(id);
 
     if (validateYouTubeUrl(input.value)) {
         socket.emit('new-video', { url: input.value, trailId: id, cookie: meuCookie })
@@ -53,14 +48,13 @@ form.addEventListener('submit', (e) => {
     }
 })
 
+
 //recebendo novas notificações do servidor ----------
 socket.on('news', async (data)=>{
 
-    //console.log(data)
     const news = data.news
     news.forEach(n => {
         let status = n.read ? "read" : "unread";
-        console.log(status)
         let title = n.title;
         let body = n.body;
         let link = n.link;
@@ -75,10 +69,7 @@ socket.on('news', async (data)=>{
 
         const newOne = document.getElementById('notify')
         if(n.read === false && !newOne.classList.contains('new-one')){
-            
                 newOne.classList.add('new-one')
-            
-
         }
 
     })
@@ -88,7 +79,6 @@ socket.on('news', async (data)=>{
 
 
 socket.on('new-video-added', (data) => {
-    //console.log(data.title, data.id, data.url )
     const list = document.querySelector('ul#videos-list');
     let arrayVideos = document.querySelectorAll(".link");
     let videosQuant = arrayVideos.length;

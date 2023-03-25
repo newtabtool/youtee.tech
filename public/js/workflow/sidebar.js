@@ -76,8 +76,7 @@ function toggleVisibility() {
       </svg>`
     }
     document.getElementById('bar').replaceChild(buttonVisibility, document.getElementById('visibility') )
-    //document.getElementById('visibility').remove()
-    //console.log(data)
+   
   })
   }
 
