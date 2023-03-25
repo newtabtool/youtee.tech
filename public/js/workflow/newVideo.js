@@ -13,6 +13,9 @@ let last = 0;
 
 const meuCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt_token=')).split('=')[1];
 
+socket.on('connect', function getNewNotifications(){
+    socket.emit('get-notifications', { token: meuCookie })
+})
 function validateYouTubeUrl(url) {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
@@ -40,7 +43,7 @@ form.addEventListener('submit', (e) => {
     let id = partes_url[partes_url.length - 1];
 
     // Exibe o ID no console
-    console.log(id);
+    //console.log(id);
 
     if (validateYouTubeUrl(input.value)) {
         socket.emit('new-video', { url: input.value, trailId: id, cookie: meuCookie })
@@ -49,6 +52,40 @@ form.addEventListener('submit', (e) => {
         alert('Url inválida')
     }
 })
+
+//recebendo novas notificações do servidor ----------
+socket.on('news', async (data)=>{
+
+    //console.log(data)
+    const news = data.news
+    news.forEach(n => {
+        let status = n.read ? "read" : "unread";
+        console.log(status)
+        let title = n.title;
+        let body = n.body;
+        let link = n.link;
+        let id = n._id;
+
+        document.getElementById("notifications-conteiner").innerHTML = `
+        <span id="notifications">
+            <a href="#" onclick="openNotificationsOnClick('${title}','${body}', '${link}', '${id}','${status}')" class="${status}" title="Clique para abrir" id="${id}">
+                ${n.title}
+            </a>
+        </span>`
+
+        const newOne = document.getElementById('notify')
+        if(n.read === false && !newOne.classList.contains('new-one')){
+            
+                newOne.classList.add('new-one')
+            
+
+        }
+
+    })
+})
+
+
+
 
 socket.on('new-video-added', (data) => {
     //console.log(data.title, data.id, data.url )
@@ -61,5 +98,6 @@ socket.on('new-video-added', (data) => {
     <li class="line">${data.title}</li>
   </button>
     `);
+
 });
 

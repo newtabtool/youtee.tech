@@ -1,12 +1,27 @@
 import videoController from "./app/controllers/videoController.js";
 import { io } from "./http.js";
 import jwt from 'jsonwebtoken'
+import notificationController from "./app/controllers/notificationController.js";
 
 
 import cookie from 'cookie';
 
 io.on("connection", socket => {
     //console.log("a user connected");
+    socket.on('get-notifications', async (data) => {
+        //console.log(data);
+        const validToken = jwt.verify(data.token, process.env.JWT_SECRET)
+        if(validToken){
+            const idUser = validToken.id;
+            //console.log(idUser)
+            const news = await notificationController.getAll(idUser)
+            socket.emit('news', {  news: news })
+        }
+    })
+    socket.on("read", async (id) =>{
+        console.log(id)
+        const change = await notificationController.read(id)
+    })
 
     socket.on("new-video", async (data) => {
 
