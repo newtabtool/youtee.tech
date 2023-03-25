@@ -13,7 +13,7 @@ let last = 0;
 
 const meuCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt_token=')).split('=')[1];
 
-socket.on('connect', function getNewNotifications(){
+socket.on('connect', function getNewNotifications() {
     socket.emit('get-notifications', { token: meuCookie })
 })
 
@@ -50,27 +50,29 @@ form.addEventListener('submit', (e) => {
 
 
 //recebendo novas notificações do servidor ----------
-socket.on('news', async (data)=>{
+socket.on('news', async (data) => {
 
     const news = data.news
     console.log(news)
     news.forEach(n => {
         let status = n.read ? "read" : "unread";
-        let title = n.title;
-        let body = n.body;
+        let title = encodeURIComponent(n.title);
+let body = encodeURIComponent(n.body);
         let link = n.link;
         let id = n._id;
 
         document.getElementById("notifications-conteiner").innerHTML += `
-        <span id="notifications">
-            <a href="#" onclick="openNotificationsOnClick('${title}','${body}', '${link}', '${id}','${status}')" class="${status}" title="Clique para abrir" id="${id}">
-                ${n.title}
-            </a>
-        </span>`
+    <span id="notifications">
+        <a href="#" onclick="openNotificationsOnClick('${title}','${body}', '${link}', '${id}','${status}')" class="${status}" title="Clique para abrir" id="${id}">
+            ${n.title}
+        </a>
+    </span>
+`;
+
 
         const newOne = document.getElementById('notify')
-        if(n.read === false && !newOne.classList.contains('new-one')){
-                newOne.classList.add('new-one')
+        if (n.read === false && !newOne.classList.contains('new-one')) {
+            newOne.classList.add('new-one')
         }
 
     })
