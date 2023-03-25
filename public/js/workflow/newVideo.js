@@ -53,6 +53,7 @@ form.addEventListener('submit', (e) => {
 socket.on('news', async (data)=>{
 
     const news = data.news
+    console.log(news)
     news.forEach(n => {
         let status = n.read ? "read" : "unread";
         let title = n.title;
@@ -60,7 +61,7 @@ socket.on('news', async (data)=>{
         let link = n.link;
         let id = n._id;
 
-        document.getElementById("notifications-conteiner").innerHTML = `
+        document.getElementById("notifications-conteiner").innerHTML += `
         <span id="notifications">
             <a href="#" onclick="openNotificationsOnClick('${title}','${body}', '${link}', '${id}','${status}')" class="${status}" title="Clique para abrir" id="${id}">
                 ${n.title}
