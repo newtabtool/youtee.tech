@@ -9,9 +9,6 @@ async function getRelatedVideos(relatedVideos){
         const card = document.createElement('div');
         card.classList.add('card');
       
-        const image = document.createElement('div');
-        image.classList.add('card-image');
-        card.appendChild(image);
       
         const category = document.createElement('div');
         category.classList.add('category');
@@ -19,6 +16,13 @@ async function getRelatedVideos(relatedVideos){
         category.textContent = relatedVideo.channel
         card.appendChild(category);
 
+        const buttonAdd = document.createElement('button');
+        buttonAdd.classList.add('button-add');
+        buttonAdd.textContent = "+";
+        buttonAdd.id = relatedVideo.url
+        buttonAdd.addEventListener('click', (e) => addNewVideoFromRelateds(e))
+        card.appendChild(buttonAdd);
+        
         const linkToVideoRelated = document.createElement('a');
         linkToVideoRelated.classList.add('link-related');
         linkToVideoRelated.setAttribute('href', relatedVideo.url)
@@ -32,16 +36,6 @@ async function getRelatedVideos(relatedVideos){
         linkToVideoRelated.appendChild(heading);
       
         relatedVideosConteiner.appendChild(card);
-     /* 
-      
-      
-      
-      
-        <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines</div>
-                </div> */
         
     });
 }

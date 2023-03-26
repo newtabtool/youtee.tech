@@ -47,7 +47,7 @@
         <div class="videos-name">
             <ul id="videos-list">
                 <% n=0; videos.forEach(video=> { %>
-                    <button onclick="loadWorkflow(event)" id="<%= n %>" class="link" data-id="<%= video._id %>"
+                    <button onclick="loadWorkflow(event)" id="<%= n %>" title="<%= video.title %>" class="link" data-id="<%= video._id %>"
                         target="_blank">
                         <li class="line">
                             <%= video.title %>
@@ -146,7 +146,6 @@
 
 
         <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/workflow/socket.js"></script>
         <script src="/js/workflow/newVideo.js"></script>
         <script src="/js/workflow/loadRelatedVideos.js"></script>
         <script src="/js/workflow/notesController.js"></script>
@@ -155,7 +154,6 @@
         <script src="/js/workflow/sidebar.js"></script>
         <script src="/js/workflow/videoToolBar.js"></script>
         <script src="/js/workflow/pomodoro.js"></script>
-        <script src="/js/workflow/module.js" type="module"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
             integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>

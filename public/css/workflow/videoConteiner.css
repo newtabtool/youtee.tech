@@ -38,7 +38,9 @@
     border-radius: 5px;
 }
 #delete{
-    background: rgba(255, 0, 0, 0.5);
+    background: rgba(255, 0, 0, 0.6);
+    border:none;
+    color:#fff;
 }
 .related-videos-list{
     display: flex;

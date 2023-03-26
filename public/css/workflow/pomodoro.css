@@ -30,6 +30,13 @@
     color: #fff;
 }
 
+#closePomodoro{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    color:#000;
+    
+}
 .work {
     background-color: #f09;
 }

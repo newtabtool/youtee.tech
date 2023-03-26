@@ -89,33 +89,42 @@ class videoController {
             return videoID;
         }
         try {
-            let videoId = getId(url)
+            let videoId = getId(url);
             title = await youtube.metadata(url).then(function (json) {
-                //console.log("json com erro")
-                //console.log(json)
-                return json.title;
+              return json.title;
             }, function (err) {
-                console.log(err);
+              console.log(err);
             });
-
-
+          
             text = await getSubtitles({
-                videoID: videoId, // youtube video id
-                lang: 'pt' // default: `en`
+              videoID: videoId,
+              lang: 'pt'
             }).then(captions => {
-                // console.log(captions);
-                let textComplete = ''
-                captions.forEach(element => {
-                    textComplete = textComplete + " " + element.text + " ";
-
+              let textComplete = '';
+              captions.forEach(element => {
+                textComplete = textComplete + " " + element.text + " ";
+              });
+              return textComplete;
+            }).catch(async err => {
+              console.log('Erro ao obter legendas em português:', err);
+              try {
+                const captions = await getSubtitles({
+                  videoID: videoId,
+                  lang: 'en'
                 });
-                //console.log(textI)
-                return textComplete
-            })
+                let textComplete = '';
+                captions.forEach(element => {
+                  textComplete = textComplete + " " + element.text + " ";
+                });
+                return textComplete;
+              } catch (err) {
+                console.log('Erro ao obter legendas em inglês:', err);
+              }
+            });
+          } catch (err) {
+            console.log(err);
+          }
 
-        } catch (err) {
-            console.log(err)
-        }
         //console.log(title)
         //console.log(text)
         let arrayTitles;
