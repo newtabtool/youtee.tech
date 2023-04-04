@@ -33,6 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/modal/modal.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 
@@ -47,8 +48,8 @@
         <div class="videos-name">
             <ul id="videos-list">
                 <% n=0; videos.forEach(video=> { %>
-                    <button onclick="loadWorkflow(event)" id="<%= n %>" title="<%= video.title %>" class="link" data-id="<%= video._id %>"
-                        target="_blank">
+                    <button onclick="loadWorkflow(event)" id="<%= n %>" title="<%= video.title %>" class="link"
+                        data-id="<%= video._id %>" target="_blank">
                         <li class="line">
                             <%= video.title %>
                         </li>
@@ -70,33 +71,95 @@
 
         <div class="options-conteiner wrapper" id="bar">
 
+            <dialog>
+                <div class="modal-conteiner" id="modal-conteiner">
+                    <div class="main-modal">
+                        <div class="modal-header">
+                            Publicar trilha
+                            <span>
+                                <button class="modal-button" id="modal-save-button" >salvar</button>
+                                <button class="modal-button" id="modal-cancel-button">fechar</button>
+                            </span>
+                        </div>
+                        <div class="modal-content" id="modal-content">
+                            <h3>
+                                Vamos configurar sua trilha para torná-la pública
+                            </h3>
+                            <form action="">
+                                <label for="trail-description">Dê um nome pra sua trilha</label>
+                                <input type="text" name="trail-name" id="trail-name"
+                                    placeholder="Digite aqui o nome da trilha" required>
 
-            <button title="Clique aqui para abrir as notificações"  id="notify" onclick="toggleNotifications()">
+                                <span id="desc"><label for="trail-description">Forneça uma descrição sobre a sua trilha</label><b id="count-desc-size">0/500</b></span>
+                                <input type="text" name="trail-description" id="trail-description"
+                                    placeholder="Escreva uma descrição aqui" required>
+
+                                <label for="trail-tags">Agora adicione até 10 tags ao seu vídeo</label>
+                                <input type="text" name="trail-tags" id="trail-tags"
+                                    placeholder="Escreva as tags separadas por , (vírgulas)" required>
+                                    <span id="tag-content"></span>
+
+
+                                <label for="trail-category">Escolha uma categoria:</label>
+                                <select id="trail-category" name="categoria" required >
+                                    <option value="" selected disabled>Selecione</option>
+                                    <option value="entretenimento">Entretenimento</option>
+                                    <option value="musica">Música</option>
+                                    <option value="esportes">Esportes</option>
+                                    <option value="jogos">Jogos</option>
+                                    <option value="educacao">Educação</option>
+                                    <option value="comedia">Comédia</option>
+                                    <option value="noticias">Notícias e Política</option>
+                                    <option value="ciencia">Ciência e Tecnologia</option>
+                                    <option value="moda">Moda e Beleza</option>
+                                    <option value="viagens">Viagens e Turismo</option>
+                                    <option value="outros">Outros</option>
+
+                                </select>
+
+                                <label for="sponsored">Link patrocinado </label>
+                                <input type="text" name="sponsored" id="sponsored"
+                                    placeholder="Ex: rede social, site, video no youtube ou cursos" required>
+                            
+                            <h3>Estes são os vídeos que estarão na trilha:</h3>
+                            <% n=0; videos.forEach(video=> { %>
+                                <div class="video-details-modal">
+                                    <label for="option2" class="video-name-modal"><%= video.title %></label>
+                                    <input type="checkbox" checked id=<%= n %> name="videos[]" value=<%= video.url %> >
+                                </div>
+                                <% n++ %>
+                                    <% }) %>
+
+                            </form>  
+                        </div>
+                    </div>
+
+                </div>
+            </dialog>
+
+
+            <button title="Clique aqui para abrir as notificações" id="notify" onclick="toggleNotifications()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="bell-not"
                     class="bi bi-bell" viewBox="0 0 16 16">
                     <path
                         d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
                 </svg>
                 <div class="notifications-conteiner hidden" id="notifications-conteiner">
-                
+
                 </div>
             </button>
-            
+
 
 
             <% if (trail.publik===true) { %>
-                <button onclick="toggleVisibility()" title="Tornar privado" id="visibility">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye"
-                        viewBox="0 0 16 16">
-                        <path
-                            d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                        <path
-                            d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                    </svg>
-                </button>
+                <a href="/public-trails/<%= trail.id_public %>" target="_blank" title="Acessar pagina publica da trilha">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
+                        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"/>
+                      </svg>
+                </a>
                 <% }else{ %>
 
-                    <button onclick="toggleVisibility()" title="Tornar público" id="visibility">
+                    <button title="Tornar público" id="visibility">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-eye-slash" viewBox="0 0 16 16">
                             <path
@@ -133,8 +196,21 @@
 
         </div>
 
-        <span class="trail-name line">
-            <%= trail.name %>
+        <span class="trail-name line" id="trail-name-button">
+            <button id="show-trails-name">
+                <%= trail.name %>
+            </button>
+            <div id="conteiner-name-trails" class="hidden">
+
+                <% n=0; trails.forEach(trail=> { %>
+
+                    <a class="trail-option-item" href="/trail/<%= trail.id %>">
+                        <%= trail.name %>
+                    </a>
+                    <% n++ %>
+                        <% }) %>
+
+            </div>
         </span>
     </div>
     <button onclick="sidebarToggle()" id="toggleButton" title="Recolher menu"><svg xmlns="http://www.w3.org/2000/svg"
@@ -153,6 +229,7 @@
         <script src="/js/workflow/loadWorkspace.js"></script>
         <script src="/js/workflow/sidebar.js"></script>
         <script src="/js/workflow/videoToolBar.js"></script>
+        <script src="/js/modal/modal.js"></script>
         <script src="/js/workflow/pomodoro.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
             integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="

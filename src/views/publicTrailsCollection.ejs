@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouteeTech | Trilhas públicas</title>
+    <style>
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css");
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        body, html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background-color: rgba(42,41,58, 1);
+            display: grid;
+            grid-template-columns: minmax(290px, 20%) auto;
+            grid-template-rows: auto 90% 10%;
+            grid-gap: 10px;
+            grid-template-areas: 
+            'header header'
+            'sidebar conteiner'
+            'footer footer';
+        }
+        .conteiner{
+            display: grid;
+            grid-template-columns: 95%;
+            grid-template-rows: min-content;
+            grid-gap: 1rem;
+            grid-area: conteiner;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            overscroll-behavior-y: contain;
+            justify-content: center;
+        }
+        .conteiner::-webkit-scrollbar{
+            width: 3px;
+            background-color: none;
+        }
+        .conteiner::-webkit-scrollbar-thumb{
+            background-color:rgba(0,255,255,0.4);
+            border-radius: 5px;
+
+        }
+        .card-trail{
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            color: #f4f4f4;
+            width: fit-content;
+            border-radius: 10px;
+            gap: 15px;
+            width: 100%;
+            min-width: 400px;
+        }
+        .card-trail h1{
+            color: #09f;
+            white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+        }
+        .card-trail a {
+            color: #f4f4f4;
+            padding: 10px 15px;
+            background-color: #09f;
+            border-radius: 5px;
+            text-decoration: none;
+
+        }
+        header{
+            grid-area: header;
+            background-color: rgba(0,0,0,0.5);
+            color: #09f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+        .sidebar{
+            grid-area: sidebar;
+            background-color: rgba(0,0,0,0.5);
+            min-width: 200px;
+        }
+        footer{
+            grid-area: footer;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .svg-yellow{
+            fill: #ee0;
+            color:#ee0
+        }
+        .card-header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            gap: 20px;
+        }
+        .card-header h1{
+            max-width: 50%;
+        }
+        .card-header span{
+            display: flex;
+            gap: 10px;
+            width: auto;
+            justify-content: start;
+            align-items: center;
+            min-width: 120px;
+        }
+        .acount a{
+            text-decoration: none;
+            color:#09f;
+            width: auto;
+            height: 100%;
+        }
+        .sidebar ul, .sidebar ul li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+        }
+        .sidebar ul  button{
+            background-color: transparent;
+            width: 100%;
+            text-decoration: none;
+            color: #f4f4f4;
+            padding: 10px 20px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: 0.2s linear;
+            border-bottom: 1px solid rgba(0, 100, 255, 0);
+
+        }
+        .sidebar ul button{
+            display: flex;
+            justify-content: space-between;
+        }
+        .sidebar ul button i{
+            color:rgba(255,255,255,0.5);
+            font-weight: bold;
+        }
+        .sidebar ul button:hover{
+            color: #09f;
+            border-bottom: 1px solid rgba(0, 100, 255, 0.2);
+        }
+
+
+
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <h2>YouteeTech</h2>
+        <div class="acount">
+            <a href="/auth/login"><i class="bi bi-person"></i>Fazer login</a>
+        </div>
+    </header>
+    <div class="sidebar">
+        <ul>
+            <li><button type="button">Entretenimento <i><%= count.entretenimento %></i></button></li>
+            <li><button type="button">Música <i><%= count.musica %></i></button></li>
+            <li><button type="button">Esportes <i><%= count.esportes %></i> </button></li>
+            <li><button type="button">Jogos<i><%= count.jogos %></i></button></li>
+            <li><button type="button">Educação<i><%= count.educacao %></i></button></li>
+            <li><button type="button">Comédia<i><%= count.comedia %></i></button></li>
+            <li><button type="button">Notícias e Política<i><%= count.noticias %></i></button></li>
+            <li><button type="button">Ciência e Tecnologia<i><%= count.ciencia %></i></button></li>
+            <li><button type="button">Moda e Beleza<i><%= count.moda %></i></button></li>
+            <li><button type="button">Viagens e Turismo<i><%= count.viagens %></i></button></li>
+            <li><button type="button">Outros<i><%= count.outros %></i></button></li>
+          </ul>
+    </div>
+    <div class="conteiner">
+        <% trails.forEach(trail => { %>
+        <div class="card-trail">
+            <img src="" alt="">
+            <div class="card-header">
+                <h1><%= trail.name %></h1>
+                <span>
+                    <i><%= trail.videos.length %> Vídeos</i>
+                    <i class="bi bi-star svg-yellow"></i>
+                    <% var rating = Math.round(trail.stars/trail.votes) %>
+                    <%= (isNaN(rating) || !isFinite(rating)) ? 0 : rating  %>
+            
+                    <i>- <%= (isNaN(trail.votes) || !isFinite(trail.votes)) ? 0 : trail.votes %> clasificações</i>
+                </span>
+
+            </div>
+            
+       
+            <p><%= trail.description %></p>
+            <a href='/public-trails/<%= trail._id %>'>Ver esta trilha</a>
+        </div>
+        <% }) %>
+       
+    </div>
+    <footer>
+        <a href="/termos.html" target="_blank">Termos de Uso</a> | <a href="/politicas.html" target="_blank">Políticas de Privacidade</a>
+    </footer>
+</body>
+</html>

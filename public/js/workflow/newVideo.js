@@ -69,7 +69,6 @@ form.addEventListener('submit', (e) => {
 socket.on('news', async (data) => {
 
     const news = data.news
-    console.log(news)
     news.forEach(n => {
         let status = n.read ? "read" : "unread";
         let title = encodeURIComponent(n.title);

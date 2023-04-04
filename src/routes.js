@@ -5,6 +5,7 @@ import SessionsController from "./app/controllers/sessionController.js";
 import userController from "./app/controllers/userController.js";
 import trailController from './app/controllers/trailController.js'; 
 import comunityController from "./app/controllers/comunityController.js";
+import publicTrailController from "./app/controllers/publicTrailController.js";
 
 //--------------------------rota principal -------------------------------
 routes.get('/', (req, res, next) => SessionsController(req, res, next), userController.mainController)
@@ -25,7 +26,10 @@ routes.get('/trails', (req, res, next) => SessionsController(req, res, next), vi
 routes.post('/trails/create', (req, res, next) => SessionsController(req, res, next), trailController.create)
 routes.get('/trail/:id', (req, res, next) => SessionsController(req, res, next), videoController.getVideoData)
 routes.post('/trails/testname', (req, res, next) => SessionsController(req, res, next), trailController.testTrailName)
-routes.get('/trail/toggle-visibility/:id', (req, res, next) => SessionsController(req, res, next), trailController.changeV)
+routes.post('/create-public-trail', (req, res, next) => SessionsController(req, res, next), trailController.createPublicTrail)
+routes.get('/public-trails/:id', (req,res) => trailController.getPublicTrailPage(req,res))
+routes.get('/public-collections/', (req,res) => publicTrailController.getAll(req,res))
+
 
 
 // ----------------------------rotas da toobar --------------------------------
@@ -43,8 +47,14 @@ routes.get('/auth/login', userController.getLogin)
 routes.post('/auth/login', userController.login)
 routes.get('/auth/signup', userController.getSignup)
 routes.post('/auth/signup', userController.signup)
+routes.post('/auth/signup/google', userController.signupGoogle)
 routes.get('/auth/logout', userController.getLogout)
 routes.get('/auth/delete', userController.delete)
+routes.post('/sync/google', (req,res) => userController.syncFinish(req,res))
+routes.post('/auth/google', (req,res) => userController.google(req,res))
+routes.post('/auth/google/sync', (req,res) => userController.googleSync(req,res))
+
+
 
 
 

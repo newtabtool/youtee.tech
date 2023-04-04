@@ -122,3 +122,12 @@ function toggleNotifications(){
     document.getElementById(id).classList.add('read')
     document.getElementById('notification-box').remove()
   }
+  function toggleTrailList(){
+    if(document.getElementById('conteiner-name-trails').classList.contains('hidden')){
+    document.getElementById('conteiner-name-trails').classList.remove('hidden')
+    }else{
+    document.getElementById('conteiner-name-trails').classList.add('hidden')
+    }
+  }
+  document.getElementById('show-trails-name').addEventListener('click', toggleTrailList)
+  

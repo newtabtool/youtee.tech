@@ -85,7 +85,7 @@ async function loadOCR(){
         }
     }
 
-    document.getElementById('col3').innerHTML += `<button onclick="ocrImage()">Analizar e extrair texto</button>
+    document.getElementById('col3').innerHTML += `<button onclick="ocrImage()" id="button-ocr-read">Analizar e extrair texto</button>
     <div id="text-ocr-display" class="center-text">
         O texto extraido aparecerá aqui
     </div>`

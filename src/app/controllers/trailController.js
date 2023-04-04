@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 import User from '../models/UserModel.js';
 import TrailModel from '../models/TrailModel.js';
 import VideoModel from '../models/VideoModel.js';
+import PublicTrailModel from '../models/PublicTrailModel.js';
+import youtube from 'youtube-metadata-from-url';
+
 
 const router = express.Router();
 
@@ -59,23 +62,42 @@ class TrailController {
     }
   }
 
-  async changeV(req, res) {
-    const { id: trailId } = req.params;
-    const verifyTrailAuthor = await TrailModel.findOne({ _id: trailId });
-
-    if (verifyTrailAuthor && verifyTrailAuthor.creator === req.id) {
-      const visibility = !verifyTrailAuthor.publik;
-
-      try {
-        await TrailModel.findOneAndUpdate({ _id: trailId }, { publik: visibility });
-        res.status(200).json({ visibility });
-      } catch (err) {
-        console.log(err);
-        res.status(400).send(err);
-      }
-    } else {
-      res.status(400).send({ msg: 'Bad Request' });
+  async createPublicTrail(req,res){
+    //console.log(req.body)
+    const { name, description, tags, videos, category, id, sponsored} = req.body;
+    if(!id){
+      return res.status(400).send({ Mensagem: "Erro, tente novamente"})
+    }
+    const verifyIsPublic = await TrailModel.findOne({ _id: id})
+    if(verifyIsPublic.publik === true){
+      return res.status(400).send({ Mensagem: "Erro, tente novamente"})
+    }
+    const create = await PublicTrailModel.create({ creator: req.id, name, description, tags, category, likes: 0, copys: 0, videos, sponsored})
+    //insrir a id da nova trilha criada na trilha antiga
+    const insertId = await TrailModel.findOneAndUpdate({ _id: id}, { publik: true, id_public: create._id})
+    if(create){
+      return res.json({ status: true, id: create._id });
+    }
+    else{
+      return res.json({ status: false, })
     }
   }
+
+
+
+  async getPublicTrailPage(req,res){
+    const id = req.params.id
+    console.log(id)
+    const trailData = await PublicTrailModel.findOne({ _id: id })
+    console.log(trailData)
+    if(trailData){
+      res.render('publicTrailPage', { id: id, trailData: trailData});
+    }
+  }
+
+
+  
+
+
 }
 export default new TrailController()

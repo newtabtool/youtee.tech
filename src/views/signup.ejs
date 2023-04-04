@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -44,6 +46,7 @@
         .form {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 10px;
             width: 300px;
             background-color: #fff;
@@ -114,9 +117,13 @@
         .inputs:focus {
             border: 1px solid rgb(23, 111, 211);
         }
-
-        #file {
+        .danger{
+            color: #fff;
+            padding: 5px;
+            background-color: #f09;
+            border-radius: 5px;
             display: none;
+            text-align: center;
         }
     </style>
 </head>
@@ -131,36 +138,65 @@
             <span class="title">Obrigado por apoiar o projeto</span>
             <span class="sub mb">Bem vindo(a) ao New Tab Tool!</span>
             <input id="file" type="text" hidden>
-            <label class="avatar" for="file"><span> <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 24 24">
-                        <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
-                        <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path fill="#ffffff"
-                                d="M17.1813 16.3254L15.3771 14.5213C16.5036 13.5082 17.379 12.9869 18.2001 12.8846C19.0101 12.7837 19.8249 13.0848 20.8482 13.8687C20.8935 13.9034 20.947 13.9202 21 13.9202V15.024C21 19.9452 19.9452 21 15.024 21H8.976C4.05476 21 3 19.9452 3 15.024V13.7522C3.06398 13.7522 3.12796 13.7278 3.17678 13.679L4.45336 12.4024C5.31928 11.5365 6.04969 10.8993 6.71002 10.4791C7.3679 10.0605 7.94297 9.86572 8.50225 9.86572C9.06154 9.86572 9.6366 10.0605 10.2945 10.4791C10.9548 10.8993 11.6852 11.5365 12.5511 12.4024L16.8277 16.679C16.9254 16.7766 17.0836 16.7766 17.1813 16.679C17.2789 16.5813 17.2789 16.423 17.1813 16.3254Z"
-                                opacity="0.1"></path>
-                            <path stroke-width="2" stroke="#ffffff"
-                                d="M3 8.976C3 4.05476 4.05476 3 8.976 3H15.024C19.9452 3 21 4.05476 21 8.976V15.024C21 19.9452 19.9452 21 15.024 21H8.976C4.05476 21 3 19.9452 3 15.024V8.976Z">
-                            </path>
-                            <path stroke-linecap="round" stroke-width="2" stroke="#ffffff"
-                                d="M17.0045 16.5022L12.7279 12.2256C9.24808 8.74578 7.75642 8.74578 4.27658 12.2256L3 13.5022">
-                            </path>
-                            <path stroke-linecap="round" stroke-width="2" stroke="#ffffff"
-                                d="M21.0002 13.6702C18.907 12.0667 17.478 12.2919 15.1982 14.3459"></path>
-                            <path stroke-width="2" stroke="#ffffff"
-                                d="M17 8C17 8.55228 16.5523 9 16 9C15.4477 9 15 8.55228 15 8C15 7.44772 15.4477 7 16 7C16.5523 7 17 7.44772 17 8Z">
-                            </path>
-                        </g>
-                    </svg></span></label>
+            <div id="buttonDiv"></div>
+
 
             <input type="email" class="inputs" id="email" name="email" placeholder="email">
             <input type="password" class="inputs" id="password" name="password" placeholder="senha">
             <input type="password" class="inputs" id="password_confirm" name="password_confirm" placeholder="confirmação de senha">
+            <b class="danger" id="danger">jjndffoganfdsogndfojfg</b>
             <span class="sub">Ja tem uma conta? <a href="/auth/login">login</a></span>
             <button type="submit" id="action">cadastrar</button>
         </form>
     </div>
     <script>
+        function handleCredentialResponse(response) {
+            token = response.credential;
+            //const tokenObj = JSON.parse(token)
+            //enviar o token não decodificado pro backend
+            fetch('/auth/signup/google', {
+                method: 'POST', headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token })
+            }).then( res => res.json()).then( data => {
+                if(data.status === 1){
+                    document.cookie = `jwt_token=${data.token}; max-age=604800; HttpOnly=false`;
+                    window.location.href = '/';
+                }
+                if(data.status === 2){
+                    document.getElementById('danger').innerText = "Infelizmente não foi possivel realizar o cadastro com essa conta, tente outra ou cadastre-se com email"
+                    document.getElementById('danger').style.display = "block"
+                }
+                if(data.status === 0){
+                    document.getElementById('danger').innerText = "Já existe uma consta cadastrada com esse email"
+                    document.getElementById('danger').style.display = "block"
+                }
+
+            })
+
+
+
+        }
+
+
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "1063025007942-2fe8i3mlq6u9qclee8r6hqh4hh2gp6mh.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+
+
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "filled_blue", size: "large", shape: "pill" }  // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+
+
         const action = document.querySelector('#action')
         const formElement = document.querySelector('#form')
         const passwordElement = document.querySelector('#password')

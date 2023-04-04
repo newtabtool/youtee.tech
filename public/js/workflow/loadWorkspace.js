@@ -13,13 +13,12 @@ async function loadWorkflow(event) {
     const idUnit = event.currentTarget.dataset.id;
     //console.log(idUnit)
     const actives = document.querySelectorAll('.active')
-    if(actives.length > 0) {
+    
     actives.forEach((element) => {
         element.classList.remove('active');
-        this.classList.add('active');
-
     });
-    }
+    event.target.classList.add('active');
+    
     let id = await Number(event.currentTarget.id);
     globalVideoId = idUnit;
     //console.log(id)

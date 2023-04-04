@@ -2,12 +2,35 @@ import videoController from "./app/controllers/videoController.js";
 import { io } from "./http.js";
 import jwt from 'jsonwebtoken'
 import notificationController from "./app/controllers/notificationController.js";
+import youtube from 'youtube-metadata-from-url';
+import PublicTrailModel from "./app/models/PublicTrailModel.js";
 
 
 import cookie from 'cookie';
 
 io.on("connection", socket => {
     //console.log("a user connected");
+
+    
+
+    socket.on('get-videos-from-public-trails', async (data) => {
+        const videos = await PublicTrailModel.findOne({ _id: data.id });
+        const videoCollection = videos.videos;
+        const promises = videoCollection.map(video => youtube.metadata(video));
+        const videoDataCollection = await Promise.all(promises);
+        videoDataCollection.forEach(videoData => {
+          socket.emit('stream', videoData);
+        });
+      });
+      
+
+
+
+
+
+
+
+
     socket.on('get-notifications', async (data) => {
         //console.log(data);
         const validToken = jwt.verify(data.token, process.env.JWT_SECRET)

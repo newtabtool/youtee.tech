@@ -107,13 +107,15 @@ a, button{
 }
 
 .options-conteiner a:hover, .options-conteiner button:hover {
-   color:aqua;
-   background: rgba(200, 200, 255, 0.15);
+    color:aqua;
+    background: rgba(200, 200, 255, 0.15);
+}
+#videos-list button, #videos-list .line{
+    color:#fff;
 }
 
 .active{
-    background: rgba(0,255,255,1);
-    border: 2px solid red;
+    color:#09f !important;
 }
 #toggleButton{
     text-decoration: none;
@@ -137,9 +139,6 @@ a, button{
     transition: 0.3s linear;
 }
     
-#videos-list button, #videos-list .line{
-    color:#fff;
-}
 #notify{
     position: relative;
 }

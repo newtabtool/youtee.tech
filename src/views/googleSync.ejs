@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vincular com o Google</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="shortcut icon" href="/assets/faviconpng.png">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--body-bg-dark);
+        }
+
+        .conteiner{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .content{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 100px 100px 80px rgba(0, 0, 0, 0.03);
+            align-items: center;
+        }
+        .content svg{
+            width: 80px;
+            height: 80px;
+            background-color: #09f;
+            border-radius: 50%;
+            font-size: 40px;
+            padding: 20px;
+            margin: 30px;
+        }
+        .danger{
+            color: #fff;
+            padding: 5px;
+            background-color: #f09;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <div class="content">
+        <h3>Agora vamos vincular sua conta da YouteeTech com o Google</h3>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+          </svg>
+          <b class="danger" id="danger"></b>
+          <div id="buttonDiv"></div>
+        </div>
+    </div>
+    <script>
+        function handleCredentialResponse(response) {
+            token = response.credential;
+            //const tokenObj = JSON.parse(token)
+            //enviar o token não decodificado pro backend
+            fetch('/sync/google', {
+                method: 'POST', headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token })
+            }).then( res => res.json()).then( data => {
+                if(data.status === true){
+                document.cookie = `jwt_token=${data.token}; max-age=604800; HttpOnly=false`;
+                window.location.href = '/';
+                }else{
+                document.getElementById('danger').innerText = "Infelizmente não foi possivel vincular sua conta"
+                document.getElementById('danger').style.display = "block"
+                setTimeout(()=> window.location.href = '/', 4000)
+                }
+                
+
+            })
+
+
+
+        }
+
+
+
+
+
+
+
+
+         window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "1063025007942-2fe8i3mlq6u9qclee8r6hqh4hh2gp6mh.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+
+
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"),
+                { theme: "filled_blue", size: "large", shape: "pill" }  // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+    </script>
+</body>
+</html>
