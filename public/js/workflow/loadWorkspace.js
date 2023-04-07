@@ -27,11 +27,11 @@ async function loadWorkflow(event) {
         const videosData = await fetch(`/video/${idUnit}`).then((res) => {
             return res.json();
         })
-        //console.log(videosData.videoData[0])
-        globalVideoData = videosData.videoData[0]
-        let relatedVideos = videosData.videoData[0].related
-        let note = videosData.videoData[0].notes
-        let url = videosData.videoData[0].url
+        console.log(videosData.videoData)
+        globalVideoData = videosData.videoData
+        let relatedVideos = videosData.videoData.related
+        let note = videosData.videoData.notes
+        let url = videosData.videoData.url
         let href = getYouTubeVideoId(url)
         //NoteAppend(note)
         getRelatedVideos(relatedVideos)

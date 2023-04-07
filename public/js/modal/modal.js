@@ -18,9 +18,10 @@ const sponsoredElement = document.querySelector('#sponsored')
 
 let tags = [];
 let videos = [];
-
+if(buttonShowModal){
 buttonShowModal.onclick = function() {
     modal.showModal()
+}
 }
 
 closeModalButton.onclick = function() {

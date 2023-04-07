@@ -5,7 +5,7 @@ let texts = [
 
 ];
 let n = 0;
-console.log(texts)
+//console.log(texts)
 
 function changeUp(){
     if(n < 3){
@@ -32,6 +32,6 @@ function changeDown(){
 setInterval(changeUp, 2500)
 setInterval(()=>{
     let width = window.innerWidth;
-    console.log(width)
+    //console.log(width)
 }
     ,1000)

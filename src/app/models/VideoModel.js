@@ -6,7 +6,7 @@ const VideoSchema = mongoose.model("video", {
     url: { type: String, required: true },
     title: { type: String, required: true },
     thumbnail: { type: String, required: true },
-    transcription: { type: String, required: true },
+    transcription: { type: String, required: false },
     notes: { type: String, required: true},
     related: [
         {

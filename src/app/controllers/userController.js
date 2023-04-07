@@ -131,6 +131,7 @@ class UserController {
       if(user.id_google == id){
         const token_secret = process.env.JWT_SECRET
         const token = jwt.sign({ id: user._id, email: email, premium: user.premium, id_google: id }, token_secret, { expiresIn: '30d' });
+        //console.log(token)
         return res.json({token: token, status: "log"})
       }
       if(!user){
@@ -148,6 +149,15 @@ class UserController {
       return null;
     }
   }
+  async setCookie(req,res){
+    const token = req.params.token;
+    const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
+    res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
+    res.redirect("/")
+
+  }
+
+  
   async googleSync(req, res){
     
     function salvarTokenNoCookie(res, token) {
@@ -177,6 +187,12 @@ class UserController {
       res.status(501).send('Erro ao realizar login, dados errados');
     }
 
+  }
+
+
+  async logout(req,res){
+    res.clearCookie('jwt_token');
+    res.redirect('/welcome')
   }
 }
 

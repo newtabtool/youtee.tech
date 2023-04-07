@@ -194,8 +194,8 @@
                 body: JSON.stringify({ token: token })
             }).then( res => res.json()).then( data => {
                 if(data.status === "log"){
-                document.cookie = `jwt_token=${data.token}; max-age=604800; HttpOnly=false`;
-                window.location.href = '/';
+                    
+                    window.location.href = `/auth/login/set_cookie/${data.token}`;
                 }
                 if(data.status === "unknown"){
                     //não esta cadastrado
@@ -218,7 +218,7 @@
 
         }
 
-
+        
         window.onload = function () {
             google.accounts.id.initialize({
                 client_id: "1063025007942-2fe8i3mlq6u9qclee8r6hqh4hh2gp6mh.apps.googleusercontent.com",

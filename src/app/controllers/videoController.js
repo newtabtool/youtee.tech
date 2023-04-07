@@ -43,17 +43,57 @@ class videoController {
     }
 
     async getVideoDataUnit(req, res) {
-        console.log("get video data")
+      function getId(url) {
+        var regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/;
+        var match = url.match(regex);
+        var videoID = match[7];
+        return videoID;
+      }
+      try {
+        const videoData = await VideoModel.findById({ _id: req.params.id });
+        const videoId = getId(videoData.url); // função getId para obter o ID do vídeo a partir da URL
+        
+        let textComplete = '';
         try {
-            let videoId = req.params.id
-            //console.log(videoId)
-            const videoData = await VideoModel.find({ _id: videoId })
-            res.status(200).json({ videoData })
+          const captions = await getSubtitles({
+            videoID: videoId,
+            lang: 'pt'
+          });
+          captions.forEach(element => {
+            textComplete = textComplete + ' ' + element.text + ' ';
+          });
         } catch (err) {
-            console.log(err)
-            return res.status(500).json({ error: "Erro inesperado" })
+          console.log('Erro ao obter legendas em português:', err);
+          try {
+            const captions = await getSubtitles({
+              videoID: videoId,
+              lang: 'en'
+            });
+            captions.forEach(element => {
+              textComplete = textComplete + ' ' + element.text + ' ';
+            });
+          } catch (err) {
+            console.log('Erro ao obter legendas em inglês:', err);
+          }
         }
+        
+        videoData.transcription = textComplete; // atualiza a propriedade "transcription" do objeto "videoData"
+        console.log(videoData)
+        res.status(200).json({ videoData });
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Erro inesperado' });
+      }
     }
+    
+   
+    
+
+
+
+
+
+
 
     async getVideoData(req, res) {
         const id = req.params.id
@@ -81,7 +121,7 @@ class videoController {
 
     //inserir video
     async create(url, trailId, userId) {
-
+      console.log(url)
         function getId(url) {
             var regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/;
             var match = url.match(regex);
@@ -89,13 +129,14 @@ class videoController {
             return videoID;
         }
         try {
-            let videoId = getId(url);
-            title = await youtube.metadata(url).then(function (json) {
-              return json.title;
-            }, function (err) {
-              console.log(err);
-            });
+          let videoId = getId(url);
+          title = await youtube.metadata(url).then(function (json) {
+            return json.title;
+          }, function (err) {
+            console.log(err);
+          });
           
+          /* 
             text = await getSubtitles({
               videoID: videoId,
               lang: 'pt'
@@ -121,12 +162,11 @@ class videoController {
                 console.log('Erro ao obter legendas em inglês:', err);
               }
             });
+            */
           } catch (err) {
             console.log(err);
-          }
+          } 
 
-        //console.log(title)
-        //console.log(text)
         let arrayTitles;
         let relateds = [];
         let newVideo;
@@ -156,7 +196,7 @@ class videoController {
                 url: url,
                 title: title,
                 thumbnail: thumbnail,
-                transcription: text,
+                transcription: "Baixando",
                 notes: 'Digite aqui suas notas sobre o vídeo',
                 related: relateds
             })
@@ -169,7 +209,49 @@ class videoController {
         //res.json({title: title, descriptionn: text, relact: arrayTitles})
     }
 
+    async createCopy(title, url, trailId, userId) {
+        
+        let arrayTitles;
+        let relateds = [];
+        let newVideo;
+        try {
 
+            const urlReq = `https://www.googleapis.com/youtube/v3/search?key=${process.env.GOOGLE_API_KEY}&type=video&part=snippet&q=${title}`
+            const equals = await axios.get(urlReq)
+            let thumbnail = equals.data.items[0].snippet.thumbnails.high.url
+            //console.log(equals.data.items[0].snippet.thumbnails)
+            arrayTitles = equals.data.items
+            arrayTitles.forEach(element => {
+                let t = element.snippet.title
+                let s = element.snippet.channelTitle
+                let id = equals.data.items[0].id.videoID
+                let u = `https://www.youtube.com/watch?v=${element.id.videoId}`
+                //console.log(u)
+                relateds.push({ title: t, url: u, channel: s })
+
+            })
+            //console.log(relateds)
+            if(text === undefined){
+                text = "erro ao baixar transcrição"
+            }
+            newVideo = await VideoModel.create({
+                userId: userId,
+                trailId: trailId,
+                url: url,
+                title: title,
+                thumbnail: thumbnail,
+                transcription: "Baixando",
+                notes: 'Digite aqui suas notas sobre o vídeo',
+                related: relateds
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+        //console.log('\n \n \n' + newVideo)
+        return newVideo;
+        //res.json({title: title, descriptionn: text, relact: arrayTitles})
+    }
 
 
 

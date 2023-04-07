@@ -232,5 +232,23 @@ a, button{
     color:#03f !important;
     font-weight: 400 !important;
 }
+.added{
+    animation: destac 1s linear normal;
+}
+@keyframes destac{
+    0%{
+        background-color: #000;
+    }
+    25%{
+        background-color: #03f;
+    }
+    50%{
+        background-color: #03f;
+    }
+    100%{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
 
 

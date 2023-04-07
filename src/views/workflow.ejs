@@ -34,7 +34,9 @@
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/variables.css">
     <link rel="stylesheet" href="/css/modal/modal.css">
+    <link rel="stylesheet" href="/css/modal-delete/modal.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/workflow/rating.css">
 </head>
 
 <body>
@@ -77,8 +79,8 @@
                         <div class="modal-header">
                             Publicar trilha
                             <span>
-                                <button class="modal-button" id="modal-save-button" >salvar</button>
-                                <button class="modal-button" id="modal-cancel-button">fechar</button>
+                                <button class="modal-button" id="modal-save-button">salvar</button>
+                                <button class="modal-button" id="modal-cancel-button" onclick="hideModalDelete()">fechar</button>
                             </span>
                         </div>
                         <div class="modal-content" id="modal-content">
@@ -90,18 +92,19 @@
                                 <input type="text" name="trail-name" id="trail-name"
                                     placeholder="Digite aqui o nome da trilha" required>
 
-                                <span id="desc"><label for="trail-description">Forneça uma descrição sobre a sua trilha</label><b id="count-desc-size">0/500</b></span>
+                                <span id="desc"><label for="trail-description">Forneça uma descrição sobre a sua
+                                        trilha</label><b id="count-desc-size">0/500</b></span>
                                 <input type="text" name="trail-description" id="trail-description"
                                     placeholder="Escreva uma descrição aqui" required>
 
                                 <label for="trail-tags">Agora adicione até 10 tags ao seu vídeo</label>
                                 <input type="text" name="trail-tags" id="trail-tags"
                                     placeholder="Escreva as tags separadas por , (vírgulas)" required>
-                                    <span id="tag-content"></span>
+                                <span id="tag-content"></span>
 
 
                                 <label for="trail-category">Escolha uma categoria:</label>
-                                <select id="trail-category" name="categoria" required >
+                                <select id="trail-category" name="categoria" required>
                                     <option value="" selected disabled>Selecione</option>
                                     <option value="entretenimento">Entretenimento</option>
                                     <option value="musica">Música</option>
@@ -120,17 +123,20 @@
                                 <label for="sponsored">Link patrocinado </label>
                                 <input type="text" name="sponsored" id="sponsored"
                                     placeholder="Ex: rede social, site, video no youtube ou cursos" required>
-                            
-                            <h3>Estes são os vídeos que estarão na trilha:</h3>
-                            <% n=0; videos.forEach(video=> { %>
-                                <div class="video-details-modal">
-                                    <label for="option2" class="video-name-modal"><%= video.title %></label>
-                                    <input type="checkbox" checked id=<%= n %> name="videos[]" value=<%= video.url %> >
-                                </div>
-                                <% n++ %>
-                                    <% }) %>
 
-                            </form>  
+                                <h3>Estes são os vídeos que estarão na trilha:</h3>
+                                <% n=0; videos.forEach(video=> { %>
+                                    <div class="video-details-modal">
+                                        <label for="option2" class="video-name-modal">
+                                            <%= video.title %>
+                                        </label>
+                                        <input type="checkbox" checked id=<%=n %> name="videos[]" value=<%= video.url %>
+                                            >
+                                    </div>
+                                    <% n++ %>
+                                        <% }) %>
+
+                            </form>
                         </div>
                     </div>
 
@@ -150,47 +156,66 @@
             </button>
 
 
+            <% if (trail.copy_of!="" && trail.copy_of !=undefined) { %>
 
-            <% if (trail.publik===true) { %>
-                <a href="/public-trails/<%= trail.id_public %>" target="_blank" title="Acessar pagina publica da trilha">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock" viewBox="0 0 16 16">
-                        <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"/>
-                      </svg>
-                </a>
+                <button id="rating"
+                    title="Avaliar trilha pública. Sua nota vai influenciar diretamente na classificação da trilha pública">
+                    <i class="bi bi-star-fill"></i>
+                    <div id="rating-conteiner" class="hidden">
+                        <span id="svg-rating"></span>
+                        <div>
+                            <a title="1" data-value="1" class="rating-start"><i class="bi bi-star-fill"
+                                    data-value="1"></i></a>
+                            <a title="2" data-value="2" class="rating-start"><i class="bi bi-star-fill"
+                                    data-value="2"></i></a>
+                            <a title="3" data-value="3" class="rating-start"><i class="bi bi-star-fill"
+                                    data-value="3"></i></a>
+                            <a title="4" data-value="4" class="rating-start"><i class="bi bi-star-fill"
+                                    data-value="4"></i></a>
+                            <a title="5" data-value="5" class="rating-start"><i class="bi bi-star-fill"
+                                    data-value="5"></i></a>
+                        </div>
+                    </div>
+                </button>
                 <% }else{ %>
-
-                    <button title="Tornar público" id="visibility">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-eye-slash" viewBox="0 0 16 16">
-                            <path
-                                d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
-                            <path
-                                d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
-                            <path
-                                d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
-                        </svg>
-                    </button>
-                    <% } %>
-
-
-
-
-                        <a href="" title="Renomear trilha">
+                    <% if (trail.publik===true) { %>
+                        <a href="/public-trails/<%= trail.id_public %>" target="_blank"
+                            title="Acessar pagina publica da trilha">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-card-checklist" viewBox="0 0 16 16">
+                                class="bi bi-unlock" viewBox="0 0 16 16">
                                 <path
-                                    d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
-                                <path
-                                    d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
+                                    d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z" />
                             </svg>
                         </a>
+                        <% }else{ %>
 
-                        <button onclick="toggleFullScreen()" id="btn-full" title="Full Screen"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
-                            </svg></button>
+                            <button title="Tornar público" id="visibility">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z" />
+                                    <path
+                                        d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
+                                    <path
+                                        d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
+                                </svg>
+                            </button>
+                            <% } }%>
+
+
+
+
+                                <button title="Excluir trilha" id="delete-trail-button">
+                                    <i class="bi bi-trash3"></i>
+                                    <a href='/delete-trail/<%= trail._id %>' class="option-delete hidden" id="btn-delete"><i class="bi bi-check-lg"></i></a>
+                                </button>
+
+                                <button onclick="toggleFullScreen()" id="btn-full" title="Full Screen"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+                                    </svg></button>
 
 
 
@@ -228,9 +253,11 @@
         <script src="/js/workflow/toolBar.js"></script>
         <script src="/js/workflow/loadWorkspace.js"></script>
         <script src="/js/workflow/sidebar.js"></script>
+        <script src="/js/workflow/rating.js"></script>
         <script src="/js/workflow/videoToolBar.js"></script>
         <script src="/js/modal/modal.js"></script>
         <script src="/js/workflow/pomodoro.js"></script>
+        <script src="/js/modal-delete/modalDelete.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
             integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>

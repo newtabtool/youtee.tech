@@ -1,0 +1,70 @@
+#rating{
+    position: relative;
+}
+#rating-conteiner{
+    position: absolute;
+    top: -155px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 60% 40%;
+    gap: 9px;
+    z-index: 99;
+    background: rgba(5, 5, 25, 1);
+    padding:0 9px;
+    border-radius: 5px;
+    transform: translateX(25px);
+    height: 150px;
+    min-width: 250px;
+    place-content: center;
+
+}
+#rating-conteiner div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+#rating-conteiner span{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    gap: 10px;
+}
+#rating-conteiner span b{
+    font-size: 1rem;
+    color:#f4f4f4;
+}
+#rating-conteiner a{
+    background-color: transparent;
+}
+#rating-conteiner a{
+    color: aqua;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+}
+#rating-conteiner a:hover{
+    color: #09f;
+}
+.hidden{
+    display: none !important;
+}
+.bi-emoji-angry{
+    color:#f00;
+}
+.bi-emoji-frown{
+    color:#f99;
+}
+.bi-emoji-expressionless{
+    color:#99f;
+}
+.bi-emoji-smile{
+    color:#09f;
+}
+.bi-emoji-heart-eyes{
+    color:#00f;
+}

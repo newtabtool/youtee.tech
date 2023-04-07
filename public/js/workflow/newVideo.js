@@ -102,10 +102,12 @@ socket.on('new-video-added', (data) => {
     let videosQuant = arrayVideos.length;
     let thisId = videosQuant + 1;
     list.insertAdjacentHTML('beforeend', `
-    <button onclick="loadWorkflow(event)" " id=${thisId} title="${data.title}" class="link" data-id="${data._id}" >
+    <button onclick="loadWorkflow(event)" " id=${thisId} title="${data.title}" class="link added" data-id="${data._id}" >
     <li class="line">${data.title}</li>
   </button>
     `);
+
+    list.lastElementChild.scrollIntoView()
 
 });
 

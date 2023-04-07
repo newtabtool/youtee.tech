@@ -32,7 +32,7 @@
         .conteiner{
             display: grid;
             grid-template-columns: 95%;
-            grid-template-rows: min-content;
+            grid-template-rows: repeat(auto-fit, minmax(min-content, 150px));
             grid-gap: 1rem;
             grid-area: conteiner;
             overflow-y: auto;
@@ -177,20 +177,20 @@
     </header>
     <div class="sidebar">
         <ul>
-            <li><button type="button">Entretenimento <i><%= count.entretenimento %></i></button></li>
-            <li><button type="button">Música <i><%= count.musica %></i></button></li>
-            <li><button type="button">Esportes <i><%= count.esportes %></i> </button></li>
-            <li><button type="button">Jogos<i><%= count.jogos %></i></button></li>
-            <li><button type="button">Educação<i><%= count.educacao %></i></button></li>
-            <li><button type="button">Comédia<i><%= count.comedia %></i></button></li>
-            <li><button type="button">Notícias e Política<i><%= count.noticias %></i></button></li>
-            <li><button type="button">Ciência e Tecnologia<i><%= count.ciencia %></i></button></li>
-            <li><button type="button">Moda e Beleza<i><%= count.moda %></i></button></li>
-            <li><button type="button">Viagens e Turismo<i><%= count.viagens %></i></button></li>
-            <li><button type="button">Outros<i><%= count.outros %></i></button></li>
+            <li><button class="category"  type="button" value="entretenimento">Entretenimento <i><%= count.entretenimento %></i></button></li>
+            <li><button class="category"  type="button" value="musica">Música <i><%= count.musica %></i></button></li>
+            <li><button class="category"  type="button" value="esportes">Esportes <i><%= count.esportes %></i> </button></li>
+            <li><button class="category"  type="button" value="jogos">Jogos<i><%= count.jogos %></i></button></li>
+            <li><button class="category"  type="button" value="educacao">Educação<i><%= count.educacao %></i></button></li>
+            <li><button class="category"  type="button" value="comedia">Comédia<i><%= count.comedia %></i></button></li>
+            <li><button class="category"  type="button" value="noticias">Notícias e Política<i><%= count.noticias %></i></button></li>
+            <li><button class="category"  type="button" value="ciencia">Ciência e Tecnologia<i><%= count.ciencia %></i></button></li>
+            <li><button class="category"  type="button" value="moda">Moda e Beleza<i><%= count.moda %></i></button></li>
+            <li><button class="category"  type="button" value="viagens">Viagens e Turismo<i><%= count.viagens %></i></button></li>
+            <li><button class="category"  type="button" value="outros">Outros<i><%= count.outros %></i></button></li>
           </ul>
     </div>
-    <div class="conteiner">
+    <div class="conteiner" id="conteiner">
         <% trails.forEach(trail => { %>
         <div class="card-trail">
             <img src="" alt="">
@@ -217,5 +217,6 @@
     <footer>
         <a href="/termos.html" target="_blank">Termos de Uso</a> | <a href="/politicas.html" target="_blank">Políticas de Privacidade</a>
     </footer>
+    <script src="/js/public-trail-collection/loadByCategory.js"></script>
 </body>
 </html>

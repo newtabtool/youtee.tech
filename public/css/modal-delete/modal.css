@@ -1,0 +1,13 @@
+#delete-trail-button{
+    position: relative;
+}
+
+.option-delete{
+    position: absolute;
+    display: none;
+    background: #f00 !important;
+    border-radius: 5px;
+    padding: 5px 10px;
+    top: -55px;
+    font-size: 25px;
+}

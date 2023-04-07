@@ -1,58 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-     <!-- Google Tag Manager -->
-     <script>(function (w, d, s, l, i) {
-        w[l] = w[l] || []; w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-        }); var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-5754GXM');</script>
-<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5754GXM');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= trailData.name %></title>
+    <title>
+        <%= trailData.name %>
+    </title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
-        *{
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Source Sans Pro', sans-serif;
         }
-        body{
-            background-color: rgba(0,0,0,1);
+
+        body {
+            background-color: rgba(0, 0, 0, 1);
         }
-        .center{
+
+        .center {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .collumn{
+
+        .collumn {
             flex-direction: column;
         }
-        .row{
+
+        .row {
             flex-direction: row;
         }
-        .trail-name{
-            color:#09f;
+
+        .trail-name {
+            color: #09f;
             text-align: left;
             width: 100%;
             padding-left: 1rem;
         }
-        .flex{
+
+        .flex {
             display: flex;
         }
-        .conteiner{
+
+        .conteiner {
             width: 830px;
             max-width: 90%;
             margin: 0 auto;
         }
-        .svg-data{
-            color:#ddd;
+
+        .svg-data {
+            color: #ddd;
             font-weight: 100;
             margin: 10px;
             border-radius: 5px;
@@ -60,60 +72,71 @@
             border: none;
 
         }
-        button.svg-data{
-            background-color: rgba(255,255,255,0.2);
-            
+
+        button.svg-data {
+            background-color: rgba(255, 255, 255, 0.2);
+
         }
-        .header{
+
+        .header {
             display: grid;
-            grid-template-columns: 50% auto auto auto auto;
+            grid-template-columns: 40% auto auto auto auto;
             grid-template-rows: 100%;
             place-items: center;
             width: 100%;
-            background-color: rgba(255, 255, 255,0.2);
-            color:#f4f4f4;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #f4f4f4;
         }
-        .header span{
+
+        .header span {
             display: flex;
             align-items: center;
-            color:#f4f4f4;
+            color: #f4f4f4;
         }
-        .header span svg{
+
+        .header span svg {
             margin: 3px;
-            color:#ff0;
+            color: #ff0;
         }
-        .content{
-            background-color: rgba(255, 255, 255,0.1);
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 2rem;
-            
+
         }
-        .content p{
-            color:#fff;
+
+        .content p {
+            color: #fff;
             text-align: left;
         }
-        .content h4{
-            color:#fff;
+
+        .content h4 {
+            color: #fff;
             margin: 10px 0;
         }
-        .content i{
+
+        .content i {
             display: block;
             width: 100%;
             text-align: right;
             margin: 10px;
-            padding: 0 15px ;
-            color:rgba(255,255,255,0.5)
+            padding: 0 15px;
+            color: rgba(255, 255, 255, 0.5)
         }
-        .content p{
-            margin:  10px 0;
+
+        .content p {
+            margin: 10px 0;
         }
-        .videos-conteiner{
+
+        .videos-conteiner {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             grid-gap: 1rem;
             margin-top: 15px;
         }
-        .card-video{
-            background-color: rgba(255,255,255,0.1);
+
+        .card-video {
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             margin: 5px;
             padding: .7rem;
@@ -122,113 +145,159 @@
             flex-direction: column;
             gap: 10px;
         }
-        .card-video img{
+
+        .card-video img {
             width: 100%;
         }
-        .card-video p{
+
+        .card-video p {
             font-size: .8rem;
         }
-        .card-video b{
+
+        .card-video b {
             color: #09f;
 
         }
-        button, a{
+
+        button,
+        a {
             cursor: pointer;
         }
-        .btn-blue{
+
+        .btn-blue {
             padding: 10px 15px;
             margin: 5px;
-            background-color:#09f;
+            background-color: #09f;
             color: #fff;
             border-radius: 5px;
-            border:none;
+            border: none;
+            text-decoration: none;
         }
-        #tags{
-            background-color: rgba(255, 255, 255,0.1);
+
+        #tags {
+            background-color: rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: row;
             margin: 15px 0;
             padding: 15px;
             color: #fff;
         }
-        #tags i{
+
+        #tags i {
             padding: 5px;
             border-radius: 5px;
-            background-color: rgba(255, 255, 255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             margin: 5px;
             width: auto;
         }
-        .link-conteiner{
+
+        .link-conteiner {
             text-align: left;
         }
-        .link-conteiner i{
+
+        .link-conteiner i {
             width: 80%;
             margin: 15px 0;
             text-align: left;
         }
+
+        .span-login {
+            margin-left: 15px;
+        }
+
+        .span-login a {
+            color: #09f;
+
+        }
     </style>
 </head>
-<body >
+
+<body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5754GXM" height="0" width="0"
-        style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div class="conteiner center collumn">
         <div class="header">
-        <h3 class="trail-name"><%= trailData.name %></h3>
-        
-        <button class="btn-blue" title="Cria uma cópia particupar desta trilha que recebe atualizações automaticamente">Usar esta trilha</button>
-        <span>
+            <h3 class="trail-name">
+                <%= trailData.name %>
+            </h3>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-            </svg>
-            <% var rating = Math.round(trailData.stars/trailData.votes) %>
-            <%= (isNaN(rating) || !isFinite(rating)) ? 0 : rating  %> 
-        </span>
-        <%= (isNaN(trailData) || !isFinite(trailData)) ? 0 : trailData.votes %>
-          Classificações
-        <i class="svg-data"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M5 1.5A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm5 0a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Z"/>
-                <path d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
-                <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982Z"/>
-              </svg>
-              <%= trailData.copys %></i>
-    </div>
-    <div class="content">
-        <h4>Descrição:</h4>
-        <p>
-            <%= trailData.description %>
-        </p>
-        <hr>
-        <span id="tags">Tags: 
-            <% n=0; trailData.tags.forEach(tag=> { %>
-                <i><%= tag %></i>
-                <% n++ %>
-            <% }) %>
-        </span>
-        <hr>
+            <% if(loged===true){ %>
+                <% if(copied===true){ %>
+                <a class="btn-blue" href='/copy/<%= trailData._id %>'
+                   target="_blank" title="Cria uma cópia particupar desta trilha que recebe atualizações automaticamente">Usar esta
+                    trilha</a>
+                    <% } %>
+                <% }else{ %>
+                    <span class="span-login">Faça&nbsp;
+                        <a href="/auth/login">&nbsp;login &nbsp;
+                        </a> pra usar esta trilha</span>
+                    <% } %>
+                        <span>
 
-        <div class="videos-conteiner" id="videos-conteiner">
-            
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-star" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                            </svg>
+                            <% var rating=Math.round(trailData.stars/trailData.votes) %>
+                                <%= (isNaN(rating) || !isFinite(rating)) ? 0 : rating %>
+                        </span>
+                        <%= (isNaN(trailData) || !isFinite(trailData)) ? 0 : trailData.votes %>
+                            Classificações
+                            <i class="svg-data">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-clipboard-heart" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M5 1.5A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm5 0a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Z" />
+                                    <path
+                                        d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
+                                    <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982Z" />
+                                </svg>
+                                <%= trailData.copys %>
+                            </i>
         </div>
-        <br><br><hr>
-        <div class="flex row link-conteiner center" >
-            <i>Atenção! A YouteeTech não é responsável pelos links patrocinados, o conteúdo do link é de total responsabilidade do criador da trilha, se o link estiver verde é porque ele foi verificado e é seguro</i>
-            <a class="btn-blue" title="Ajude o criador da trilha usando este link" href=<%= trailData.sponsored %>>Link patrocinado</a>
+        <div class="content">
+            <h4>Descrição:</h4>
+            <p>
+                <%= trailData.description %>
+            </p>
+            <hr>
+            <span id="tags">Tags:
+                <% n=0; trailData.tags.forEach(tag=> { %>
+                    <i>
+                        <%= tag %>
+                    </i>
+                    <% n++ %>
+                        <% }) %>
+            </span>
+            <hr>
+
+            <div class="videos-conteiner" id="videos-conteiner">
+
+            </div>
+            <br><br>
+            <hr>
+            <div class="flex row link-conteiner center">
+                <i>Atenção! A YouteeTech não é responsável pelos links patrocinados, o conteúdo do link é de total
+                    responsabilidade do criador da trilha, se o link estiver verde é porque ele foi verificado e é
+                    seguro</i>
+                <a class="btn-blue" title="Ajude o criador da trilha usando este link" href=<%=trailData.sponsored
+                    %>>Link patrocinado</a>
+            </div>
+
         </div>
-
     </div>
-</div>
 
 
 
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-<script>
-    const trailD = '<%= id %>'
-</script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        const trailD = '<%= id %>'
+    </script>
     <script src="/js/publicTrails/socket-load.js"></script>
 </body>
+
 </html>
