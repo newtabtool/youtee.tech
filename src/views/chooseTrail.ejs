@@ -29,7 +29,7 @@
             background-color: #226;
         }
 
-        header button {
+        header button, header a {
             padding: 25px 45px;
             background-color: #226;
             color: #fff;
@@ -48,7 +48,7 @@
 <body onload="loadPrivatesTrails()">
     <header>
         <button onclick="loadPrivatesTrails()" id="private" class="active">Pessoal</button>
-        <button id="comunity">Comunidade</button>
+        <a href="/public-collections" id="comunity">Trilhas públicas</a>
     </header>
 
     <section class="section_form container hidden" id="form-create">

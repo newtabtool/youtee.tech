@@ -3,7 +3,9 @@ import TrailModel from '../models/TrailModel.js';
 import User from '../models/UserModel.js';
 import videoController from './videoController.js';
 import youtube from 'youtube-metadata-from-url';
-
+import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
+dotenv.config()
 
 class PublicTrail {
     async getAll(req, res) {
@@ -24,8 +26,18 @@ class PublicTrail {
         }
 
         //exibir todas as quantidades no console
-
-        res.render('publicTrailsCollection', { trails, count })
+    const token = req.cookies.jwt_token
+    let loged;
+        try{
+            const verify = jwt.verify(token, process.env.JWT_SECRET)
+            if(verify){
+              loged = true
+            }
+            console.log(loged)
+        }catch(err){
+          loged = false
+        }
+        res.render('publicTrailsCollection', { trails, count, loged })
     }
     async getForCategory(req, res) { 
         const category = req.params.category

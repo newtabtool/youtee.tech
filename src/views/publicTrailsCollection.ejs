@@ -162,6 +162,55 @@
             border-bottom: 1px solid rgba(0, 100, 255, 0.2);
         }
 
+        @media screen and (max-width:800px){
+            body{
+            grid-template-rows: auto auto 90% 10%;
+            grid-gap: 10px;
+            grid-template-areas: 
+            'header header'
+            'sidebar sidebar'
+            'conteiner conteiner'
+            'footer footer';
+            }
+            .sidebar ul{
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                overscroll-behavior-x: contain;
+                position: relative;
+        }
+        .sidebar ul li{
+            width:auto;
+            white-space: nowrap;
+        }
+        .sidebar ul li i{
+            margin: 0 10px;
+        }
+        .sidebar ul::-webkit-scrollbar{
+            height: 80px;
+            background-color: none;
+        }
+        .sidebar ul::-webkit-scrollbar-thumb{
+            background-color:rgba(0,255,255,0.4);
+            border-radius: 5px;
+        }
+    }
+    @media screen and (max-width:550px){
+
+    .card-header{
+        flex-direction: column;
+    }
+    .card-header h1{
+        font-size: 1.5rem;
+    }
+    .card-header span{
+        margin-bottom: 15px;
+    }
+    }
 
 
         
@@ -172,7 +221,12 @@
     <header>
         <h2>YouteeTech</h2>
         <div class="acount">
-            <a href="/auth/login"><i class="bi bi-person"></i>Fazer login</a>
+            <% if(loged===true){ %>
+                <a href="/"><i class="bi bi-person"></i>Minhas trilhas</a>
+                   
+                <% }else{ %>
+                    <a href="/auth/login"><i class="bi bi-person"></i>Fazer login</a>
+                <% } %>
         </div>
     </header>
     <div class="sidebar">
