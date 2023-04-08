@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulário de Contato</title>
+    <link rel="shortcut icon" href="/assets/faviconpng.png">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #1a1a1a;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #2a2a2a;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      form {
+        margin-top: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      textarea {
+        background-color: #333;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 100%;
+      }
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+      input[type="submit"] {
+        background-color: #0077b6;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+      input[type="submit"]:hover {
+        background-color: #023e8a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Entre em Contato</h2>
+      <form method="post" action="https://formsubmit.co/limatechinnovations@gmail.com">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="whatsapp">WhatsApp:</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(xx) xxxxx-xxxx">
+
+        <label for="sugestao">Sugestão:</label>
+        <textarea id="sugestao" name="sugestao" required></textarea>
+
+        <label for="aceito_whatsapp">
+          <input type="checkbox" id="aceito_whatsapp" name="aceito_whatsapp" value="sim">
+          <span>Aceito contato pelo WhatsApp</span>
+        </label>
+
+        <input type="submit" value="Enviar">
+      </form>
+    </div>
+  </body>
+</html>
