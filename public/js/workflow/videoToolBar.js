@@ -59,6 +59,8 @@ async function loadOCR(){
         <p id="info-ocr"> Coloque o vídeo em fullscreen, pressione a tecla PrtScr, depois clique aqui e pressione CRTL + V
          </p>
          <img id="pasted-image" style="display:none;" />
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6802591759052757"
+     crossorigin="anonymous"></script>
      </div>`
         document.body.appendChild(col3)
 

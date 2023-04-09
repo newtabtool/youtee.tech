@@ -15,6 +15,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/faviconpng.png">
+    <meta name="description" content='<%= trailData.description %>'>
+    <meta property="og:image" content="/assets/cloak.png">
+
     <title>
         <%= trailData.name %>
     </title>
@@ -265,8 +269,9 @@
                             </svg>
                             <% var rating=Math.round(trailData.stars/trailData.votes) %>
                                 <%= (isNaN(rating) || !isFinite(rating)) ? 0 : rating %>
+                                
                         </span>
-                        <%= (isNaN(trailData) || !isFinite(trailData)) ? 0 : trailData.votes %>
+                        <%= (isNaN(trailData.votes) || !isFinite(trailData.votes)) ? 0 : trailData.votes %>
                             Classificações
                             <i class="svg-data">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

@@ -99,9 +99,9 @@ class TrailController {
         if(verify){
           loged = true
            userId = verify.id
-          console.log(userId)
+          //console.log(userId)
         }
-        console.log(loged)
+        //console.log(loged)
     }catch(err){
       loged = false
     }
@@ -112,7 +112,7 @@ class TrailController {
         if (verify) {
             return false
         } else {
-            console.log("passou")
+            //console.log("passou")
             return true
 
         }

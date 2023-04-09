@@ -78,7 +78,7 @@ class videoController {
         }
         
         videoData.transcription = textComplete; // atualiza a propriedade "transcription" do objeto "videoData"
-        console.log(videoData)
+        //console.log(videoData)
         res.status(200).json({ videoData });
       } catch (err) {
         console.log(err);
@@ -121,7 +121,7 @@ class videoController {
 
     //inserir video
     async create(url, trailId, userId) {
-      console.log(url)
+      //console.log(url)
         function getId(url) {
             var regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/;
             var match = url.match(regex);

@@ -45,7 +45,14 @@ class PublicTrail {
         return res.json({arrayTrails})
 
     }
+
+
+
     async getForTag() { }
+
+
+
+
     async copy(req, res) {
         async function verifyCopy(currentTrailId, userId) {
             const verify = await TrailModel.findOne({ copy_of: currentTrailId, creator: userId });
@@ -69,6 +76,7 @@ class PublicTrail {
                 const videosOfCurrentTrail = currentTrail.videos
                 const name = currentTrail.name
                 const copy_of = currentTrail._id
+                const updateNumberCopys = await PublicTrailModel.findOneAndUpdate({ _id:id }, currentTrail.copys + 1)
                 const pasteTrail = await TrailModel.create({ creator, publik, id_public, name, copy_of })
                 videosOfCurrentTrail.forEach(async video => {
                     function getId(video) {
@@ -88,6 +96,7 @@ class PublicTrail {
                 })
                 return res.redirect(`/`)
             } catch (err) {
+                console.log(err)
                 return res.send({ erro: "houve um erro ao tentar copiar a trilha" })
             }
         } else {
@@ -128,7 +137,7 @@ class PublicTrail {
                 stars: newStars,
                 votes: newVotes
             }
-            console.log(trail.stars)
+            //console.log(trail.stars)
             try {
                 const updateAvaliated = await TrailModel.findByIdAndUpdate({ _id:id}, { evaluated: true}, { new: true})
                 const updatedTrail = await PublicTrailModel.findByIdAndUpdate({_id:publicTrailId}, update, { new: true })

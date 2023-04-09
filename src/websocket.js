@@ -42,7 +42,7 @@ io.on("connection", socket => {
         }
     })
     socket.on("read", async (id) =>{
-        console.log(id)
+        //console.log(id)
         const change = await notificationController.read(id)
     })
 
