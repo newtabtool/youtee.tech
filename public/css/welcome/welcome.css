@@ -156,6 +156,9 @@ span.logo img{
     fill:#26A5E4 ;
 }
 @media screen and (max-width: 785px) {
+    #header-home{
+        position: relative;
+    }
     .conteiner h1{
         font-size: 13vw;
     }
@@ -195,6 +198,13 @@ span.logo img{
     .conteiner div a{
         font-size: 15px;
     
+    }
+    .conteiner{
+        margin-bottom: 25px;
+        height: auto;
+    }
+    #explain-cards{
+        padding-top: 50px;
     }
     
 }
