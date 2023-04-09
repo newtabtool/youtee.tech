@@ -88,22 +88,22 @@
                                 Vamos configurar sua trilha para torná-la pública
                             </h3>
                             <form action="">
-                                <label for="trail-description">Dê um nome pra sua trilha</label>
+                                <label for="trail-description">Dê um nome pra sua trilha (obrigatório)</label>
                                 <input type="text" name="trail-name" id="trail-name"
                                     placeholder="Digite aqui o nome da trilha" required>
 
                                 <span id="desc"><label for="trail-description">Forneça uma descrição sobre a sua
-                                        trilha</label><b id="count-desc-size">0/500</b></span>
+                                        trilha (obrigatório)</label><b id="count-desc-size">0/500</b></span>
                                 <input type="text" name="trail-description" id="trail-description"
                                     placeholder="Escreva uma descrição aqui" required>
 
-                                <label for="trail-tags">Agora adicione até 10 tags ao seu vídeo</label>
+                                <label for="trail-tags">Agora adicione até 10 tags ao seu vídeo (obrigatório)</label>
                                 <input type="text" name="trail-tags" id="trail-tags"
                                     placeholder="Escreva as tags separadas por , (vírgulas)" required>
                                 <span id="tag-content"></span>
 
 
-                                <label for="trail-category">Escolha uma categoria:</label>
+                                <label for="trail-category">Escolha uma categoria: (obrigatório)</label>
                                 <select id="trail-category" name="categoria" required>
                                     <option value="" selected disabled>Selecione</option>
                                     <option value="entretenimento">Entretenimento</option>
@@ -228,6 +228,7 @@
             <div id="conteiner-name-trails" class="hidden">
 
                 <% n=0; trails.forEach(trail=> { %>
+
 
                     <a class="trail-option-item" href="/trail/<%= trail.id %>">
                         <%= trail.name %>

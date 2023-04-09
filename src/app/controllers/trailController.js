@@ -118,7 +118,7 @@ class TrailController {
         }
     }
       const copied = await verifyCopy(id, userId)
-      res.render('publicTrailPage', { id: id, trailData: trailData, loged, copied});
+      res.render('publicTrailPage', { id: id,  trailData, loged, copied});
     }
   }
 

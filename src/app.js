@@ -24,6 +24,9 @@ class App{
         this.app.set("view engine", "ejs");
         this.app.set("views", "src/views");
         this.app.use(express.static("public"));
+        this.app.use((req,res)=>{
+            res.status(404).render('404');
+        })
     }
     routes(){
         this.app.use(routes);

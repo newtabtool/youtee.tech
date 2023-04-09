@@ -60,7 +60,7 @@ routes.post('/auth/google', (req,res) => userController.google(req,res))
 routes.post('/auth/google/sync', (req,res) => userController.googleSync(req,res))
 
 routes.get('/contact', (req,res) => res.render('contact'))
-
+routes.get('/404', (req,res) => res.render('404'))
 
 
 

@@ -249,6 +249,12 @@ a, button{
         background-color: rgba(0, 0, 0, 0.1);
     }
 }
+#show-trails-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+}
 
 
 
