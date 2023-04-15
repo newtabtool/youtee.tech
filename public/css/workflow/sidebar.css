@@ -15,7 +15,7 @@ a, button{
     background: rgba(0, 0, 0, 0.1);
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: auto 100px 70px  60px;
+    grid-template-rows: 60px auto 100px 70px  60px;
     overflow: hidden;
 
 
@@ -93,6 +93,7 @@ a, button{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
 }
+
 
 .options-conteiner a, .options-conteiner button {
     text-decoration: none;
@@ -255,6 +256,37 @@ a, button{
     text-overflow: ellipsis;
     padding: 0 8px;
 }
+.user-options{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-gap: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 2px;
+}
+.user-options button, .user-options a{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: rgba(255, 255, 255, 0.8);
+    display: grid;
+    place-content: center;
+    border: none;
+    transition: 0.5s linear;
 
+}
+.user-options button:hover, .user-options a:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+
+}
+.premium{
+    stroke: #09f;
+}
+.not-premium{
+    stroke: #fff;
+    stroke-width: 2px;
+    fill: #fff;
+    
+}
 
 

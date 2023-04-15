@@ -97,10 +97,11 @@ class videoController {
 
     async getVideoData(req, res) {
         const id = req.params.id
+        const user = await UserModel.findOne({_id:req.id})
         const trail = await TrailModel.findById(id)
         const videos = await VideoModel.find({ trailId: id })
         const trails = await TrailModel.find({ creator: req.user.id})
-        res.status(200).render('workflow', { trail: trail, trails: trails, videos: videos })
+        res.status(200).render('workflow', { trail: trail, trails: trails, videos: videos, premium: user.premium })
     }
 
 

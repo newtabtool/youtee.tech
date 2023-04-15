@@ -24,8 +24,8 @@ class PaymentController {
                     },
                 ],
                 mode: 'subscription',
-                success_url: `https://youtee.tech/payment/success/${req.id}`,
-                cancel_url: `https://youtee.tech/payment/cancel/${req.id}`,
+                success_url: `${process.env.url}/payment/success/${req.id}`,
+                cancel_url: `${process.env.url}/payment/cancel/${req.id}`,
             });
     
             res.redirect(303, session.url);
@@ -34,9 +34,10 @@ class PaymentController {
         }
     }
 
-    async success(req,res){
-        const user = req.params.id;
 
+    async success(req,res){ //pagamento realizado ---------------------------
+        const user = req.params.id;
+        if(user === req.id){
         try {
             const update_user = await UserModel.findOneAndUpdate({ _id:user}, { premium: true, premium_since: Date.now() });
             res.render('checkout/thanks')
@@ -44,10 +45,13 @@ class PaymentController {
             console.log(error)
             res.send({ erro: "Desculpe, houve um erro ao atualizar sua inscrição, mas não se preocupe, seu pagamento foi processado e nossa equipe técnica pode te ajudar"})
         }
+    }
 
     }
+
+
     async cancel(req,res){
-        res.send({MSG: "CANCELADO"})
+        res.send({Atenção: "Seu pagamento não foi realizado, mas não se preocupe, o fato de você ter tentado ja é um indicativo de que nossa plataforma esa cumprindo com o seu papel"})
     }
 
     

@@ -63,6 +63,25 @@
 
 
     <div class="sidebar" id="sidebar">
+        <div class="user-options">
+            <a title="Logout" href="/logout">
+                <img src="/assets/svg/logout.svg">
+            </a>
+
+            <a href="/" title="Home">
+                <img src="/assets/svg/home.svg">
+            </a>
+
+            <% if(premium === true){ %> 
+            <button title="Você é Premium" >
+                <img src="/assets/svg/diamond-premium.svg" class="premium" title="Você é Premium"  >
+            </button>
+            <% }else{ %> 
+            <a href="/prices" >
+                <img src="/assets/svg/diamond.svg" class="not-premium" title="Ver preços"/>
+            </a>
+            <% } %>
+        </div>
         <div class="videos-name">
             <ul id="videos-list">
                 <% n=0; videos.forEach(video=> { %>
