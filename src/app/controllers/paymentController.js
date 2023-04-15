@@ -24,8 +24,8 @@ class PaymentController {
                     },
                 ],
                 mode: 'subscription',
-                success_url: `http://localhost:3000/payment/success/${req.id}`,
-                cancel_url: `http://localhost:3000/payment/cancel/${req.id}`,
+                success_url: `https://youtee.tech/payment/success/${req.id}`,
+                cancel_url: `https://youtee.tech/payment/cancel/${req.id}`,
             });
     
             res.redirect(303, session.url);
