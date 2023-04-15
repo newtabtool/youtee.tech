@@ -6,11 +6,14 @@ import userController from "./app/controllers/userController.js";
 import trailController from './app/controllers/trailController.js'; 
 import comunityController from "./app/controllers/comunityController.js";
 import publicTrailController from "./app/controllers/publicTrailController.js";
+import PaymentController from "./app/controllers/paymentController.js";
 
 //--------------------------rota principal -------------------------------
 routes.get('/', (req, res, next) => SessionsController(req, res, next), userController.mainController)
 routes.get('/welcome', (req, res) => { res.render('welcome') })
 routes.get('/news', (req, res) => { res.render('news') })
+routes.get('/prices', (req, res) => { res.render('checkout/prices') })
+
 
 // ---------------------------- video ---------------------------
 routes.get('/new', (req, res, next) => SessionsController(req, res, next), videoController.create)
@@ -58,10 +61,14 @@ routes.get('/auth/delete', userController.delete)
 routes.post('/sync/google', (req,res) => userController.syncFinish(req,res))
 routes.post('/auth/google', (req,res) => userController.google(req,res))
 routes.post('/auth/google/sync', (req,res) => userController.googleSync(req,res))
-
 routes.get('/contact', (req,res) => res.render('contact'))
 routes.get('/404', (req,res) => res.render('404'))
 
 
+//----------------------------checkout-----------------------
+routes.get("/checkout", (req,res, next)=> SessionsController(req, res, next), PaymentController.checkout)
+routes.get("/initiate-checkout", (req,res, next)=> SessionsController(req, res, next), PaymentController.payment)
+routes.get("/payment/success/:id", (req,res, next)=> SessionsController(req, res, next), PaymentController.success)
+routes.get("/payment/cancel/:id", (req,res, next)=> SessionsController(req, res, next), PaymentController.cancel)
 
 export default routes;

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preços</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+html, body{
+    height: 100%;
+}
+        body {
+    font-family: 'Source Sans Pro', sans-serif;
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    background-color: #f4f4f4;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.conteiner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 900px;
+    max-width: 90%;
+    margin: 0 auto;
+    height: 80%;
+    max-height: 500px;
+    gap: 1rem;
+}
+.conteiner div{
+    background-color: #fff;
+    border-radius: 1rem;
+    width: 380px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.conteiner div img{
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    width: 90%;
+    text-align: center;
+    background-color: #09f;
+    border-radius: 5px;
+    margin: 0 auto;
+    color:#fff;
+    padding: 1rem;
+    display: block;
+}
+@media screen and ( max-width: 600px ){
+    .conteiner{
+        flex-direction:column;
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+    .conteiner div{
+        gap: 1rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <div class="qr">
+            <img src="/assets/qr.jpeg" alt="QR code">
+            <h2>Apoie com um pix de qualquer valor</h2>
+        </div>
+        <div class="premium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                    fill="#09f" class="bi bi-gem" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.1.7a.5.5 0 0 1 .4-.2h9a.5.5 0 0 1 .4.2l2.976 3.974c.149.185.156.45.01.644L8.4 15.3a.5.5 0 0 1-.8 0L.1 5.3a.5.5 0 0 1 0-.6l3-4zm11.386 3.785-1.806-2.41-.776 2.413 2.582-.003zm-3.633.004.961-2.989H4.186l.963 2.995 5.704-.006zM5.47 5.495 8 13.366l2.532-7.876-5.062.005zm-1.371-.999-.78-2.422-1.818 2.425 2.598-.003zM1.499 5.5l5.113 6.817-2.192-6.82L1.5 5.5zm7.889 6.817 5.123-6.83-2.928.002-2.195 6.828z" />
+                                </svg>
+            <h2>Ative a assinatura mensal</h2>
+            <h1>R$ 4,99/30dias</h1>
+            <p>a qualquer momento depois de logado voce pode acessar youtee.tech/checkout para fazer a assinatura, se voce ja estiver logado clique no botão abaixo</p>
+            <a href="/checkout">Escolher esse</a>
+        </div>
+    </div>
+</body>
+</html>

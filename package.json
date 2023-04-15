@@ -30,6 +30,7 @@
     "nodemon": "^2.0.20",
     "postcss": "^8.4.21",
     "socket.io": "^4.6.1",
+    "stripe": "^12.1.0",
     "tesseract.js": "^4.0.2",
     "youtube-captions-scraper": "^2.0.0",
     "youtube-frames": "^1.0.3",
