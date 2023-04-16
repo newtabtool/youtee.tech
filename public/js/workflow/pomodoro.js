@@ -8,7 +8,9 @@ let pomodoroTimer;
 let breaks = 0;
 let isBigBreak = false;
 let isBreak = false;
+let pomo_seted = false;
 function startPomodoro() {
+    if(pomo_seted === false){
     document.getElementById('conteiner-clock').innerHTML = `
             <div class="conteiner-clock work" id="cont-clock">
 
@@ -45,6 +47,8 @@ function startPomodoro() {
     </div>
             `
     pomodoro()
+    pomo_seted = true
+    }
 
 }
 function pausePomodoro() {
@@ -53,6 +57,7 @@ function pausePomodoro() {
     clearInterval(pomodoroTimer);
 }
 function closePomodoro(){
+    pomo_seted = false;
     document.getElementById('cont-clock').remove();
     currentTimeMinutes = 0;
     currentTimeSeconds = 0;
