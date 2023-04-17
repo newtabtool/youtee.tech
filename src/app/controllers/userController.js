@@ -109,9 +109,9 @@ class UserController {
     }
     const user  = await User.create({ email, password: "", premium: false, id_google: ticket.sub }).then((user)=>{
         const token = jwt.sign({ id: user._id, email: user.email, premium: user.premium }, token_secret, { expiresIn: '30d' });
-        
       return res.json({status: 1, token: token})
     }).catch((err)=>{
+      console.log(err)
       return res.json({status: 2})
     })
   }
@@ -134,6 +134,7 @@ class UserController {
         //console.log(token)
         return res.json({token: token, status: "log"})
       }
+
       if(!user){
         return res.json({status: "unknown"})
       }
