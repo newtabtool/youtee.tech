@@ -107,6 +107,7 @@ class TrailController {
     }
     }
     if(trailData){
+      let count =  await TrailModel.count({ copy_of: id });
       async function verifyCopy(currentTrailId, userId) {
         const verify = await TrailModel.findOne({ copy_of: currentTrailId, creator: userId });
         if (verify) {
@@ -118,7 +119,7 @@ class TrailController {
         }
     }
       const copied = await verifyCopy(id, userId)
-      res.render('publicTrailPage', { id: id,  trailData, loged, copied});
+      res.render('publicTrailPage', { id: id,  trailData, count, loged, copied});
     }
   }
 
