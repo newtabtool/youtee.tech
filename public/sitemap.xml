@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://youtee.tech/welcome</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/news</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/auth/signup</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/prices</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/public-collections</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/contact</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/termos.html</loc>
+  <lastmod>2023-04-17T00:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/politicas.html</loc>
+  <lastmod>2023-04-17T00:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/auth/login</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/public-trails/6431e877b85557a066371eca</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/public-trails/643b31bba2ddc579bf6ff221</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://youtee.tech/public-trails/643b34b3a2ddc579bf6ff296</loc>
+  <lastmod>2023-04-18T01:10:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
