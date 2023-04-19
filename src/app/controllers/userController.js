@@ -6,6 +6,7 @@ import User from '../models/UserModel.js';
 import jwt from 'jsonwebtoken';
 
 import dotenv from "dotenv";
+import UserSchema from '../models/UserModel.js';
 dotenv.config()
 const router = express.Router();
 express().use(express.json())
@@ -39,7 +40,7 @@ class UserController {
         const token_secret = process.env.JWT_SECRET;
         const token = jwt.sign({ id: user._id, email: email, premium: user.premium }, token_secret, { expiresIn: '7d' });
         await salvarTokenNoCookie(res, token);
-        res.redirect('/');
+        res.redirect('/dashboard');
       } catch (err) {
         console.log(err);
         res.status(501).send('Erro ao realizar login');
@@ -52,6 +53,10 @@ class UserController {
   async signup(req, res) {
     const email = req.body.email;
     const password = req.body.password;
+    const { accept_terms, accept_emails } = req.body;
+    if(!accept_emails || !accept_terms){
+      return res.send("É necessário aceitar os termos e o envio de emails para continuar")
+    }
     const password_confirm = req.body.password_confirm;
     const signuping = await checkSignup(email, password);
     const token_secret = process.env.JWT_SECRET;
@@ -65,7 +70,7 @@ class UserController {
         //res.header('authorization-token', token).json({ msg: 'logado' });
         const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
         res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
-        res.redirect('/');
+        res.redirect('/dashboard');
       } 
     }catch(err){
       res.status(501).send('Erro ao realizar cadastro');
@@ -154,7 +159,7 @@ class UserController {
     const token = req.params.token;
     const tempoExpiracao = 60 * 60 * 24 * 7; // 1 semana
     res.cookie('jwt_token', token, { maxAge: tempoExpiracao * 1000, httpOnly: false });
-    res.redirect("/")
+    res.redirect("/dashboard")
 
   }
 
@@ -193,8 +198,48 @@ class UserController {
 
   async logout(req,res){
     res.clearCookie('jwt_token');
-    res.redirect('/welcome')
+    res.redirect('/')
   }
+
+  async cancelSub(req,res){
+    const user_loged = req.id
+    const user_received = req.params.id
+    if(user_received === user_loged){
+      res.render("cancel-emails");
+    }else{
+      res.send("Voce precisa estar logado na mesma conta que recebeu o email para cancelar")
+    }
+  }
+
+
+
+
+  async cancelEmails(req,res){
+    const user_loged = req.id
+    const { promo, news, contact } = req.body
+    
+    try {
+      const user = await User.findOne({ _id: user_loged })
+
+      if(promo){
+        const update_promo = await User.findOneAndUpdate({ _id: user_loged },{ accept_email_promo: false })
+      }
+
+      if(news){
+        const update_news = await User.findOneAndUpdate({ _id: user_loged },{ accept_email_news: false })
+      }
+
+      if(promo){
+        const update_contact = await User.findOneAndUpdate({ _id: user_loged },{ accept_email_contact: false })
+      }
+      res.send("Cancelamento concluido <a href='/dashboard'>Voltar pra home</a>")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
 }
 
 export default new UserController();

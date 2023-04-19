@@ -1,297 +1,373 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5754GXM');</script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-5754GXM");
+    </script>
     <!-- End Google Tag Manager -->
-    
-    <link rel="shortcut icon" href="/assets/faviconpng.png">
-    <link rel="stylesheet" href="/css/default.css">
-    <link rel="stylesheet" href="/css/variables.css">
+
+    <link rel="shortcut icon" href="/assets/faviconpng.png" />
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
     <style>
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
 
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        body {
-            background: var(--body-bg-dark);
-        }
+      body {
+        background: var(--body-bg-dark);
+      }
 
-        #conteiner-login {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
+      #conteiner-login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
 
-        .form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 300px;
-            background-color: #fff;
-            border-radius: 20px;
-            padding: 30px 20px;
-            box-shadow: 100px 100px 80px rgba(0, 0, 0, 0.03)
-        }
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 300px;
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 30px 20px;
+        box-shadow: 100px 100px 80px rgba(0, 0, 0, 0.03);
+      }
 
-        .title {
-            color: black;
-            font-weight: bold;
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
+      .title {
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
 
-        .sub {
-            text-align: center;
-            color: black;
-            font-size: 14px;
-            width: 100%;
-        }
+      .sub {
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        width: 100%;
+      }
 
-        .sub.mb {
-            margin-bottom: 1px;
-        }
+      .sub.mb {
+        margin-bottom: 1px;
+      }
 
-        .sub a {
-            color: rgb(23, 111, 211);
-        }
+      .sub a {
+        color: rgb(23, 111, 211);
+      }
 
-        .avatar {
-            height: 50px;
-            width: 50px;
-            background-color: rgb(23, 111, 211);
-            border-radius: 50%;
-            align-self: center;
-            padding: 6px;
-            cursor: pointer;
-            box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015), 100px 100px 80px rgba(0, 0, 0, 0.03);
-        }
+      .avatar {
+        height: 50px;
+        width: 50px;
+        background-color: rgb(23, 111, 211);
+        border-radius: 50%;
+        align-self: center;
+        padding: 6px;
+        cursor: pointer;
+        box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015),
+          100px 100px 80px rgba(0, 0, 0, 0.03);
+      }
 
-        .form button {
-            align-self: flex-end;
-        }
+      .form button {
+        align-self: flex-end;
+      }
 
-        .inputs,
-        button {
-            border: none;
-            outline: none;
-            width: 100%;
-            padding: 16px 10px;
-            background-color: rgb(247, 243, 243);
-            border-radius: 10px;
-            box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015), 100px 100px 80px rgba(0, 0, 0, 0.03);
-        }
+      .inputs,
+      button {
+        border: none;
+        outline: none;
+        width: 100%;
+        padding: 16px 10px;
+        background-color: rgb(247, 243, 243);
+        border-radius: 10px;
+        box-shadow: 12.5px 12.5px 10px rgba(0, 0, 0, 0.015),
+          100px 100px 80px rgba(0, 0, 0, 0.03);
+      }
 
-        button {
-            margin-top: 12px;
-            background-color: rgb(23, 111, 211);
-            color: #fff;
-            text-transform: uppercase;
-            font-weight: bold;
+      button {
+        margin-top: 12px;
+        background-color: rgb(23, 111, 211);
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
 
-        }
-
-
-        .inputs:focus {
-            border: 1px solid rgb(23, 111, 211);
-        }
-        .danger{
-            color: #fff;
-            padding: 5px;
-            background-color: #f09;
-            border-radius: 5px;
-            display: none;
-            text-align: center;
-        }
+      .inputs:focus {
+        border: 1px solid rgb(23, 111, 211);
+      }
+      .danger {
+        color: #fff;
+        padding: 5px;
+        background-color: #f09;
+        border-radius: 5px;
+        display: none;
+        text-align: center;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5754GXM"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-5754GXM"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="conteiner-login">
-        <form class="form" id="form" action="/auth/signup" method="post">
-            <span class="title">Obrigado por apoiar o projeto</span>
-            <span class="sub mb">Bem vindo(a) ao New Tab Tool!</span>
-            <input id="file" type="text" hidden>
-            <div id="buttonDiv"></div>
+      <form class="form" id="form" action="/auth/signup" method="post">
+        <span class="title">Obrigado por apoiar o projeto</span>
+        <span class="sub mb">Bem vindo(a) ao YouteeTech</span>
+        <input id="file" type="text" hidden />
+        <div id="buttonDiv"></div>
 
+        <input
+          type="email"
+          class="inputs"
+          id="email"
+          name="email"
+          placeholder="email"
+        />
+        <label for="password" style="font-size: 0.8rem"
+          >A senha deve ter pelo menos 8 caracteres e conter pelo menos uma
+          letra e um número</label
+        >
+        <input
+          type="password"
+          class="inputs"
+          id="password"
+          name="password"
+          placeholder="senha"
+        />
+        <input
+          type="password"
+          class="inputs"
+          id="password_confirm"
+          name="password_confirm"
+          placeholder="confirmação de senha"
+        />
 
-            <input type="email" class="inputs" id="email" name="email" placeholder="email">
-            <label for="password" style="font-size: 0.8rem;">A senha deve ter pelo menos 8 caracteres e conter pelo menos uma letra e um número</label>
-            <input type="password" class="inputs" id="password" name="password" placeholder="senha">
-            <input type="password" class="inputs" id="password_confirm" name="password_confirm" placeholder="confirmação de senha">
-            <b class="danger" id="danger"></b>
-            <span class="sub">Ja tem uma conta? <a href="/auth/login">login</a></span>
-            <button type="submit" id="action">cadastrar</button>
-        </form>
+        <div
+          class="checks"
+          style="
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            justify-content: start;
+            align-items: start;
+            width: 100%;
+            gap:10px;
+          "
+        >
+          <span>
+            <input
+              type="checkbox"
+              id="receber_emails"
+              name="accept_emails"
+              value="true"
+              required
+            />
+            <label for="receber_emails">Desejo receber emails</label>
+          </span>
+          <span>
+            <input
+              type="checkbox"
+              id="aceitar_termos"
+              name="accept_terms"
+              value="true"
+              required
+            />
+            <label for="aceitar_termos"
+              >Aceito os <a href="/termos.html">termos de uso</a>
+            </label>
+          </span>
+        </div>
+
+        <b class="danger" id="danger"></b>
+        <span class="sub"
+          >Ja tem uma conta? <a href="/auth/login">login</a></span
+        >
+        <button type="submit" id="action">cadastrar</button>
+      </form>
     </div>
     <script>
-        function handleCredentialResponse(response) {
-            token = response.credential;
-            //const tokenObj = JSON.parse(token)
-            //enviar o token não decodificado pro backend
-            fetch('/auth/signup/google', {
-                method: 'POST', headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ token: token })
-            }).then( res => res.json()).then( data => {
-                if(data.status === 1){
-                    //document.cookie = `jwt_token=${data.token}; max-age=604800; HttpOnly=false`;
-                    window.location.href = `/auth/login/set_cookie/${data.token}`
-
-                }
-                if(data.status === 2){
-                    document.getElementById('danger').innerText = "Infelizmente não foi possivel realizar o cadastro com essa conta, tente outra ou cadastre-se com email"
-                    document.getElementById('danger').style.display = "block"
-                }
-                if(data.status === 0){
-                    document.getElementById('danger').innerText = "Já existe uma consta cadastrada com esse email"
-                    document.getElementById('danger').style.display = "block"
-                }
-
-            })
-
-
-
-        }
-
-
-
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: "1063025007942-2fe8i3mlq6u9qclee8r6hqh4hh2gp6mh.apps.googleusercontent.com",
-                callback: handleCredentialResponse
-            });
-
-
-            google.accounts.id.renderButton(
-                document.getElementById("buttonDiv"),
-                { theme: "filled_blue", size: "large", shape: "pill" }  // customization attributes
-            );
-            google.accounts.id.prompt(); // also display the One Tap dialog
-        }
-
-
-
-        const action = document.querySelector('#action')
-        const formElement = document.querySelector('#form')
-        const passwordElement = document.querySelector('#password')
-        const passwordConfirmElement = document.querySelector('#password_confirm')
-        const emailElement = document.querySelector('#email')
-        let validPass
-        let validEmail
-        let validPassConf
-
-        async function validateEmail(email, emailElement) {
-            // expressão regular para validar email
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            let isValid = await regex.test(email);
-
-            if (!isValid) {
-                emailElement.style.borderColor = '#f00';
-                emailElement.style.borderStyle = 'solid';
-                emailElement.style.borderWidth = '1px';
-                validEmail = false;
-            } else {
-                emailElement.style.borderColor = 'none';
-                emailElement.style.borderStyle = 'none';
-                emailElement.style.borderWidth = '0';
-                validEmail = true
-            }
-        }
-
-        async function validatePassword(password, passwordElement) {
-            // expressão regular para validar senha
-            const regex = /^(?=.*\d).{8,}$/
-            let isValid = await regex.test(password);
-
-            if (!isValid) {
-
-                passwordElement.style.borderColor = '#f00';
-                passwordElement.style.borderStyle = 'solid';
-                passwordElement.style.borderWidth = '1px';
-                validPass = false;
-
-            } else {
-                passwordElement.style.borderColor = 'none';
-                passwordElement.style.borderStyle = 'none';
-                passwordElement.style.borderWidth = '0';
-                validPass = true;
-            }
-        }
-
-        function validatePasswordConfirmation(password, passwordConfirm, passwordConfirmElement) {
-           
-            if (password !== passwordConfirm) {
-                passwordConfirmElement.style.borderColor = '#f00';
-                passwordConfirmElement.style.borderStyle = 'solid';
-                passwordConfirmElement.style.borderWidth = '1px';
-                validPassConf = false;
-
-            } else {
-                passwordConfirmElement.style.borderColor = 'none';
-                passwordConfirmElement.style.borderStyle = 'none';
-                passwordConfirmElement.style.borderWidth = '0';
-                validPassConf = true;
-
-            }
-        }
-
-        if(validPass && validPassConf && validEmail){
-            action.removeAttribute('disabled')
-            action.style.backgroundColor = '#f00';
-            action.style.borderStyle ='solid';
-            action.style.borderWidth = '1px';
-            
-        }
-        passwordElement.addEventListener('input', () => { validatePassword(passwordElement.value, passwordElement) })
-        emailElement.addEventListener('input', () => { validateEmail(emailElement.value, emailElement) });
-        emailElement.addEventListener('change', () => { validateEmail(emailElement.value, emailElement) });
-        passwordConfirmElement.addEventListener('input', () => { validatePasswordConfirmation(passwordElement.value, passwordConfirmElement.value, passwordConfirmElement, validPassConf)})
-        formElement.addEventListener('submit', function (e) {
-            e.preventDefault()
-            let password = passwordElement.value
-            let passwordConfirm = passwordConfirmElement.value
-            let email = emailElement.value
-
-
+      function handleCredentialResponse(response) {
+        token = response.credential;
+        //const tokenObj = JSON.parse(token)
+        //enviar o token não decodificado pro backend
+        fetch("/auth/signup/google", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token: token }),
         })
-
-        formElement.addEventListener("submit", function (e) {
-            e.preventDefault()
-            console.log( validEmail, validPass, validPass)
-            console.log('clicado')
-            if(validPass && validPassConf && validEmail){
-                formElement.submit();
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === 1) {
+              //document.cookie = `jwt_token=${data.token}; max-age=604800; HttpOnly=false`;
+              window.location.href = `/auth/login/set_cookie/${data.token}`;
             }
-        })
+            if (data.status === 2) {
+              document.getElementById("danger").innerText =
+                "Infelizmente não foi possivel realizar o cadastro com essa conta, tente outra ou cadastre-se com email";
+              document.getElementById("danger").style.display = "block";
+            }
+            if (data.status === 0) {
+              document.getElementById("danger").innerText =
+                "Já existe uma consta cadastrada com esse email";
+              document.getElementById("danger").style.display = "block";
+            }
+          });
+      }
+
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id:
+            "1063025007942-2fe8i3mlq6u9qclee8r6hqh4hh2gp6mh.apps.googleusercontent.com",
+          callback: handleCredentialResponse,
+        });
+
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "filled_blue", size: "large", shape: "pill" } // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+      };
+
+      const action = document.querySelector("#action");
+      const formElement = document.querySelector("#form");
+      const passwordElement = document.querySelector("#password");
+      const passwordConfirmElement =
+        document.querySelector("#password_confirm");
+      const emailElement = document.querySelector("#email");
+      let validPass;
+      let validEmail;
+      let validPassConf;
+
+      async function validateEmail(email, emailElement) {
+        // expressão regular para validar email
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let isValid = await regex.test(email);
+
+        if (!isValid) {
+          emailElement.style.borderColor = "#f00";
+          emailElement.style.borderStyle = "solid";
+          emailElement.style.borderWidth = "1px";
+          validEmail = false;
+        } else {
+          emailElement.style.borderColor = "none";
+          emailElement.style.borderStyle = "none";
+          emailElement.style.borderWidth = "0";
+          validEmail = true;
+        }
+      }
+
+      async function validatePassword(password, passwordElement) {
+        // expressão regular para validar senha
+        const regex = /^(?=.*\d).{8,}$/;
+        let isValid = await regex.test(password);
+
+        if (!isValid) {
+          passwordElement.style.borderColor = "#f00";
+          passwordElement.style.borderStyle = "solid";
+          passwordElement.style.borderWidth = "1px";
+          validPass = false;
+        } else {
+          passwordElement.style.borderColor = "none";
+          passwordElement.style.borderStyle = "none";
+          passwordElement.style.borderWidth = "0";
+          validPass = true;
+        }
+      }
+
+      function validatePasswordConfirmation(
+        password,
+        passwordConfirm,
+        passwordConfirmElement
+      ) {
+        if (password !== passwordConfirm) {
+          passwordConfirmElement.style.borderColor = "#f00";
+          passwordConfirmElement.style.borderStyle = "solid";
+          passwordConfirmElement.style.borderWidth = "1px";
+          validPassConf = false;
+        } else {
+          passwordConfirmElement.style.borderColor = "none";
+          passwordConfirmElement.style.borderStyle = "none";
+          passwordConfirmElement.style.borderWidth = "0";
+          validPassConf = true;
+        }
+      }
+
+      if (validPass && validPassConf && validEmail) {
+        action.removeAttribute("disabled");
+        action.style.backgroundColor = "#f00";
+        action.style.borderStyle = "solid";
+        action.style.borderWidth = "1px";
+      }
+      passwordElement.addEventListener("input", () => {
+        validatePassword(passwordElement.value, passwordElement);
+      });
+      emailElement.addEventListener("input", () => {
+        validateEmail(emailElement.value, emailElement);
+      });
+      emailElement.addEventListener("change", () => {
+        validateEmail(emailElement.value, emailElement);
+      });
+      passwordConfirmElement.addEventListener("input", () => {
+        validatePasswordConfirmation(
+          passwordElement.value,
+          passwordConfirmElement.value,
+          passwordConfirmElement,
+          validPassConf
+        );
+      });
+      formElement.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let password = passwordElement.value;
+        let passwordConfirm = passwordConfirmElement.value;
+        let email = emailElement.value;
+      });
+
+      formElement.addEventListener("submit", function (e) {
+        e.preventDefault();
+        console.log(validEmail, validPass, validPass);
+        console.log("clicado");
+        if (validPass && validPassConf && validEmail) {
+          formElement.submit();
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

@@ -9,8 +9,11 @@ import publicTrailController from "./app/controllers/publicTrailController.js";
 import PaymentController from "./app/controllers/paymentController.js";
 
 //--------------------------rota principal -------------------------------
-routes.get('/', (req, res, next) => SessionsController(req, res, next), userController.mainController)
-routes.get('/welcome', (req, res) => { res.render('welcome') })
+routes.get('/dashboard', (req, res, next) => SessionsController(req, res, next), userController.mainController)
+routes.get('/cancel-sub/:id', (req, res, next) => SessionsController(req, res, next), userController.cancelSub)
+routes.post('/cancel-emails', (req, res, next) => SessionsController(req, res, next), userController.cancelEmails)
+routes.get('/', (req, res) => { res.render('welcome') })
+routes.get('/welcome', (req, res) => { res.redirect('/') })
 routes.get('/news', (req, res) => { res.render('news') })
 routes.get('/prices', (req, res) => { res.render('checkout/prices') })
 

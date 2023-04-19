@@ -94,7 +94,7 @@ class PublicTrail {
 
                     let newVideo = await videoController.createCopy(title, video, pasteTrail._id, req.id)
                 })
-                return res.redirect(`/`)
+                return res.redirect(`/dashboard`)
             } catch (err) {
                 console.log(err)
                 return res.send({ erro: "houve um erro ao tentar copiar a trilha" })

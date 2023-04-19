@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar recebimento de emails</title>
+    <style>
+        body,html{
+            height:100%
+        }
+        *{
+            margin: 0; padding:0;
+        }
+        .conteiner{
+            width: 650px;
+            max-width: 90%;
+            margin: 0 auto;
+            height: 95%;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+        }
+        p,h1,label{
+            margin:10px
+        }
+        .button{
+            margin: 10px;
+            padding: 10px 15px;
+            background-color: #f99;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="conteiner">
+        <h1>Formulário de Cancelamento de Recebimento de Email</h1>
+    <p>Por favor, selecione os tipos de e-mails que você deseja cancelar o recebimento:</p>
+    <form action="/cancel-emails" method="post">
+      <label>
+        <input type="checkbox" name="promo" value="true">
+        Cancelar recebimento de emails promocionais
+      </label>
+      <br>
+      <label>
+        <input type="checkbox" name="news" value="true">
+        Cancelar recebimento de emails sobre novas versões
+      </label>
+      <br>
+      <label>
+        <input type="checkbox" name="contact" value="true">
+        Cancelar recebimento de emails oficiais de comunicação
+      </label>
+      <br>
+      <br>
+      <input type="submit" value="Cancelar esses" class="button">
+    </form>
+        </form>
+    </div>
+</body>
+</html>
