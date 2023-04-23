@@ -1,11 +1,16 @@
-.container {
-    height: calc(100% - 60px);
-    width: 100%;
+html, body{
+    height: 100%;
+}
+body{
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
+
+body{
+    background-color: #000;
+    display: grid;
+    grid-template-columns: 340px auto;
+}
 
 .row-wrap{
     flex-wrap: wrap;
@@ -16,56 +21,415 @@ a{
 }
 
 .card{
-    width: 240px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background: linear-gradient( rgb(0, 49, 82), #003);
-    padding: 10px;
-    margin:10px;
-    border: 1px solid rgba(255,255,255,0.4);
-    border-radius: 15px;
-
-}
-.card-hero{
-    width: 100%;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    height: 100%;
+    height: 210px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+    gap: 1rem;
+    text-align: left;
+    background: #09f;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 0;
 }
-.card-hero h1{
+
+.card h3{
+    font-size: 1.2rem;
+    color:#fff;
+    max-width: 300px;
+}
+.card i{
     font-size: .9rem;
+    color:#fff;
+    max-width: 300px;
 }
-.card-hero svg{
+.card b, .card a{
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 5px 1.5rem;
+    font-weight: 600;
+}
+.card svg{
     height: 60%;
     max-height: 100px;
 }
-.card p{
+.card div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    padding: 10px;
-    color:#fff;
-    font-size: 15px;
-    text-align: left;
-    scroll-behavior: smooth;
-    overflow: scroll;
-    text-overflow: ellipsis;
-    height: auto;
-    
 }
+.card div span{
+    display: flex;
+    flex-direction: row;
+    gap: .4rem;
+}
+.card div span i.bx, .card div span i.bx-trash{
+    font-size: 1.1rem;
+    position: relative;
+}
+.card div span i.bx::after{
+    content: "";
+    display: block;
+    border: 1px solid #fff;
+    position: absolute;
+    border-radius: 50%;
+    left: -5px;
+    right: -5px;
+    top: -5px;
+    bottom: -5px;
+}
+
+
+.card div button{
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    margin: 0 5px ;
+}
+
+
+
+
 .card p::-webkit-scrollbar{
     width: 0;
 }
-.card button{
+.sidebar{
+    background-color: rgba(255,255,255,0.05);
+    width: 340px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 60px;
+    padding: 1rem;
+    max-height: 100vh;
+    position: fixed;
+    gap: 1rem;
+
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.menu button, .menu a{
+    background-color: transparent;
+    font-size: 1.05rem;
+    color: #fff;
     border: none;
+
+}
+.sidebar-footer{
+    background-color: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+.sidebar-footer button{
+    border: none;
+    background-color: transparent;
+}
+.sidebar-footer i.bx{
+    font-size: 1.4rem;
     color:#fff;
-    background-color: #02f;
-    padding: 10px;
-    margin: 10px 0;
+}
+.sidebar-footer i.bx:hover{
+    color: #09f;
+}
+button:hover, a:hover{
+    transition: 0.2s linear;
+    transform: scale(1.15);
+    color:#09f;
+
+}
+.section_form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conteiner{
+    width: 100%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
+}
+.box-conteiner {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    padding: 1rem
+}
+.conteiner::-webkit-scrollbar{
+    width: 3px;
+    background-color: none;
+}
+.conteiner::-webkit-scrollbar-thumb{
+    background-color:rgba(0,255,255,0.4);
     border-radius: 5px;
 }
+.notifications, .settings{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgba(255,255,255,0.05);
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+.hidden{
+    display: none;
+    position: fixed;
+}
+.new-notification{
+    position: relative;
+}
+.new-notification::after{
+    content: " ";
+    display: block;
+    background-color: #0f9;
+    border-radius: 50%;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    z-index: 99;
+}
+.sidebar .notifications button{
+    background-color: rgba(255,255,255,0.05);
+    border: none;
+    padding: 0.5rem 0;
+    margin: 0.2rem 1rem;
+    color:#fff;
+    border-radius: 5px;
+}
+.sidebar .notifications button i{
+    display: none;
+}
+.sidebar .notifications button:hover i{
+    display: block;
+}
+.sidebar .notifications button:hover{
+    transform: scale(1);
+}
+.unread{
+    background-color: #09f !important;
+}
+
+.notification-card{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2rem;
+    margin: auto auto;
+    width: auto;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(0, -50%);
+}
+
+.settings{
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 60px;
+    grid-gap: 1rem;
+    color:#fff;
+}
+
+.settings div.checkbox-conteiner{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.settings h3{
+    color:#fff;
+}
+.centered{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/*        aqui vai o css input toggle-------------------------------------- */
+/*        aqui vai o css input toggle-------------------------------------- */  
+
+
+.check {
+    position: relative;
+    background: linear-gradient(90deg, #09f, rgb(2, 133, 221));
+    line-height: 0;
+    font-size: 25px;
+   }
+   
+   .check input[type="checkbox"],
+   .check label,
+   .check label::before,
+   .check label::after {
+    appearance: none;
+    display: inline-block;
+    font-size: inherit;
+    border-radius: 1em;
+    border: 0;
+    transition: .35s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+   }
+   
+   .check {
+    appearance: none;
+    display: inline-block;
+    border-radius: 1em;
+    border: 0;
+    transition: .35s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+   }
+   
+   .check label {
+    width: 2.2em;
+    height: 1em;
+    background: #d7d7d7;
+    overflow: hidden;
+   }
+   
+   .check input[type="checkbox"] {
+    position: absolute;
+    z-index: 1;
+    width: .8em;
+    height: .8em;
+    top: .1em;
+    left: .1em;
+    background: linear-gradient(45deg, #dedede, #ffffff);
+    box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+    outline: none;
+   }
+   
+   .check input[type="checkbox"]:checked {
+    left: 1.3em;
+   }
+   
+   .check input[type="checkbox"]:checked + label {
+    background: transparent;
+   }
+   
+   .check label::before,
+   .check label::after {
+    content: "· ·";
+    position: absolute;
+    overflow: hidden;
+    left: .50em;
+    top: .5em;
+    height: 1em;
+    letter-spacing: -.04em;
+    color: #9b9b9b;
+    font-family: "Times New Roman", serif;
+    z-index: 2;
+    font-size: .6em;
+    border-radius: 0;
+    transform-origin: 0 0 -.5em;
+    backface-visibility: hidden;
+   }
+   
+   .check label::after {
+    content: "?";
+    top: .65em;
+    left: .6em;
+    height: .1em;
+    width: .35em;
+    font-size: .2em;
+    transform-origin: 0 0 -.4em;
+   }
+   
+   .check input[type="checkbox"]:checked + label::before,
+   .check input[type="checkbox"]:checked + label::after {
+    left: 2.55em;
+    top: .4em;
+    line-height: .1em;
+    transform: rotateY(360deg);
+   }
+   
+   .check input[type="checkbox"]:checked + label::after {
+    height: .16em;
+    top: .55em;
+    left: 2.6em;
+    font-size: .6em;
+    line-height: 0;
+   }
+   
+/* aqui termina o css input toggle-------------------------------------- */
+
+/* inspired from this svgbackgrounds.com/ */
+.button {
+    width: fit-content;
+    display: flex;
+    padding: 0.6em 1.1em;
+    gap: 0.4rem;
+    font-weight: bold;
+    border-radius: 30px;
+    text-shadow: 2px 2px 3px rgb(136 0 136 / 50%);
+    background: linear-gradient(15deg, #880088, #aa2068, #cc3f47, #de6f3d, #f09f33, #de6f3d, #cc3f47, #aa2068, #880088) no-repeat;
+    background-size: 300%;
+    background-position: left center;
+    transition: background .3s ease;
+    color: #fff;
+  }
+  
+  .button:hover {
+    background-size: 320%;
+    background-position: right center;
+    transform: scale(1);
+    color: #fff;
+  }
+  
+  .button:hover svg {
+    fill: #fff;
+  }
+  
+  .button svg {
+    width: 23px;
+    fill: #f09f33;
+    transition: .3s ease;
+  }
+  .extension-login {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .extension-login:hover {
+    background-color: #09f;
+    box-shadow: 0px 15px 20px rgba(0, 102, 255, 0.4);
+    color: #fff;
+    transform: scale(1.05);
+  }
+  
+  .extension-login:active {
+    transform: translateY(-1px);
+  }

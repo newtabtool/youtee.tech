@@ -7,14 +7,20 @@ import jwt from 'jsonwebtoken';
 
 import dotenv from "dotenv";
 import UserSchema from '../models/UserModel.js';
+import notificationsModel from '../models/notificationsModel.js';
 dotenv.config()
 const router = express.Router();
 express().use(express.json())
 
 class UserController {
   async mainController(req, res) {
-    const user = req.id;
-    res.render('chooseTrail', { user });
+    const userId = req.id;
+    const notifications = await notificationsModel.find({user: userId})
+    const user = await User.findOne({_id: userId})
+    const promo = user.accept_email_promo
+    const news = user.accept_email_news
+    const contact = user.accept_email_contact
+    res.render('chooseTrail', { user: userId,  notifications, news, promo, contact});
   }
 
   async getLogin(req, res) {
@@ -64,7 +70,7 @@ class UserController {
       let salt = bcrypt.genSaltSync(14);
       let password_hash = bcrypt.hashSync(password, salt);
       try{
-      const signup = await User.create({ email, password: password_hash, premium: false });
+      const signup = await User.create({ email, password: password_hash, premium: false, accept_email_promo: true, accept_email_news:true, accept_email_contact:true });
       if (signup) {
         const token = jwt.sign({ id: signup._id, email: email, premium: signup.premium }, token_secret, { expiresIn: '30d' });
         //res.header('authorization-token', token).json({ msg: 'logado' });
@@ -112,7 +118,7 @@ class UserController {
     if(verify){
       return res.json({status: 0})
     }
-    const user  = await User.create({ email, password: "", premium: false, id_google: ticket.sub }).then((user)=>{
+    const user  = await User.create({ email, password: "", premium: false, id_google: ticket.sub, accept_email_promo: true, accept_email_news:true, accept_email_contact:true }).then((user)=>{
         const token = jwt.sign({ id: user._id, email: user.email, premium: user.premium }, token_secret, { expiresIn: '30d' });
       return res.json({status: 1, token: token})
     }).catch((err)=>{
@@ -162,8 +168,6 @@ class UserController {
     res.redirect("/dashboard")
 
   }
-
-  
   async googleSync(req, res){
     
     function salvarTokenNoCookie(res, token) {
@@ -194,13 +198,10 @@ class UserController {
     }
 
   }
-
-
   async logout(req,res){
     res.clearCookie('jwt_token');
     res.redirect('/')
   }
-
   async cancelSub(req,res){
     const user_loged = req.id
     const user_received = req.params.id
@@ -210,10 +211,6 @@ class UserController {
       res.send("Voce precisa estar logado na mesma conta que recebeu o email para cancelar")
     }
   }
-
-
-
-
   async cancelEmails(req,res){
     const user_loged = req.id
     const { promo, news, contact } = req.body
@@ -237,9 +234,58 @@ class UserController {
       console.log(error)
     }
   }
+  async changePromo(req,res){
+    const user = await User.findOne({_id:req.id})
+    const email_current = user.accept_email_promo;
+    if(email_current === true || email_current === false){
+    const email_changed = !email_current
+    console.log(email_changed)
+    try {
+    const update_promo = await User.findOneAndUpdate({_id:req.id}, { accept_email_promo: email_changed })
+  } catch (error) {
+    console.log(error)
+  }
+    }else{
+    const email_changed = false
+    console.log(email_changed)
+    const update_promo = await User.findOneAndUpdate({_id:req.id}, { accept_email_promo: email_changed })
+    }
+  }
+  async changeNews(req,res){
+    
+      const user = await User.findOne({_id:req.id})
+      const email_current = user.accept_email_news;
+      if(email_current === true || email_current === false){
+        const email_changed = !email_current
+        try {
+          const update_news = await User.findOneAndUpdate({_id:req.id}, { accept_email_news: email_changed })
+        } catch (error) {
+          console.log(error)
+        }
 
-
-
+      }else{
+        const email_changed = false
+        const update_news = await User.findOneAndUpdate({_id:req.id}, { accept_email_news: email_changed })
+      }
+   
+  }
+  async changeContact(req,res){
+    const user = await User.findOne({_id:req.id})
+    const email_current = user.accept_email_contact;
+    if(email_current === true || email_current === false){
+    const email_changed = !email_current
+    console.log(email_changed)
+    try {
+    const update_contact = await User.findOneAndUpdate({_id:req.id}, { accept_email_contact: email_changed })
+  } catch (error) {
+    console.log(error)
+  }
+    }else{
+    const email_changed = false
+    console.log(email_changed)
+    const update_contact = await User.findOneAndUpdate({_id:req.id}, { accept_email_contact: email_changed })
+    }
+  }
 }
 
 export default new UserController();

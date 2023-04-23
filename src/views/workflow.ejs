@@ -63,25 +63,7 @@
 
 
     <div class="sidebar" id="sidebar">
-        <div class="user-options">
-            <a title="Logout" href="/logout">
-                <img src="/assets/svg/logout.svg">
-            </a>
-
-            <a href="/dashboard" title="Home">
-                <img src="/assets/svg/home.svg">
-            </a>
-
-            <% if(premium === true){ %> 
-            <button title="Você é Premium" >
-                <img src="/assets/svg/diamond-premium.svg" class="premium" title="Você é Premium"  >
-            </button>
-            <% }else{ %> 
-            <a href="/prices" >
-                <img src="/assets/svg/diamond.svg" class="not-premium" title="Ver preços"/>
-            </a>
-            <% } %>
-        </div>
+        
         <div class="videos-name">
             <ul id="videos-list">
                 <% n=0; videos.forEach(video=> { %>
@@ -179,17 +161,14 @@
             </dialog>
 
 
-            <button title="Clique aqui para abrir as notificações" id="notify" onclick="toggleNotifications()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="bell-not"
-                    class="bi bi-bell" viewBox="0 0 16 16">
-                    <path
-                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                </svg>
-                <div class="notifications-conteiner hidden" id="notifications-conteiner">
+            
+            <a title="Logout" href="/logout">
+                <img src="/assets/svg/logout.svg">
+            </a>
 
-                </div>
-            </button>
-
+            <a href="/dashboard" title="Home">
+                <img src="/assets/svg/home.svg">
+            </a>
 
             <% if (trail.copy_of!="" && trail.copy_of !=undefined) { %>
 
@@ -216,11 +195,9 @@
                     <% if (trail.publik===true) { %>
                         <a href="/public-trails/<%= trail.id_public %>" target="_blank"
                             title="Acessar pagina publica da trilha">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-unlock" viewBox="0 0 16 16">
-                                <path
-                                    d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z" />
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-break" viewBox="0 0 16 16">
+                                <path d="M0 10.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zM12 0H4a2 2 0 0 0-2 2v7h1V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v7h1V2a2 2 0 0 0-2-2zm2 12h-1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2H2v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2z"/>
+                              </svg>
                         </a>
                         <% }else{ %>
 
@@ -236,14 +213,6 @@
                                 </svg>
                             </button>
                             <% } }%>
-
-
-
-
-                                <button title="Excluir trilha" id="delete-trail-button">
-                                    <i class="bi bi-trash3"></i>
-                                    <a href='/delete-trail/<%= trail._id %>' class="option-delete hidden" id="btn-delete"><i class="bi bi-check-lg"></i></a>
-                                </button>
 
                                 <button onclick="toggleFullScreen()" id="btn-full" title="Full Screen"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -295,6 +264,9 @@
         <script src="/js/workflow/pomodoro.js"></script>
         <script src="/js/workflow/codemirror.js"></script>
         <script src="/js/modal-delete/modalDelete.js"></script>
+        <script src="/js/workflow/canvaController.js"></script>
+        <% if(premium){ %> <script src="/js/workflow/paint.js"></script> <% } %>
+        <script src="/js/workflow/premium.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
             integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>

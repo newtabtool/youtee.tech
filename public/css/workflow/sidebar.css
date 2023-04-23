@@ -15,7 +15,7 @@ a, button{
     background: rgba(0, 0, 0, 0.1);
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 60px auto 100px 70px  60px;
+    grid-template-rows: auto 100px 70px  60px;
     overflow: hidden;
 
 

@@ -1,5 +1,5 @@
 
-const confirmDelete = document.querySelector("#delete-trail-button")
+/* const confirmDelete = document.querySelector("#delete-trail-button")
 confirmDelete.onclick = toggleConfirmation
 function toggleConfirmation(){
     if(document.querySelector("#btn-delete").classList.contains("hidden")){
@@ -7,4 +7,4 @@ function toggleConfirmation(){
     }else{
         document.querySelector("#btn-delete").classList.add("hidden")
     }
-}
+} */

@@ -1,6 +1,3 @@
-const snapshotButton = document.getElementById('')
-const notesButton = document.getElementById('')
-const transcriptionButton = document.getElementById('')
 const chatButton = document.getElementById('')
 const col3 = document.getElementById('col3')
 
@@ -41,7 +38,6 @@ async function loadTranscription() {
     }
 
 }
-
 
 
 async function loadOCR(){

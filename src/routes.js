@@ -1,5 +1,6 @@
 import { Router } from "express";
 const routes = new Router()
+import cors from "cors";
 import videoController from "./app/controllers/videoController.js";
 import SessionsController from "./app/controllers/sessionController.js";
 import userController from "./app/controllers/userController.js";
@@ -7,6 +8,9 @@ import trailController from './app/controllers/trailController.js';
 import comunityController from "./app/controllers/comunityController.js";
 import publicTrailController from "./app/controllers/publicTrailController.js";
 import PaymentController from "./app/controllers/paymentController.js";
+import extensionController from "./app/controllers/extensionController.js";
+import ExtensionSessionsController from "./app/controllers/extensionSessionController.js";
+import path, { dirname } from 'path'
 
 //--------------------------rota principal -------------------------------
 routes.get('/dashboard', (req, res, next) => SessionsController(req, res, next), userController.mainController)
@@ -49,7 +53,10 @@ routes.post('/note/save', (req, res, next) => SessionsController(req, res, next)
 //---------------------comunidade----------------------------
 routes.get('/comunidade/trails', (req, res, next) => SessionsController(req, res, next), comunityController.listAll)
 
-
+//----------------------rotas de aceitação de email -------------------
+routes.post('/change-promo', (req, res, next) => SessionsController(req, res, next), userController.changePromo)
+routes.post('/change-news', (req, res, next) => SessionsController(req, res, next), userController.changeNews)
+routes.post('/change-contact', (req, res, next) => SessionsController(req, res, next), userController.changeContact)
 
 // ---------------------------- user ------------------------
 //routes.post('/user/new', userController.create)
@@ -73,5 +80,25 @@ routes.get("/checkout", (req,res, next)=> SessionsController(req, res, next), Pa
 routes.get("/initiate-checkout", (req,res, next)=> SessionsController(req, res, next), PaymentController.payment)
 routes.get("/payment/success/:id", (req,res, next)=> SessionsController(req, res, next), PaymentController.success)
 routes.get("/payment/cancel/:id", (req,res, next)=> SessionsController(req, res, next), PaymentController.cancel)
+
+
+
+
+//---------------------------rota das extensões -----------------------------------
+//---------------------------rota das extensões -----------------------------------
+//---------------------------rota das extensões -----------------------------------
+//---------------------------rota das extensões -----------------------------------
+//---------------------------rota das extensões -----------------------------------
+//---------------------------rota das extensões -----------------------------------
+
+routes.get("/extension/get/:token",        (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.getAll)
+routes.post("/extension/put-video/:token/:trailId", (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.postVideo)
+routes.get('/get-token', (req, res, next) => SessionsController(req, res, next), extensionController.getToken)
+
+routes.get("/download-extension", (req, res) => {
+    const file = path.join(process.cwd(), 'public/YouteeTech.crx');
+    res.download(file);
+  });
+  
 
 export default routes;

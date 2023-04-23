@@ -1,259 +1,110 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escolher Trilha</title>
-    <link rel="shortcut icon" href="/assets/faviconpng.png">
+    <link rel="shortcut icon" href="/assets/faviconpng.png" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/formCreateTrail.css" />
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/cardsTrail.css" />
+    <link rel="stylesheet" href="/css/loader.css" />
+    <link rel="stylesheet" href="/css/variables.css" />
 
-    <link rel="stylesheet" href="/css/formCreateTrail.css">
-    <link rel="stylesheet" href="/css/default.css">
-    <link rel="stylesheet" href="/css/cardsTrail.css">
-    <link rel="stylesheet" href="/css/loader.css">
-    <link rel="stylesheet" href="/css/variables.css">
-
-    
     <style>
-        .hidden {
-            display: none;
-        }
+      .hidden {
+        display: none;
+      }
 
-        header {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            background-color: #226;
-        }
-
-        header button, header a {
-            padding: 25px 45px;
-            background-color: #226;
-            color: #fff;
-            border: none;
-        }
-
-        header button:hover {
-            background-color: #224;
-        }
-        .active{
-            background-color: #224;
-        }
+      .active {
+        background-color: #224;
+      }
     </style>
-</head>
+  </head>
 
-<body onload="loadPrivatesTrails()">
-    <header>
-        <button id="private" class="active">Pessoal</button>
-        <a href="/public-collections" id="comunity">Trilhas públicas</a>
-    </header>
-
-    <section class="section_form container hidden" id="form-create">
-        <form id="consultation-form" class="feed-form" method="post" action="/trails/create">
-            <input required placeholder="Nome da trilha" name="name" id="name" type="text">
+  <body onload="loadPrivatesTrails()">
+    <a href="#"></a>
+    <div class="sidebar">
+        <div class="notifications hidden" id="notifications">
+            <% notifications.forEach(notification => { %>
+                <button onclick="loadNotification('<%= notification._id %>', '<%= notification.title %>', '<%= notification.body %>','<%= notification.link %>')"   <% if(notification.read == false) { %> class="unread" <% } %> ><%= notification.title %>
+                <i><%= notification.body %></i>
+                </button>
+            <% }) %>
+        </div>
+        <div class="settings hidden" id="settings">
+            <div class="checkbox-conteiner">
+            <h3>Escolha quais emails você quer receber</h3>
+                <div class="centered">
+                    <div class="check">
+                        <input id="promo" type="checkbox" <% if(promo) {%> checked <% } %> >
+                        <label for="promo"></label>
+                      </div>
+                    <label for="promo" class="label-text">Emails Promocionais</label>
+                  </div>
+                  <div class="centered">
+                    <div class="check">
+                        <input id="news" type="checkbox"  <% if(news) {%> checked <% } %> >
+                        <label for="news" ></label>
+                      </div>
+                    <label for="news" class="label-text">Emails sobre atualizações</label>
+                  </div>
+                  <div class="centered">
+                    <div class="check">
+                        <input id="contact" type="checkbox"  <% if(contact) {%> checked <% } %> >
+                        <label for="contact"></label>
+                      </div>
+                    <label for="contact" class="label-text">Emails de contato oficiais</label>
+                  </div>
+                  <a href="/download-extension" class="extension-login" id="auth-extension"> <i class='bx bx-extension'></i> Baixar a extensão</a>
+            </div>
+                  <i>Não é possivel desativar os emails de comunicados sobre a conta</i>
+                  
             
-            <button class="button_submit">Criar</button>
-        </form>
-    </section>
-
-
+        </div>
+        <div class="menu" id="menu">
+            <a href="/public-collections" target="_blank"> Trilhas públicas <i class='bx bxs-right-top-arrow-circle'></i></a>
+            <a href="/dashboard"><i class='bx bx-list-ul' ></i> Minhas trilhas</a>
+            <a href="#" id="btn-create"><i class='bx bx-list-plus'></i> Nova trilha</a>
+            <a href="/"><i class='bx bx-home-alt-2'></i> Home </a>
+            <a href="contact"><i class='bx bx-star'></i> Feedback</a>
+        </div>
+        <div class="sidebar-footer">
+            <a href="/prices" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
+                    <path d="m18 0 8 12 10-8-4 20H4L0 4l10 8 8-12z"></path>
+                </svg>
+                Comprar Premium
+            </a>
+            <button id="settings-btn"><i class='bx bx-cog'></i></button>
+            <button id="notifications-btn" <% notifications.forEach(notification => { if(notification.read === false){ %> class="new-notification" <%}}) %>><i class='bx bx-bell '></i></button>
+        </div>
+    </div>
+   
+    
 
     <div class="conteiner_load" id="load">
-        <div class="three-body">
-            <div class="three-body__dot"></div>
-            <div class="three-body__dot"></div>
-            <div class="three-body__dot"></div>
-        </div>
+      <div class="three-body">
+        <div class="three-body__dot"></div>
+        <div class="three-body__dot"></div>
+        <div class="three-body__dot"></div>
+      </div>
     </div>
 
+    <div class="container" id="c1">
+        <div class="box-conteiner" id="new">
 
-
-    <div class="container row-wrap" id="new">
-        <a href="#" id="btn-create"  title="Criar nova trilha de estudos" >
-            
-            <div class="card" id="card-new">
-                <div class="card-hero">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path fill="rgba(66,193,110,1)"
-                            d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
-                        </path>
-                    </svg>
-                    <h1 class="title">Nova trilha</h1>
-                </div>
-            </div></a>
-        </div>
+      </div>
     </div>
+   
 
-
-
-
-
-
-
-
-    <script>
-        const load = document.getElementById('load')
-        const nameInput = document.getElementById('name')
-        const btnNew = document.getElementById('new')
-        const btnCreate = document.getElementById('btn-create')
-        const formCreate = document.getElementById('form-create')
-        const test = document.getElementById('test')
-        const conteiner = document.getElementById('new')
-        const form = document.getElementById('consultation-form')
-
-        function loadPrivatesTrails(event) {
-            fetch('/trails')
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                /* let cards = document.querySelectorAll('.card')
-                    cards.forEach(card => {
-                        card.remove()
-                    }) */
-                    document.getElementById('comunity').classList.remove('active')
-                    
-                    document.getElementById('private').classList.add('active')
-                    const trails = data.trails;
-                    // Use os dados das trilhas aqui
-                    //console.log(trails)
-                    load.remove()
-                    btnNew.classList.remove('hidden')
-                    //document.getElementById('card-new').classList.remove('hidden')
-                    trails.forEach(trail => {
-                        //console.log(trail.name)
-
-                        const newTrailDiv = document.createElement('div');
-                        newTrailDiv.innerHTML = `
-                        <a href="/trail/${trail._id}" id="btn-new" title="${trail.description}" >
-            
-            <div class="card" id="card-new">
-                <div class="card-hero">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path fill="rgba(66,193,110,1)"
-                            d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
-                        </path>
-                    </svg>
-                    <h1 class="title">${trail.name}</h1>
-                </div>
-            </div></a>
-      `;
-
-                        // Anexe o elemento criado ao elemento pai
-                        conteiner.appendChild(newTrailDiv);
-
-                    });
-                })
-        }
-
-
-
-        function loadPublicTrails() {
-
-            fetch('/comunidade/trails')
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-
-                    let cards = document.querySelectorAll('.card')
-                    cards.forEach(card => {
-                        card.remove()
-                    })
-                    
-                    document.getElementById('comunity').classList.add('active')
-                    document.getElementById('card-new').classList.add('hidden')
-                    document.getElementById('private').classList.remove('active')
-                    const trails = data.trails;
-                    // Use os dados das trilhas aqui
-                    //console.log(trails)
-                    load.remove()
-                    btnNew.classList.remove('hidden')
-
-                    trails.forEach(trail => {
-                        //console.log(trail.name)
-
-                        const newTrailDiv = document.createElement('div');
-                        newTrailDiv.innerHTML = `
-          <div class="card">
-            <div class="header">
-              <div class="img-box">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path fill="rgba(66,193,110,1)" d="M20.083 15.2l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zm0-4.7l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm-7.569-9.191l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0zM12 3.332L5.887 7 12 10.668 18.113 7 12 3.332z">
-                  </path>
-                </svg>
-              </div>
-              <h1 class="title">${trail.name}</h1>
-            </div>
-
-            <div class="content">
-              <p>
-                ${trail.description}
-              </p>
-
-              <a class="btn-link" href="/trail/${trail._id}">Acessar</a>
-            </div>
-          </div>
-        
-      `;
-
-                        // Anexe o elemento criado ao elemento pai
-                        conteiner.appendChild(newTrailDiv);
-
-
-
-
-                    });
-                })
-
-        }
-
-
-
-        btnCreate.addEventListener('click', (e) => {
-            e.preventDefault()
-            btnNew.remove()
-            formCreate.classList.remove("hidden");
-        })
-        formCreate.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = nameInput.value;
-            const response = await fetch('/trails/testname', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name })
-            });
-            const data = await response.json();
-            if (data.valid === true) {
-                // Name is valid
-                form.submit();
-            } else {
-                // Name is not valid
-                nameInput.style.borderColor = 'red';
-                nameInput.style.borderWidth = '1px';
-                nameInput.style.borderStyle = 'solid';
-                alert('Este nome já está em uso');
-                nameInput.addEventListener('input', () => {
-                    nameInput.style.borderColor = 'none';
-                    nameInput.style.borderWidth = '0';
-                    nameInput.style.borderStyle = 'none';
-                });
-            }
-        });
-
-
-
-
-
-    </script>
-</body>
-
+    <script src="/js/dashboard/trailCardController.js"></script>
+    <script src="/js/dashboard/main.js"></script>
+    <script src="/js/dashboard/sidebar.js"></script>
+  </body>
 </html>

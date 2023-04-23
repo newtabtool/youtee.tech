@@ -127,7 +127,7 @@ class TrailController {
     const verifyAuthor = await TrailModel.findById(req.params.id)
     if(verifyAuthor.creator === req.id){
       await TrailModel.findByIdAndDelete(req.params.id).then(()=>{
-        return res.redirect("/")
+        return res.status(200).send("ok")
       })
     }else{
       return res.send({ erro: "Parece que voce não é o dono dessa trilha"})
