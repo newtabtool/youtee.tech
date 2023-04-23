@@ -7,6 +7,7 @@ async function ExtensionSessionsController(req, res, next){
         const userLoged = jwt.verify(token, process.env.JWT_SECRET)
         req.user = userLoged
         req.id = userLoged.id
+        
         next()
 
     }catch(err){

@@ -57,7 +57,7 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
-    height: calc( 100% - 60px);
+    
 }
 .modal-content h3{
     margin: 10px;

@@ -29,7 +29,10 @@
 
   <body onload="loadPrivatesTrails()">
     <a href="#"></a>
-    <div class="sidebar">
+    <div class="toggle-conteiner" id="toggle-conteiner">
+      <button id="toggle-sidebar"><i class='bx bx-menu'></i></button>
+    </div>
+    <div class="sidebar" id="sidebar">
         <div class="notifications hidden" id="notifications">
             <% notifications.forEach(notification => { %>
                 <button onclick="loadNotification('<%= notification._id %>', '<%= notification.title %>', '<%= notification.body %>','<%= notification.link %>')"   <% if(notification.read == false) { %> class="unread" <% } %> ><%= notification.title %>
@@ -61,8 +64,10 @@
                       </div>
                     <label for="contact" class="label-text">Emails de contato oficiais</label>
                   </div>
+                  <% if(premium){ %>
                   <a href="/download-extension" class="extension-login" id="auth-extension"> <i class='bx bx-extension'></i> Baixar a extensão</a>
-            </div>
+                    <% } %>
+                </div>
                   <i>Não é possivel desativar os emails de comunicados sobre a conta</i>
                   
             
@@ -75,12 +80,16 @@
             <a href="contact"><i class='bx bx-star'></i> Feedback</a>
         </div>
         <div class="sidebar-footer">
+          <% if(!premium){ %>
             <a href="/prices" class="button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
                     <path d="m18 0 8 12 10-8-4 20H4L0 4l10 8 8-12z"></path>
                 </svg>
                 Comprar Premium
             </a>
+
+
+            <% } %>
             <button id="settings-btn"><i class='bx bx-cog'></i></button>
             <button id="notifications-btn" <% notifications.forEach(notification => { if(notification.read === false){ %> class="new-notification" <%}}) %>><i class='bx bx-bell '></i></button>
         </div>

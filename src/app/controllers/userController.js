@@ -19,8 +19,9 @@ class UserController {
     const user = await User.findOne({_id: userId})
     const promo = user.accept_email_promo
     const news = user.accept_email_news
+    const premium = user.premium
     const contact = user.accept_email_contact
-    res.render('chooseTrail', { user: userId,  notifications, news, promo, contact});
+    res.render('chooseTrail', { user: userId,  notifications, news, promo, contact, premium});
   }
 
   async getLogin(req, res) {

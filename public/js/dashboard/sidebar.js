@@ -70,11 +70,6 @@ async function loadNotification(id, title, body, link) {
 document.getElementById("promo").onchange = changePromo
 document.getElementById("news").onchange = changeNews
 document.getElementById("contact").onchange = changeContact
-document.getElementById("auth-extension").onclick = getToken
-
-function getToken(){
-      chrome.runtime.sendMessage({token: data.token})
-}
 
 
 function changePromo(){
@@ -106,4 +101,20 @@ function changeContact(){
     }).catch((error) =>{
         
     })
+}
+
+let sidebar_state = false
+const toggle_conteiner = document.getElementById("toggle-conteiner")
+const toggleButtonRespons = document.getElementById("toggle-sidebar")
+toggleButtonRespons.onclick = ()=>{
+  const sidebar = document.getElementById("sidebar")
+  if(sidebar_state === false){
+    sidebar.style.display = "grid";
+    toggle_conteiner.style.position = "fixed";
+    sidebar_state = !sidebar_state;
+  }else{
+    sidebar.style.display = "none";
+    toggle_conteiner.style.position = "relative";
+    sidebar_state = !sidebar_state;
+  }
 }
