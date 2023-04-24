@@ -19,7 +19,7 @@ class PaymentController {
             const session = await stripe.checkout.sessions.create({
                 line_items: [
                     {
-                        price: 'price_1Mwz8OJGYl8zh8bS6PHYtAC6',
+                        price: process.env.product,
                         quantity: 1,
                     },
                 ],
