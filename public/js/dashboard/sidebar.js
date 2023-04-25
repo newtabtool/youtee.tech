@@ -106,8 +106,9 @@ function changeContact(){
 let sidebar_state = false
 const toggle_conteiner = document.getElementById("toggle-conteiner")
 const toggleButtonRespons = document.getElementById("toggle-sidebar")
+const sidebar = document.getElementById("sidebar")
+
 toggleButtonRespons.onclick = ()=>{
-  const sidebar = document.getElementById("sidebar")
   if(sidebar_state === false){
     sidebar.style.display = "grid";
     toggle_conteiner.style.position = "fixed";

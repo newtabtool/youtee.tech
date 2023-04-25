@@ -293,7 +293,7 @@ button:hover, a:hover{
         justify-content: start;
         align-items: center;
         height: auto;
-        margin: 1rem 1rem;
+        margin: 1rem;
         max-width: 100%;
         background-color: rgba(255,255,255,0.05);
         margin-bottom: 0;
@@ -301,6 +301,7 @@ button:hover, a:hover{
         padding: 1rem;
         z-index: 99;
         transition: 0.5s linear;
+        max-height: 80px;
     }
     .toggle-conteiner button{
         background-color: rgba(255,255,255,0.05);

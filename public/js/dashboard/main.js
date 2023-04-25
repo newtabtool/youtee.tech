@@ -21,8 +21,11 @@ const load = document.getElementById("load");
                     }) */
             
 
-            
-            const trails = data.trails;
+                    const trails = data.trails;
+                    if(trails.length === 0){
+                      console.log(trails)
+                      showNewTrail("none")
+                    }
             // Use os dados das trilhas aqui
             //console.log(trails)
             load.remove();
@@ -55,8 +58,14 @@ const load = document.getElementById("load");
 
       
 
-      btnCreate.onclick = (e) => {
-        e.preventDefault();
+      btnCreate.onclick = (e) => showNewTrail(e)
+
+      function showNewTrail(e){
+        if(sidebar_state === true){
+          sidebar.style.display = "none";
+    toggle_conteiner.style.position = "relative";
+    sidebar_state = !sidebar_state;
+        }
         conteiner.innerHTML = `<section class="section_form container" id="form-create">
                 <form
                   id="consultation-form"

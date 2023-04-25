@@ -11,6 +11,7 @@ import PaymentController from "./app/controllers/paymentController.js";
 import extensionController from "./app/controllers/extensionController.js";
 import ExtensionSessionsController from "./app/controllers/extensionSessionController.js";
 import path, { dirname } from 'path'
+import marketingController from "./app/controllers/marketingController.js";
 
 //--------------------------rota principal -------------------------------
 routes.get('/dashboard', (req, res, next) => SessionsController(req, res, next), userController.mainController)
@@ -82,6 +83,7 @@ routes.get("/payment/success/:id", (req,res, next)=> SessionsController(req, res
 routes.get("/payment/cancel/:id", (req,res, next)=> SessionsController(req, res, next), PaymentController.cancel)
 
 
+routes.get('/get-image/:campaign', marketingController.emailGetImage)
 
 
 //---------------------------rota das extensões -----------------------------------
@@ -94,6 +96,7 @@ routes.get("/payment/cancel/:id", (req,res, next)=> SessionsController(req, res,
 routes.get("/extension/get/:token",        (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.getAll)
 routes.post("/extension/put-video/:token/:trailId", (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.postVideo)
 routes.get('/get-token', (req, res, next) => SessionsController(req, res, next), extensionController.getToken)
+
 
 routes.get("/download-extension", (req, res) => {
     const file = path.join(process.cwd(), 'public/YouteeTech.crx');
