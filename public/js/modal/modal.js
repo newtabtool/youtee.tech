@@ -28,10 +28,10 @@ closeModalButton.onclick = function() {
     modal.close()
 }
 modalTrailDescription.oninput = function(){
-    descSize.textContent = modalTrailDescription.value.length + "/500"
+    descSize.textContent = modalTrailDescription.value.length + "/5000"
 }
 modalTrailDescription.onkeydown = function(event){
-    if(modalTrailDescription.value.length >= 500){
+    if(modalTrailDescription.value.length >= 5000){
         if(event.key != 'Delete' && event.key != 'Backspace'){
         event.preventDefault()
         }
