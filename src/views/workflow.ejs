@@ -100,7 +100,7 @@
                                 <button class="modal-button" id="modal-cancel-button" onclick="hideModalDelete()">fechar</button>
                             </span>
                         </div>
-                        <div class="modal-content" id="modal-content">
+                        <div class="modal-content-public" id="modal-content">
                             <h3>
                                 Vamos configurar sua trilha para torná-la pública
                             </h3>
@@ -111,8 +111,8 @@
 
                                 <span id="desc"><label for="trail-description">Forneça uma descrição sobre a sua
                                         trilha (obrigatório)</label><b id="count-desc-size">0/5000</b></span>
-                                <input type="text" name="trail-description" id="trail-description"
-                                    placeholder="Escreva uma descrição aqui" required>
+                                        <textarea name="trail-description" id="trail-description" placeholder="Escreva uma descrição aqui" required style="height: 200px; width: 100%; padding: 1rem;"></textarea>
+
 
                                 <label for="trail-tags">Agora adicione até 10 tags ao seu vídeo (obrigatório)</label>
                                 <input type="text" name="trail-tags" id="trail-tags"

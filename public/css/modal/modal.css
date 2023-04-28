@@ -52,36 +52,37 @@
 #modal-cancel-button{
     background-color: #f09;
 }
-.modal-content{
+.modal-content-public{
     padding: 15px;
     overflow-y: auto;
     scroll-behavior: smooth;
     overscroll-behavior-y: contain;
+    max-height: calc( 100% - 60px );
     
 }
-.modal-content h3{
+.modal-content-public h3{
     margin: 10px;
 }
-.modal-content form{
+.modal-content-public form{
     padding: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: left;
     flex-direction: column;
 }
-.modal-content form label{
+.modal-content-public form label{
     margin-top: 15px;
 }
-.modal-content input, .modal-content select{
+.modal-content-public input, .modal-content-public select{
     width: 100%;
     font-size: 1rem;
     padding: .5rem;
     margin: .3rem 0;
 }
-.modal-content form b{
+.modal-content-public form b{
     margin-top: 15px;
 }
-.modal-content form i{
+.modal-content-public form i{
     padding: 5px;
     background-color: #d0d0ff;
     border-radius: 5px;
