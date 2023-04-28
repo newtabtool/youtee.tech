@@ -4,6 +4,7 @@
 #rating-conteiner{
     position: absolute;
     top: -155px;
+    left: -154px;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 60% 40%;
