@@ -12,6 +12,9 @@ import extensionController from "./app/controllers/extensionController.js";
 import ExtensionSessionsController from "./app/controllers/extensionSessionController.js";
 import path, { dirname } from 'path'
 import marketingController from "./app/controllers/marketingController.js";
+import premiumFunctionsController from "./app/controllers/premiumFunctionsController.js";
+import premiumFuncSessionsController from "./app/controllers/premiumFuncSessionsController.js";
+
 
 //--------------------------rota principal -------------------------------
 routes.get('/dashboard', (req, res, next) => SessionsController(req, res, next), userController.mainController)
@@ -96,7 +99,9 @@ routes.get('/get-image/:campaign', marketingController.emailGetImage)
 routes.get("/extension/get/:token",        (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.getAll)
 routes.post("/extension/put-video/:token/:trailId", (req,res, next)=> ExtensionSessionsController(req, res, next), extensionController.postVideo)
 routes.get('/get-token', (req, res, next) => SessionsController(req, res, next), extensionController.getToken)
-
+routes.post("/ai-analysis-text", (req,res, next) => premiumFuncSessionsController(req, res, next), premiumFunctionsController.analysis)
+routes.get("/generate-trail-form", (req,res, next) => premiumFuncSessionsController(req, res, next), premiumFunctionsController.getGenerateForm)
+routes.post("/generate-trail-form", (req,res, next) => premiumFuncSessionsController(req, res, next), premiumFunctionsController.generateTrail)
 
 routes.get("/download-extension", (req, res) => {
     const file = path.join(process.cwd(), 'public/YouteeTech.crx');

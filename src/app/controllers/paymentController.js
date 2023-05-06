@@ -8,11 +8,6 @@ class PaymentController {
         res.render('checkout/checkout')
     }
 
-
-
-
-
-
     async payment(req, res) {
         const stripe = str(process.env.sk_test);
         try {
@@ -30,7 +25,7 @@ class PaymentController {
     
             res.redirect(303, session.url);
         } catch (error) {
-            console.log(error)
+            sendErrorNotification(error.toString()+"\n \n \n paymentController linha 29");
         }
     }
 
@@ -42,7 +37,7 @@ class PaymentController {
             const update_user = await UserModel.findOneAndUpdate({ _id:user}, { premium: true, premium_since: Date.now() });
             res.render('checkout/thanks')
         } catch (error) {
-            console.log(error)
+            sendErrorNotification(error.toString()+"\n \n \n paymentController linha 40");
             res.send({ erro: "Desculpe, houve um erro ao atualizar sua inscrição, mas não se preocupe, seu pagamento foi processado e nossa equipe técnica pode te ajudar"})
         }
     }

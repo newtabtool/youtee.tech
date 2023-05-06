@@ -77,7 +77,6 @@ function changePromo(){
         method: 'POST',
         body: "change_promo"
     }).then((response) =>{
-        console.log(response)
     }).catch((error) =>{
         
     })
@@ -87,7 +86,6 @@ function changeNews(){
         method: 'POST',
         body: "change_news"
     }).then((response) =>{
-        console.log(response)
     }).catch((error) =>{
         
     })
@@ -97,7 +95,6 @@ function changeContact(){
         method: 'POST',
         body: "change_contact"
     }).then((response) =>{
-        console.log(response)
     }).catch((error) =>{
         
     })

@@ -6,11 +6,17 @@ function sidebarToggle() {
     sidebarTg = false;
     document.getElementById('toggleButton').style.transform = 'rotate(180deg)'
     document.getElementById('player').style.height = '350px'
+    if(document.getElementById('right-bar')){
+      document.getElementById('right-bar').style.display = 'flex'
+    }
   } else {
     document.body.style.gridTemplateColumns = "minmax(260px, 15%) 30px minmax(350px, 30%) minmax(270px, auto)";
     sidebarTg = true;
     document.getElementById('toggleButton').style.transform = 'rotate(0deg)'
     document.getElementById('player').style.height = '100%'
+    if(document.getElementById('right-bar')){
+      document.getElementById('right-bar').style.display = 'none'
+    }
 
 
   }

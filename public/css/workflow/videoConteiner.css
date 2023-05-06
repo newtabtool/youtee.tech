@@ -120,7 +120,7 @@
 
 /* css dos botões premium */
 /* inspired from this svgbackgrounds.com/ */
-#paint {
+#paint, #send-to-analyze{
     display: flex;
     padding: 0.6em 1.1em;
     gap: 0.4rem;
@@ -134,20 +134,17 @@
     color: #fff;
   }
   
-  #paint:hover {
+  #paint:hover, #send-to-analyze:hover {
     background-size: 320%;
     background-position: right center;
   }
   
-  #paint:hover svg {
-    fill: #fff;
-  }
-  
-  #paint svg {
+  #paint svg{
     width: 23px;
-    fill: #f09f33;
+    fill: #fff;
     transition: .3s ease;
   }
+
 
 
 

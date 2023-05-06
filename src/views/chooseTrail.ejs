@@ -78,6 +78,7 @@
             <a href="#" id="btn-create"><i class='bx bx-list-plus'></i> Nova trilha</a>
             <a href="/"><i class='bx bx-home-alt-2'></i> Home </a>
             <a href="contact"><i class='bx bx-star'></i> Feedback</a>
+            <a href="/generate-trail-form" class="button" id="trail-generator" style="margin-right: o auto">Gerador de trilhas</a>
         </div>
         <div class="sidebar-footer">
           <% if(!premium){ %>
@@ -87,9 +88,9 @@
                 </svg>
                 Comprar Premium
             </a>
-
-
             <% } %>
+              
+              
             <button id="settings-btn"><i class='bx bx-cog'></i></button>
             <button id="notifications-btn" <% notifications.forEach(notification => { if(notification.read === false){ %> class="new-notification" <%}}) %>><i class='bx bx-bell '></i></button>
         </div>
@@ -115,5 +116,7 @@
     <script src="/js/dashboard/trailCardController.js"></script>
     <script src="/js/dashboard/main.js"></script>
     <script src="/js/dashboard/sidebar.js"></script>
+    <% if(premium){ %> <script src="/js/dashboard/trailGenerator.js"></script> <% } %>
+
   </body>
 </html>

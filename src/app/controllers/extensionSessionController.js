@@ -15,7 +15,9 @@ async function ExtensionSessionsController(req, res, next){
         next()
 
     }catch(err){
+        sendErrorNotification(error.toString()+"\n \n \n extensionSessionController linha 18");
         return res.json({MSG: "Voce precisa realizar login"})
+
     }
 }
     

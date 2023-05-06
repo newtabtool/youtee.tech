@@ -1,7 +1,11 @@
 
 
-
 .workspace{
+    display: grid;
+    grid-template-columns: auto 60px;
+    gap: .5rem;
+}
+#notes-conteiner{
     height: 100%;
     background: rgba(255, 255, 255, 0.05);
     display: grid;
@@ -9,9 +13,29 @@
     grid-template-rows: auto 60px;
     padding: 10px;
     gap: 10px;
+}
+#right-bar{
+    background-color: rgba(255, 255, 255, 0.05); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
 
 }
-
+#right-bar button{
+    padding: .5rem;
+    margin: .5rem;
+    background-color: rgba(255, 255, 255, 0.01);
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    width: calc( 100% - 1rem);
+    height: calc( 60px - 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 #workflow{
     background: rgba(255, 255, 255, 0.3);

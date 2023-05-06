@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="/css/workflow/videoConteiner.css">
     <link rel="stylesheet" href="/css/workflow/messages.css">
     <link rel="stylesheet" href="/css/workflow/pomodoro.css">
+    <% if(premium){ %> <link rel="stylesheet" href="/css/premium-styles/popup-ai.css"> <% } %>
+    <% if(premium){ %> <link rel="stylesheet" href="/css/premium-styles/loader-ai.css"> <% } %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/variables.css">
@@ -266,6 +268,8 @@
         <script src="/js/modal-delete/modalDelete.js"></script>
         <script src="/js/workflow/canvaController.js"></script>
         <% if(premium){ %> <script src="/js/workflow/paint.js"></script> <% } %>
+        <% if(premium){ %> <script src="/js/workflow/premiumFunctions.js"></script> <% } %>
+        <% if(!premium){ %> <script src="/js/workflow/notPremiumFunctions.js"></script> <% } %>
         <script src="/js/workflow/premium.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
             integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="

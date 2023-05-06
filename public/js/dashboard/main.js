@@ -23,7 +23,6 @@ const load = document.getElementById("load");
 
                     const trails = data.trails;
                     if(trails.length === 0){
-                      console.log(trails)
                       showNewTrail("none")
                     }
             // Use os dados das trilhas aqui

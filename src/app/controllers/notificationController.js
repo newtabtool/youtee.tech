@@ -10,7 +10,7 @@ class NewsController{
               .exec();
             return notifications;
           } catch (error) {
-            console.error(error);
+            sendErrorNotification(error.toString()+"\n \n \n notificationController linha 13");
             return false;
           }
     }

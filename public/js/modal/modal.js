@@ -106,15 +106,36 @@ async function savePublicTrail() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ name, description, category, videos, tags, sponsored, id })
-      }).then((response) => response.json()).then((data) => {
+      })
+      .then((response) => response.json())
+      .then((data) => {
         if(data.status === true){
-        document.querySelector("#center-loading").innerHTML = `<a class="modal-button" id="modal-btn-access" target="_blank" href="/public-trails/${data.id}">Acessar trilha</a>`
-            return
+          const modalBtnAccess = document.createElement('a');
+          modalBtnAccess.classList.add('modal-button');
+          modalBtnAccess.setAttribute('id', 'modal-btn-access');
+          modalBtnAccess.setAttribute('target', '_blank');
+          modalBtnAccess.setAttribute('href', `/public-trails/${sanitizeInput(data.id)}`);
+          modalBtnAccess.textContent = 'Acessar trilha';
+      
+          const centerLoading = document.querySelector('#center-loading');
+          centerLoading.innerHTML = '';
+          centerLoading.appendChild(modalBtnAccess);
+          return;
         }
+      
         if(data.status === false){
-            document.querySelector("#center-loading").innerHTML = `<b style="color:#f00">Houve um erro, tente novamente mais tarde</b>`
-            return
+          const centerLoading = document.querySelector('#center-loading');
+          centerLoading.innerHTML = '<b style="color:#f00">Houve um erro, tente novamente mais tarde</b>';
+          return;
         }
-    })
+      });
+      
+      function sanitizeInput(input) {
+        // Sanitize input to remove any potential malicious code
+        const div = document.createElement('div');
+        div.textContent = input;
+        return div.innerHTML;
+      }
+      
       
 }

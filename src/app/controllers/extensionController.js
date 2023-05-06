@@ -9,8 +9,8 @@ class extensionController {
       let trails = await TrailModel.find({ creator: req.id });
       //console.log(trails);
       return res.json({ trails });
-    } catch (erro) {
-      console.log(erro);
+    } catch (error) {
+      sendErrorNotification(error.toString()+"\n \n \n extensionController linha 13");
     }
   }
 
@@ -45,8 +45,8 @@ class extensionController {
           console.log(err);
         }
       );
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      sendErrorNotification(error.toString()+"\n \n \n extensionController linha 49");
     }
 
     let arrayTitles;
@@ -76,9 +76,11 @@ class extensionController {
           related: relateds,
         });
         res.status(200).send("ok");
-      } catch (error) {}
+      } catch (error) {
+      sendErrorNotification(error.toString()+"\n \n \n extensionController linha 80");
+      }
     } catch (error) {
-      console.log(error);
+      sendErrorNotification(error.toString()+"\n \n \n extensionController linha 83");
     }
     return newVideo;
   }
