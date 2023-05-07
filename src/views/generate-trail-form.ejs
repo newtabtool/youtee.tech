@@ -25,6 +25,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        gap: 2rem;
       }
       .popup {
         position: relative;
@@ -255,6 +257,9 @@
           opacity: 0;
         }
       }
+      i{
+        font-size: 12px;
+      }
     </style>
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -312,7 +317,8 @@
     <div class="side-right"></div>
     <div class="side-top"></div>
   </div>
-</div>`;
+  </div>`;
+  document.body.innerHTML += `<i style="font-size:0.8rem">Isso pode levar um tempo, por favor, não feche a janela</i>`
         //console.log(theme)
         fetch("/generate-trail-form", {
   method: "POST",

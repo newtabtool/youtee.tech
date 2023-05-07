@@ -126,13 +126,19 @@ class TrailController {
   async delete(req,res){
     const verifyAuthor = await TrailModel.findById(req.params.id)
     if(verifyAuthor.creator === req.id){
-      await TrailModel.findByIdAndDelete(req.params.id).then(()=>{
-        return res.status(200).send("ok")
-      })
+        try {
+            await VideoModel.deleteMany({ trailId:req.params.id });
+            await TrailModel.findByIdAndDelete(req.params.id);
+            return res.status(200).send("ok");
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send({ error: "Erro ao deletar documentos" });
+        }
     }else{
-      return res.send({ erro: "Parece que voce não é o dono dessa trilha"})
+        return res.send({ erro: "Parece que voce não é o dono dessa trilha"});
     }
-  }
+}
+
 
 
   
