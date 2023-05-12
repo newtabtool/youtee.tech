@@ -6,7 +6,7 @@ import TrailModel from "../models/TrailModel.js";
 import "youtube-frames";
 import axios from "axios";
 import sendErrorNotification from "./sendErrorNotification.js";
-import puppeteer from "puppeteer";
+//import puppeteer from "puppeteer";
 
 dotenv.config();
 
@@ -38,6 +38,7 @@ class PremiumFunctionsController {
   }
 
   async generateTrail(req, res) {
+    /*
     console.log("Gerador de trilhas");
     const theme = req.body.theme;
     if (theme) {
@@ -85,7 +86,7 @@ class PremiumFunctionsController {
 
         const browser = await puppeteer.launch({
           args: ["--no-sandbox"],
-          headless: true,
+          headless: false,
         });
         let page = await browser.newPage();
 
@@ -110,7 +111,7 @@ class PremiumFunctionsController {
                 return img.src
               });
 
-              
+              console.log(thumbnail)
               await page.goto("https://www.youtube.com");
               await page.type("input#search", title);
               await page.click("button#search-icon-legacy");
@@ -156,7 +157,7 @@ class PremiumFunctionsController {
             await page.close();
             await browser.close();
             
-            /* const urlReq = `https://www.googleapis.com/youtube/v3/search?key=${process.env.GOOGLE_API_KEY}&type=video&part=snippet&q=${theme + " " + result}`;
+             const urlReq = `https://www.googleapis.com/youtube/v3/search?key=${process.env.GOOGLE_API_KEY}&type=video&part=snippet&q=${theme + " " + result}`;
             const get_videos = await axios.get(urlReq);
             const video = get_videos.data.items[0];
             let videoId = video.id.videoId;
@@ -178,21 +179,21 @@ class PremiumFunctionsController {
                 let u = `https://www.youtube.com/watch?v=${element.id.videoId}`;
                 relateds.push({ title: t, url: u, channel: s });
               });
-               */
-            //} catch (error) {
-              //  sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 114");
-          //  }
-            //console.log('\n \n \n' + newVideo);
-       //   }
-          res.status(200).json({ trail_id: saved._id });
-      } catch (error) {
-        console.log(error)
-        sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 125");
-        res.status(500).json({ error: "Erro ao gerar a trilha" });
-      }
-    } else {
-      res.status(400).json({ error: "Tema não informado" });
-    }
+              //} catch (error) {
+                //  sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 114");
+                //  }
+                //console.log('\n \n \n' + newVideo);
+                //   }
+                res.status(200).json({ trail_id: saved._id });
+              } catch (error) {
+                console.log(error)
+                sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 125");
+                res.status(500).json({ error: "Erro ao gerar a trilha" });
+              }
+            } else {
+              res.status(400).json({ error: "Tema não informado" });
+            }
+            */
   }
 }
 export default new PremiumFunctionsController();
