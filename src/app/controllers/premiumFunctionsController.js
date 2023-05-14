@@ -69,23 +69,24 @@ class PremiumFunctionsController {
          sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 69");
          res.status(500).json({ error: "Erro ao salvar a trilha" });
        }
-        for(data of data_for_looping){
-          let newVideo
-          try {
-             newVideo = await VideoModel.create({
-              userId: userId,
-              trailId: saved._id,
-              url: data.url,
-              title: data.title,
-              thumbnail: data.thumbnail,
-              transcription: "Baixando",
-              notes: "Digite aqui suas notas sobre o vídeo",
-              related: data.relateds,
-            });
-          } catch (error) {
-            console.log(error);
-          }
+       for (const data of data_for_looping) {
+        let newVideo;
+        try {
+          newVideo = await VideoModel.create({
+            userId: userId,
+            trailId: saved._id,
+            url: data.url,
+            title: data.title,
+            thumbnail: data.thumbnail,
+            transcription: "Baixando",
+            notes: "Digite aqui suas notas sobre o vídeo",
+            related: data.relateds,
+          });
+        } catch (error) {
+          console.log(error);
         }
+      }
+      
         res.status(200).json({ trail_id: saved._id });
 
       })
