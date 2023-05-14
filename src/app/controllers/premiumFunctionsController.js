@@ -38,162 +38,60 @@ class PremiumFunctionsController {
   }
 
   async generateTrail(req, res) {
-    /*
-    console.log("Gerador de trilhas");
-    const theme = req.body.theme;
-    if (theme) {
-      try {
-    const prompt = `Por favor, crie uma lista de tópicos para alguém que quer aprender ${theme}. Para cada item da lista, inclua apenas o nome do tópico e separe por ! . O objetivo é a lista ser bem detalhada. Por exemplo, se o assunto é matemática básica, a lista pode ser assim:
-      Adição!Subtração!Multiplicação!Divisão
-      Observação: Não envie nada além da lista`;
-        const response = await openai.createCompletion({
-          model: "text-davinci-003",
-          prompt: prompt,
-          max_tokens: parseInt(process.env.max_tokens),
-          temperature: 1,
-        }).catch(error => {
-          console.log(error);
-        });
-        const result_draw = await response.data.choices[0];
-        const result_array = result_draw.text.split("!");
-   
-        
-        const userId = req.id;
-        const { name, type, description } = {
-          name: theme,
-          type: false,
-          description: "",
-        };
-  
-        const tags = [];
-        const likes = 0;
-        const publik = type;
-        let saved
-  
+    const theme = req.body.theme
+    console.log("Iniciado")
+    const url = "https://trail-generator.onrender.com/";
+    //const url = "http://localhost:3001/";
+    const token = process.env.token_;
+
+    axios
+      .post(url, { token, theme }, { timeout: 480000 })
+      .then(async (response) => {
+        const data_for_looping = response.data.resp;
+        //depois de receber a resposta cria uma trilha
+        let userId = req.id
+        let name = theme
+        let description = theme
+        let likes = 0
+        let tags = ""
+        let saved;
+        let publik = false;
         try {
-           saved = await TrailModel.create({
-            creator: userId,
-            publik,
-            name,
-            description,
-            likes,
-            tags,
-          });
-        } catch (error) {
-          sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 121");
-          res.status(500).json({ error: "Erro ao salvar a trilha" });
+          saved = await TrailModel.create({
+           creator: userId,
+           publik,
+           name,
+           description,
+           likes,
+           tags,
+         })
+       } catch (error) {
+         sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 69");
+         res.status(500).json({ error: "Erro ao salvar a trilha" });
+       }
+        for(data of data_for_looping){
+          let newVideo
+          try {
+             newVideo = await VideoModel.create({
+              userId: userId,
+              trailId: saved._id,
+              url: data.url,
+              title: data.title,
+              thumbnail: data.thumbnail,
+              transcription: "Baixando",
+              notes: "Digite aqui suas notas sobre o vídeo",
+              related: data.relateds,
+            });
+          } catch (error) {
+            console.log(error);
+          }
         }
+        res.status(200).json({ trail_id: saved._id });
 
-        const browser = await puppeteer.launch({
-          args: ["--no-sandbox"],
-          headless: false,
-        });
-        let page = await browser.newPage();
-
-          for (const result of result_array) {
-            //looping de cada tema para gerar video
-  
-              try {
-              await page.goto("https://www.google.com");
-              await page.type(".gLFyf", `${result} site:youtube.com`);
-              await page.keyboard.press("Enter");
-              await page.waitForNavigation();
-          
-              const firstResult = await page.$(".DhN8Cf a");
-              const link = await page.evaluate((result) => result.href, firstResult);
-              const title = await page.evaluate(
-                (result) => result.querySelector("h3").innerText,
-                firstResult
-              );
-
-              const thumbnail = await page.evaluate(() => {
-                const img = document.querySelectorAll("img.YQ4gaf.zr758c")[0];
-                return img.src
-              });
-
-              console.log(thumbnail)
-              await page.goto("https://www.youtube.com");
-              await page.type("input#search", title);
-              await page.click("button#search-icon-legacy");
-              await page.waitForSelector(
-                "a.yt-simple-endpoint.style-scope.ytd-video-renderer"
-              );
-          
-              const videos = await page.$$eval(
-                "a.yt-simple-endpoint.style-scope.ytd-video-renderer",
-                (videos) => {
-                  return videos
-                    .filter(video => video.href !== "" && video.title !== "") // Filtra vídeos com link e título vazios
-                    .slice(2, 7) // 
-                    .map((video) => ({
-                      url: video.href,
-                      title: video.title,
-                      channel: "trilha gerada automaticamente",
-                      
-                    }));
-                }
-              );
-              
-              
-              console.log(videos);
-              let newVideo = await VideoModel.create({
-                userId: userId,
-                trailId: saved._id,
-                url: link,
-                title: title,
-                thumbnail: thumbnail,
-                transcription: "Baixando",
-                notes: "Digite aqui suas notas sobre o vídeo",
-                related: videos,
-              });
-              console.log(newVideo);
-            } catch (error) {
-                console.log(error)
-            }
-
-
-          
-            }
-            await page.close();
-            await browser.close();
-            
-             const urlReq = `https://www.googleapis.com/youtube/v3/search?key=${process.env.GOOGLE_API_KEY}&type=video&part=snippet&q=${theme + " " + result}`;
-            const get_videos = await axios.get(urlReq);
-            const video = get_videos.data.items[0];
-            let videoId = video.id.videoId;
-            const title = video.snippet.title;
-  
-            let arrayTitles;
-            let relateds = [];
-            let newVideo;
-            //console.log(title);
-            try {
-              const urlReq = `https://www.googleapis.com/youtube/v3/search?key=${process.env.GOOGLE_API_KEY}&type=video&part=snippet&q=${title}`;
-              const equals = await axios.get(urlReq);
-              let thumbnail = equals.data.items[0].snippet.thumbnails.high.url;
-              arrayTitles = equals.data.items;
-              arrayTitles.forEach((element) => {
-                let t = element.snippet.title;
-                let s = element.snippet.channelTitle;
-                let id = equals.data.items[0].id.videoId;
-                let u = `https://www.youtube.com/watch?v=${element.id.videoId}`;
-                relateds.push({ title: t, url: u, channel: s });
-              });
-              //} catch (error) {
-                //  sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 114");
-                //  }
-                //console.log('\n \n \n' + newVideo);
-                //   }
-                res.status(200).json({ trail_id: saved._id });
-              } catch (error) {
-                console.log(error)
-                sendErrorNotification(error.toString()+"\n \n \n premiumFunctionsController linha 125");
-                res.status(500).json({ error: "Erro ao gerar a trilha" });
-              }
-            } else {
-              res.status(400).json({ error: "Tema não informado" });
-            }
-            */
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
   }
 }
 export default new PremiumFunctionsController();
