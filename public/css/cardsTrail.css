@@ -217,12 +217,7 @@ button:hover, a:hover{
     color:#fff;
     border-radius: 5px;
 }
-.sidebar .notifications button i{
-    display: none;
-}
-.sidebar .notifications button:hover i{
-    display: block;
-}
+
 .sidebar .notifications button:hover{
     transform: scale(1);
 }
@@ -493,4 +488,25 @@ button:hover, a:hover{
   
   .extension-login:active {
     transform: translateY(-1px);
+  }
+  .btn-danger, .btn-primary{
+    border-radius: 5px;
+  }
+  .btn-primary{
+    background-color: #09f;
+    padding: 0.65rem 1rem;
+    border: none;
+    font-weight: 600;
+    color:#fff;
+    margin: 0.5rem;
+  }
+  .btn-primary:hover, .btn-danger{
+    color: #f4f4f4;
+  }
+  .btn-danger{
+    background-color: rgb(230, 103, 53);
+    padding: 0.65rem 1rem;
+    border: none;
+    font-weight: 600;
+    color:#fff;
   }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Escolher Trilha</title>
+    <title>Dashboard | Escolher trilha</title>
     <link rel="shortcut icon" href="/assets/faviconpng.png" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
@@ -35,9 +35,7 @@
     <div class="sidebar" id="sidebar">
         <div class="notifications hidden" id="notifications">
             <% notifications.forEach(notification => { %>
-                <button onclick="loadNotification('<%= notification._id %>', '<%= notification.title %>', '<%= notification.body %>','<%= notification.link %>')"   <% if(notification.read == false) { %> class="unread" <% } %> ><%= notification.title %>
-                <i><%= notification.body %></i>
-                </button>
+                <button id='<%= notification._id %>' onclick="showModalNotification('<%= notification._id %>', '<%= notification.title %>', '<%= notification.body %>','<%= notification.link %>')"   <% if(notification.read == false) { %> class="unread" <% } %> ><%= notification.title %></button>
             <% }) %>
         </div>
         <div class="settings hidden" id="settings">
@@ -65,7 +63,7 @@
                     <label for="contact" class="label-text">Emails de contato oficiais</label>
                   </div>
                   <% if(premium){ %>
-                  <a href="/download-extension" class="extension-login" id="auth-extension"> <i class='bx bx-extension'></i> Baixar a extensão</a>
+                  <a href="https://chrome.google.com/webstore/detail/youteetech/pahdblmbfilhehkockjidegaolnebkfo?hl=en-US" target="_blank" class="extension-login" id="auth-extension"> <i class='bx bx-extension'></i> Baixar a extensão</a>
                     <% } %>
                 </div>
                   <i>Não é possivel desativar os emails de comunicados sobre a conta</i>
@@ -114,8 +112,10 @@
    
 
     <script src="/js/dashboard/trailCardController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/dashboard/main.js"></script>
     <script src="/js/dashboard/sidebar.js"></script>
+    <script src="/js/dashboard/notifications.js"></script>
     <% if(premium){ %> <script src="/js/dashboard/trailGenerator.js"></script> <% } %>
 
   </body>

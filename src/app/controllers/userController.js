@@ -13,6 +13,21 @@ const router = express.Router();
 express().use(express.json())
 
 class UserController {
+
+
+  async readNotification(req, res) {
+    const id = req.params.id;
+
+    const notification = await notificationsModel.findOne({_id:id});
+    if(notification.user === req.id){
+      await notificationsModel.findOneAndUpdate({_id:id}, {read: true})
+      res.status(200).json({message: 'ok'})
+    }else{
+      res.status(401).json({message: 'not authorized'})
+    }
+  }
+
+
   async mainController(req, res) {
     const userId = req.id;
     const notifications = await notificationsModel.find({user: userId})

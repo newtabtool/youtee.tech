@@ -43,6 +43,10 @@
     color:#fff;
     border: none;
     font-size: 13px;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 #workflow:focus{
     border: none;
@@ -121,3 +125,18 @@ color:#fff;
 font-size:20px;
 
 }
+#language-label{
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    display: flex;
+    font-size: 1rem;
+    gap: 1rem;
+    color:#fff;
+}
+#editor{
+    margin-top: calc( 10px + 1rem);
+}
+.ace_editor, .ace_editor * { font-family: "Monaco", "Menlo", "Ubuntu Mono", "Droid Sans Mono", "Consolas", monospace !important; font-size: 12px !important; font-weight: 400 !important; letter-spacing: 0 !important; }
+
+

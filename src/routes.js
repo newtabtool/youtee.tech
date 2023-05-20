@@ -15,6 +15,9 @@ import marketingController from "./app/controllers/marketingController.js";
 import premiumFunctionsController from "./app/controllers/premiumFunctionsController.js";
 import premiumFuncSessionsController from "./app/controllers/premiumFuncSessionsController.js";
 
+//--------------------------------------dashboard---------------------------------
+//--------------------------------------dashboard---------------------------------
+routes.get("/read-notification/:id", (req, res, next) => SessionsController(req, res, next), userController.readNotification)
 
 //--------------------------rota principal -------------------------------
 routes.get('/dashboard', (req, res, next) => SessionsController(req, res, next), userController.mainController)

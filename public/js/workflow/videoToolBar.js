@@ -129,7 +129,9 @@ async function loadNote() {
         
         col3.innerHTML = `
         <div id="notes-conteiner">
+        <div id="editor" style="display: none;"></div>
         <textarea name="workflow" id="workflow" ></textarea>
+        
         <div class="workflow-options">
     
     

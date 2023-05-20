@@ -10,9 +10,9 @@ const VideoSchema = mongoose.model("video", {
     notes: { type: String, required: true},
     related: [
         {
-            title: { type: String, required: true },
-            url: { type: String, required: true },
-            channel: { type: String, required: true },
+            title: { type: String, required: false },
+            url: { type: String, required: false },
+            channel: { type: String, required: false },
         }
     ]
 });

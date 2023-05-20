@@ -39,16 +39,24 @@ class PremiumFunctionsController {
 
   async generateTrail(req, res) {
     const theme = req.body.theme
-    console.log("Iniciado")
-    const url = "https://trail-generator.onrender.com/";
-    //const url = "http://localhost:3001/";
+    const url = process.env.API_URL;
     const token = process.env.token_;
 
     axios
-      .post(url, { token, theme }, { timeout: 480000 })
+      .post(url, { token, theme }, { timeout: 780000 })
       .then(async (response) => {
         const data_for_looping = response.data.resp;
         //depois de receber a resposta cria uma trilha
+        console.log("Dados recebidos: \n"+data_for_looping)
+        if(data_for_looping.length == 0){
+          return res.status(500).json({ erro: "Não foi possível encontrar nenhum vídeo com esse tema"})
+        }
+        for(const video of data_for_looping){
+          console.log("Titulo do video: \n"+video.title)
+          console.log("URL do video: \n"+video.url)
+          console.log("Thumbnail do video: \n"+video.thumbnail)
+          console.log("Relateds do video: \n"+video.relateds)
+        }
         let userId = req.id
         let name = theme
         let description = theme
